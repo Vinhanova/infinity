@@ -4,5 +4,15 @@ module.exports = {
   theme: {
     extend: {}
   },
-  plugins: []
+  plugins: [],
+  theme: {
+    extend: {
+      colors: {
+        custom: {
+          tealblue: '#007991',
+          jet: '#2A2B2E'
+        }
+      }
+    }
+  }
 }

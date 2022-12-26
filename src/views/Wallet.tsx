@@ -1,7 +1,13 @@
 import React from 'react'
 
-const Wallet = () => {
-  return <div>Wallet</div>
+type Props = {}
+
+const Wallet = (props: Props) => {
+  return (
+    <div>
+      <div>Wallet</div>
+    </div>
+  )
 }
 
 export default Wallet

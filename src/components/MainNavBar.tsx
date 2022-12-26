@@ -1,4 +1,5 @@
 //rafce
+//tsrafce ?
 import React from 'react'
 import { IoInfiniteSharp, IoWalletSharp } from 'react-icons/io5'
 import { FiSettings } from 'react-icons/fi'
@@ -6,10 +7,12 @@ import { FaCoins } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
 import { BsFillCalendar2WeekFill, BsFillPersonFill } from 'react-icons/bs'
 
-const MainNavBar = () => {
+type Props = {}
+
+const MainNavBar = (props: Props) => {
   return (
-    <>
-      <div className='flex h-screen w-16 flex-col justify-between bg-gray-900 p-6 text-2xl text-white'>
+    <div className='absolute'>
+      <div className='flex h-screen w-16 flex-col justify-between bg-custom-tealblue p-6 text-2xl text-white'>
         <div className='flex w-full flex-col items-center justify-center space-y-2'>
           <button className='mb-3 rounded p-1.5 text-4xl hover:text-indigo-400 hover:outline-none'>
             <IoInfiniteSharp />
@@ -98,7 +101,7 @@ const MainNavBar = () => {
             </button>
           </div>
         </div> */}
-    </>
+    </div>
   )
 }
 

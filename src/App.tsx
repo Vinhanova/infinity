@@ -3,12 +3,14 @@ import './App.css'
 import MainNavBar from './components/MainNavBar'
 import Wallet from './views/Wallet'
 
-function App() {
+const App = () => {
   return (
-    <>
+    <div className='bg-custom-jet'>
       <MainNavBar />
-      <Wallet />
-    </>
+      <div className='min-h-screen'>
+        <Wallet />
+      </div>
+    </div>
   )
 }
 
