@@ -14,7 +14,7 @@ const MainNavBar = (props: Props) => {
   return (
     <div className='flex h-screen w-16 flex-col justify-between bg-custom-tealblue p-6 text-2xl text-white'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
-        <NavLink to='/homepage' className='mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/' className='mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-indigo-400 hover:outline-none'>
           <IoInfiniteSharp />
         </NavLink>
         <NavLink to='/homepage' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
