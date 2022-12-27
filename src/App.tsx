@@ -13,6 +13,28 @@ const router = createBrowserRouter(
   )
 )
 
+/* const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <MainPage />
+        //loader: teamLoader,
+      },
+      {
+        path: 'wallet',
+        element: <Wallet />
+      },
+      {
+        path: '*',
+        element: <h1>Error</h1>
+      }
+    ]
+  }
+]) */
+
 const App = () => {
   return <RouterProvider router={router} />
 }
