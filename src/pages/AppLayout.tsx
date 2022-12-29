@@ -4,7 +4,7 @@ import MainNavBar from '../components/MainNavBar'
 
 type Props = {}
 
-const RootLayout = (props: Props) => {
+const AppLayout = (props: Props) => {
   return (
     <div className='flex bg-custom-jet'>
       <MainNavBar />
@@ -15,4 +15,4 @@ const RootLayout = (props: Props) => {
   )
 }
 
-export default RootLayout
+export default AppLayout

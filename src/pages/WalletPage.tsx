@@ -6,7 +6,6 @@ type Props = {}
 const WalletPage = (props: Props) => {
   return (
     <>
-      <MenuNavBar />
       <div>WalletPage</div>
     </>
   )
