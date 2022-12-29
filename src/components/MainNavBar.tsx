@@ -17,16 +17,16 @@ const MainNavBar = (props: Props) => {
         <NavLink to='/' className='mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-indigo-400 hover:outline-none'>
           <IoInfiniteSharp />
         </NavLink>
-        <NavLink to='/homepage' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/calendar' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
           <BsFillCalendar2WeekFill />
         </NavLink>
-        <NavLink to='/homepage' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/meal-planner' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
           <GiMeal />
         </NavLink>
         <NavLink to='/wallet' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
           <IoWalletSharp />
         </NavLink>
-        <NavLink to='/homepage' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/investments' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
           <FaCoins />
         </NavLink>
       </div>
