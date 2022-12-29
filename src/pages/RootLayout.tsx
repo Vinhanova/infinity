@@ -8,7 +8,7 @@ const RootLayout = (props: Props) => {
   return (
     <div className='flex bg-custom-jet'>
       <MainNavBar />
-      <div className='min-h-screen'>
+      <div className='min-h-screen w-full'>
         <Outlet />
       </div>
     </div>
