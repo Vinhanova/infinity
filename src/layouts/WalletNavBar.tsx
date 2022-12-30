@@ -3,7 +3,9 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { GoPlus } from 'react-icons/go'
 
-const MenuNavBar = () => {
+type Props = {}
+
+const WalletNavBar = (props: Props) => {
   return (
     <>
       <nav className='w-full border-b-2 border-white p-2.5 font-semibold'>
@@ -40,4 +42,4 @@ const MenuNavBar = () => {
   )
 }
 
-export default MenuNavBar
+export default WalletNavBar

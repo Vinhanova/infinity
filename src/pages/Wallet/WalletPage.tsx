@@ -1,5 +1,5 @@
 import React from 'react'
-import MenuNavBar from '../../layouts/MenuNavBar'
+import WalletNavBar from '../../layouts/WalletNavBar'
 
 type Props = {}
 
