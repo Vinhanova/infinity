@@ -40,10 +40,12 @@ const AllPaymentsPage = (props: Props) => {
   return (
     <>
       {console.log(listAllPayments)}
+
       <div>AllPaymentsPage</div>
+
       {listAllPayments?.map((payment: Payment) => {
         console.log(payment)
-        return <h1>{payment.date}</h1>
+        return <h1>{payment.title}</h1>
       })}
     </>
   )
