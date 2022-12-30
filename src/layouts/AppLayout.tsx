@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import MainNavBar from '../components/MainNavBar'
+import MainNavBar from './MainNavBar'
 
 type Props = {}
 

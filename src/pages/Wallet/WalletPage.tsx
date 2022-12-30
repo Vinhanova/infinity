@@ -1,5 +1,5 @@
 import React from 'react'
-import MenuNavBar from '../components/MenuNavBar'
+import MenuNavBar from '../../layouts/MenuNavBar'
 
 type Props = {}
 
