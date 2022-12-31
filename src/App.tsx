@@ -1,14 +1,14 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import WalletNavBar from './layouts/WalletNavBar'
+import { createBrowserRouter, createRoutesFromElements, NavLink, Route, RouterProvider } from 'react-router-dom'
 import AppLayout from './layouts/AppLayout'
-import WalletPage from './pages/Wallet/WalletPage'
-import MainPage from './pages/Main/MainPage'
-import InvestmentsPage from './pages/Investments/InvestmentsPage'
-import MealPlannerPage from './pages/MealPlanner/MealPlannerPage'
-import CalendarPage from './pages/Calendar/CalendarPage'
-import RecentPaymentsPage from './pages/Wallet/RecentPaymentsPage'
-import AllPaymentsPage from './pages/Wallet/AllPaymentsPage'
-import AddPaymentPage from './pages/Wallet/AddPaymentPage'
+import WalletPage from './pages/WalletPages/WalletPage'
+import MainPage from './pages/MainPages/MainPage'
+import InvestmentsPage from './pages/InvestmentsPages/InvestmentsPage'
+import MealPlannerPage from './pages/MealPlannerPages/MealPlannerPage'
+import CalendarPage from './pages/CalendarPages/CalendarPage'
+import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
+import AllPaymentsPage from './pages/WalletPages/AllPaymentsPage'
+import AddPaymentPage from './pages/WalletPages/AddPaymentPage'
+import WalletLayout from './layouts/WalletLayout'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
       <Route path='/meal-planner'>
         <Route index element={<MealPlannerPage />} />
       </Route>
-      <Route path='wallet' element={<WalletNavBar />}>
+      <Route path='wallet' element={<WalletLayout />}>
         <Route index element={<WalletPage />} />
         <Route path='recent-payments' element={<RecentPaymentsPage />} />
         <Route path='all-payments' element={<AllPaymentsPage />} />
