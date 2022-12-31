@@ -14,10 +14,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<AppLayout />}>
       <Route index element={<MainPage />} />
-      <Route path='/calendar' element={<WalletNavBar />}>
+      <Route path='/calendar'>
         <Route index element={<CalendarPage />} />
       </Route>
-      <Route path='/meal-planner' element={<WalletNavBar />}>
+      <Route path='/meal-planner'>
         <Route index element={<MealPlannerPage />} />
       </Route>
       <Route path='wallet' element={<WalletNavBar />}>
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         <Route path='all-payments' element={<AllPaymentsPage />} />
         <Route path='add-payment' element={<AddPaymentPage />} />
       </Route>
-      <Route path='/investments' element={<WalletNavBar />}>
+      <Route path='/investments'>
         <Route index element={<InvestmentsPage />} />
       </Route>
       <Route path='*' element={<h1>Error</h1>} />
