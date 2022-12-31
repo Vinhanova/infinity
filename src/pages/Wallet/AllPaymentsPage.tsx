@@ -45,7 +45,7 @@ const AllPaymentsPage = (props: Props) => {
 
       {listAllPayments?.map((payment: Payment) => {
         console.log(payment)
-        return <h1>{payment.title}</h1>
+        return <h1 key={payment.id}>{payment.title}</h1>
       })}
     </>
   )
