@@ -1,4 +1,5 @@
 import React from 'react'
+import MonthCalendar from '../../features/MonthCalendar'
 
 type Props = {}
 
@@ -7,7 +8,9 @@ const RecentPaymentsPage = (props: Props) => {
     <>
       <div className='m-16'>
         <div className='flex gap-x-6'>
-          <div className='h-80 w-3/4 border-2 border-white'>Calendar</div>
+          <div className='h-80 w-3/4 border-2 border-white'>
+            <MonthCalendar />
+          </div>
           <div className='flex w-1/4 justify-center border-2 border-white text-center'>
             <div className='w-full'>
               <h1>Media</h1>
