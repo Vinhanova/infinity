@@ -1,22 +1,14 @@
-import { collection, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, onSnapshot, query } from 'firebase/firestore'
 import { FC, useEffect, useState } from 'react'
-import PaymentsList from '../../features/PaymentsList'
 import { db } from '../../firebase'
-
-type Payment = {
-  id: string
-  title: string
-  price: number
-  category: string
-  date: string
-}
+import PaymentsList from '../../features/PaymentsList'
+import { Payment } from '../../utils/types'
 
 const AllPaymentsPage: FC = () => {
   const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])
 
   useEffect(() => {
-    //currentMonth Query
-    const q = query(collection(db, 'payments'), where('date', '>=', new Date('01-01-2023')), where('date', '<', new Date('02-01-2023')))
+    const q = query(collection(db, 'payments'))
 
     const unsubscribe = onSnapshot(q, querySnapshot => {
       let arrAllPayments: Array<Payment> = []

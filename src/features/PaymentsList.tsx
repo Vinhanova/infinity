@@ -1,15 +1,8 @@
 import { FC } from 'react'
+import { Payment } from '../utils/types'
 
 type Props = {
   listPayments: Array<Payment>
-}
-
-type Payment = {
-  id: string
-  title: string
-  price: number
-  category: string
-  date: string
 }
 
 const PaymentsList: FC<Props> = ({ listPayments }) => {

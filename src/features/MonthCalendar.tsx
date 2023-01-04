@@ -1,30 +1,19 @@
 import React, { FC, useEffect, useState } from 'react'
-import { formatList, getMonth } from '../utils/calendar'
+import { formatPaymentsList, getMonth } from '../utils/calendar'
+import { MonthlyPaymentsDic, Payment } from '../utils/types'
 import DayCalendar from './DayCalendar'
 
 type Props = {
   list: Array<Payment>
 }
 
-type Payment = {
-  id: string
-  title: string
-  price: number
-  category: string
-  date: string
-}
-
-type dayTasks = {
-  [day: number]: Array<string>
-}
-
 const MonthCalendar: FC<Props> = ({ list }) => {
   const [currentMonthArr, setCurrentMonthArr] = useState(getMonth())
-  const [paymentsList, setPaymentsList] = useState<dayTasks>({})
+  const [monthlyPaymentsList, setMonthlyPaymentsList] = useState<MonthlyPaymentsDic>({})
   //console.log(currentMonthArr)
 
   useEffect(() => {
-    setPaymentsList(formatList(list))
+    setMonthlyPaymentsList(formatPaymentsList(list))
   }, [list])
   //console.log('MonthCalendar', paymentsList)
 
@@ -33,7 +22,7 @@ const MonthCalendar: FC<Props> = ({ list }) => {
       {currentMonthArr.map((week, index1) => (
         <React.Fragment key={index1}>
           {week.map((day, index2) => {
-            const dailyPaymentsList = paymentsList[day.nr] && !day.outOfBounds ? paymentsList[day.nr] : []
+            const dailyPaymentsList = monthlyPaymentsList[day.nr] && !day.outOfBounds ? monthlyPaymentsList[day.nr] : []
             return <DayCalendar key={index2} day={day} dailyPaymentsList={dailyPaymentsList} />
           })}
         </React.Fragment>

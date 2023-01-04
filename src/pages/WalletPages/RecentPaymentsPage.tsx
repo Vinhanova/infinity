@@ -1,15 +1,8 @@
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
-import React, { FC, useEffect, useState } from 'react'
-import MonthCalendar from '../../features/MonthCalendar'
+import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
-
-type Payment = {
-  id: string
-  title: string
-  price: number
-  category: string
-  date: string
-}
+import MonthCalendar from '../../features/MonthCalendar'
+import { Payment } from '../../utils/types'
 
 const RecentPaymentsPage: FC = () => {
   const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])

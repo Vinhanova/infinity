@@ -1,29 +1,5 @@
 import moment from 'moment'
-
-type Day = {
-  nr: number
-  outOfBounds: boolean
-}
-
-type Payment = {
-  id: string
-  title: string
-  price: number
-  category: string
-  date: string
-}
-
-type dayTasks = {
-  [day: number]: Array<string>
-}
-
-function isOutOfBounds(dayNr: number, row: number, numberOfRows: number): boolean {
-  if (row > 0 && row + 1 < numberOfRows) return false
-  if (row === 0 && dayNr < 20) return false
-  if (row + 1 === numberOfRows && dayNr > 10) return false
-
-  return true
-}
+import { Day, MonthlyPaymentsDic, Payment } from './types'
 
 export function getMonth(currentMonth: number = moment().month()) {
   // return type
@@ -48,8 +24,8 @@ export function getMonth(currentMonth: number = moment().month()) {
   return calendarArr
 }
 
-export function formatList(list: Array<Payment>): dayTasks {
-  let formattedList: dayTasks = {}
+export function formatPaymentsList(list: Array<Payment>): MonthlyPaymentsDic {
+  let formattedList: MonthlyPaymentsDic = {}
 
   for (let i = 0; i < list.length; i++) {
     const day = parseInt(moment(list[i].date, 'DD-MM-YYYY').format('D'))
@@ -59,4 +35,12 @@ export function formatList(list: Array<Payment>): dayTasks {
   }
   //console.log('FormattedList', formattedList)
   return formattedList
+}
+
+function isOutOfBounds(dayNr: number, row: number, numberOfRows: number): boolean {
+  if (row > 0 && row + 1 < numberOfRows) return false
+  if (row === 0 && dayNr < 20) return false
+  if (row + 1 === numberOfRows && dayNr > 10) return false
+
+  return true
 }

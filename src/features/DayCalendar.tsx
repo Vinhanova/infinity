@@ -1,13 +1,9 @@
 import { FC } from 'react'
+import { Day } from '../utils/types'
 
 type Props = {
   day: Day
   dailyPaymentsList: Array<string>
-}
-
-type Day = {
-  nr: number
-  outOfBounds: boolean
 }
 
 const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
