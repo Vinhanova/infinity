@@ -12,7 +12,7 @@ const MonthCalendar = (props: Props) => {
       {currentMonthArr.map((week, index1) => (
         <React.Fragment key={index1}>
           {week.map((day, index2) => (
-            <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'}`} key={index2}>
+            <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} hover:bg-custom-tealblue`} key={index2}>
               {day.nr}
             </div>
           ))}
