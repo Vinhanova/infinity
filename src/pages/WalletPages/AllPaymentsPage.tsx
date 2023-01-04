@@ -1,9 +1,7 @@
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import PaymentsList from '../../features/PaymentsList'
 import { db } from '../../firebase'
-
-type Props = {}
 
 type Payment = {
   id: string
@@ -13,7 +11,7 @@ type Payment = {
   date: string
 }
 
-const AllPaymentsPage = (props: Props) => {
+const AllPaymentsPage: FC = () => {
   const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])
 
   useEffect(() => {

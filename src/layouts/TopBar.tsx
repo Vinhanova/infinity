@@ -1,13 +1,11 @@
-import { ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 type Props = {
   start: Array<ReactNode>
   end: Array<ReactNode>
 }
 
-const WalletNavBar = (props: Props) => {
-  const { start, end } = props
-
+const WalletNavBar: FC<Props> = ({ start, end }) => {
   return (
     <nav className='w-full border-b-2 border-white p-2.5 font-semibold'>
       <div className='ml-4 flex items-center justify-between'>

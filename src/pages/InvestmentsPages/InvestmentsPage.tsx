@@ -1,8 +1,6 @@
-import React from 'react'
+import { FC } from 'react'
 
-type Props = {}
-
-const InvestmentsPage = (props: Props) => {
+const InvestmentsPage: FC = () => {
   return <div>InvestmentsPage</div>
 }
 

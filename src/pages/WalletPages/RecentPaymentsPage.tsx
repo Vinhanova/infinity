@@ -1,9 +1,7 @@
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import MonthCalendar from '../../features/MonthCalendar'
 import { db } from '../../firebase'
-
-type Props = {}
 
 type Payment = {
   id: string
@@ -13,7 +11,7 @@ type Payment = {
   date: string
 }
 
-const RecentPaymentsPage = (props: Props) => {
+const RecentPaymentsPage: FC = () => {
   const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])
 
   useEffect(() => {

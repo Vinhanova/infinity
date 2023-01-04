@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import MainNavBar from './MainNavBar'
 
-type Props = {}
-
-const AppLayout = (props: Props) => {
+const AppLayout: FC = () => {
   return (
     <div className='flex bg-custom-jet'>
       <MainNavBar />

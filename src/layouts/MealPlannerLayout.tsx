@@ -1,10 +1,9 @@
+import { FC } from 'react'
 import { GoPlus } from 'react-icons/go'
 import { NavLink, Outlet } from 'react-router-dom'
 import TopBar from './TopBar'
 
-type Props = {}
-
-const MealPlannerLayout = (props: Props) => {
+const MealPlannerLayout: FC = () => {
   return (
     <>
       <TopBar

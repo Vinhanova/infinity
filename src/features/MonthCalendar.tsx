@@ -1,4 +1,4 @@
-import React, { useDebugValue, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { formatList, getMonth } from '../utils/calendar'
 import DayCalendar from './DayCalendar'
 
@@ -18,14 +18,14 @@ type dayTasks = {
   [day: number]: Array<string>
 }
 
-const MonthCalendar = (props: Props) => {
+const MonthCalendar: FC<Props> = ({ list }) => {
   const [currentMonthArr, setCurrentMonthArr] = useState(getMonth())
   const [paymentsList, setPaymentsList] = useState<dayTasks>({})
   //console.log(currentMonthArr)
 
   useEffect(() => {
-    setPaymentsList(formatList(props.list))
-  }, [props.list])
+    setPaymentsList(formatList(list))
+  }, [list])
   //console.log('MonthCalendar', paymentsList)
 
   return (
@@ -33,8 +33,8 @@ const MonthCalendar = (props: Props) => {
       {currentMonthArr.map((week, index1) => (
         <React.Fragment key={index1}>
           {week.map((day, index2) => {
-            const tasksOfDay = paymentsList[day.nr] && !day.outOfBounds ? paymentsList[day.nr] : []
-            return <DayCalendar key={index2} day={day} tasks={tasksOfDay} />
+            const dailyPaymentsList = paymentsList[day.nr] && !day.outOfBounds ? paymentsList[day.nr] : []
+            return <DayCalendar key={index2} day={day} dailyPaymentsList={dailyPaymentsList} />
           })}
         </React.Fragment>
       ))}

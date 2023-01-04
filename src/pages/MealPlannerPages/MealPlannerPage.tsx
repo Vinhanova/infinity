@@ -1,8 +1,6 @@
-import React from 'react'
+import { FC } from 'react'
 
-type Props = {}
-
-const MealPlannerPage = (props: Props) => {
+const MealPlannerPage: FC = () => {
   return <div>MealPlannerPage</div>
 }
 

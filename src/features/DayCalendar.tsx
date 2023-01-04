@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 type Props = {
   day: Day
-  tasks: Array<string>
+  dailyPaymentsList: Array<string>
 }
 
 type Day = {
@@ -10,18 +10,14 @@ type Day = {
   outOfBounds: boolean
 }
 
-const DayCalendar = (props: Props) => {
-  const [tasks, setTasks] = useState<Array<string>>([])
-  const [day, setDay] = useState(props.day) // Problems might emerge from this variable not updating // Solution: useEffect()
-
-  useEffect(() => {
-    setTasks(props.tasks)
-  }, [props.tasks])
+const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
+  //const [paymentsList, setPaymentsList] = useState<Array<string>>([])
+  //const [dayInfo, setDayInfo] = useState(day) // Problems might emerge from this variable not updating // Solution: useEffect()
 
   return (
     <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} hover:bg-custom-tealblue`}>
       <h3>{day.nr}</h3>
-      {tasks?.map((task, index) => (
+      {dailyPaymentsList?.map((task, index) => (
         <div key={index}>{task}</div>
       ))}
     </div>

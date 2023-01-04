@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 type Props = {
   listPayments: Array<Payment>
 }
@@ -10,7 +12,7 @@ type Payment = {
   date: string
 }
 
-const PaymentsList = (props: Props) => {
+const PaymentsList: FC<Props> = ({ listPayments }) => {
   return (
     <>
       <table className='w-full text-left text-sm text-gray-500 dark:text-gray-400'>
@@ -42,7 +44,7 @@ const PaymentsList = (props: Props) => {
           </tr>
         </thead>
         <tbody>
-          {props.listPayments?.map((payment: Payment) => {
+          {listPayments?.map((payment: Payment) => {
             return (
               <tr key={payment.id} className='border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600'>
                 <td className='w-4 p-4'>

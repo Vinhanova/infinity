@@ -1,17 +1,18 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { FC } from 'react'
 import AppLayout from './layouts/AppLayout'
-import WalletPage from './pages/WalletPages/WalletPage'
+import WalletLayout from './layouts/WalletLayout'
+import MealPlannerLayout from './layouts/MealPlannerLayout'
+import CalendarLayout from './layouts/CalendarLayout'
+import InvestmentsLayout from './layouts/InvestmentsLayout'
 import MainPage from './pages/MainPages/MainPage'
+import WalletPage from './pages/WalletPages/WalletPage'
 import InvestmentsPage from './pages/InvestmentsPages/InvestmentsPage'
 import MealPlannerPage from './pages/MealPlannerPages/MealPlannerPage'
 import CalendarPage from './pages/CalendarPages/CalendarPage'
 import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
 import AllPaymentsPage from './pages/WalletPages/AllPaymentsPage'
 import AddPaymentPage from './pages/WalletPages/AddPaymentPage'
-import WalletLayout from './layouts/WalletLayout'
-import MealPlannerLayout from './layouts/MealPlannerLayout'
-import CalendarLayout from './layouts/CalendarLayout'
-import InvestmentsLayout from './layouts/InvestmentsLayout'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -59,7 +60,7 @@ const router = createBrowserRouter(
   }
 ]) */
 
-const App = () => {
+const App: FC = () => {
   return <RouterProvider router={router} />
 }
 

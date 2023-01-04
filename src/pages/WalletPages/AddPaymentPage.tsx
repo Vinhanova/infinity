@@ -1,8 +1,6 @@
-import React from 'react'
+import { FC } from 'react'
 
-type Props = {}
-
-const AddPaymentPage = (props: Props) => {
+const AddPaymentPage: FC = () => {
   return <div>AddPaymentPage</div>
 }
 

@@ -1,8 +1,6 @@
-import React from 'react'
+import { FC } from 'react'
 
-type Props = {}
-
-const MainPage = (props: Props) => {
+const MainPage: FC = () => {
   return <div>MainPage</div>
 }
 

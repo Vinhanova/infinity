@@ -17,7 +17,7 @@ type dayTasks = {
   [day: number]: Array<string>
 }
 
-function isOutOfBounds(dayNr: number, row: number, numberOfRows: number) {
+function isOutOfBounds(dayNr: number, row: number, numberOfRows: number): boolean {
   if (row > 0 && row + 1 < numberOfRows) return false
   if (row === 0 && dayNr < 20) return false
   if (row + 1 === numberOfRows && dayNr > 10) return false
@@ -26,6 +26,7 @@ function isOutOfBounds(dayNr: number, row: number, numberOfRows: number) {
 }
 
 export function getMonth(currentMonth: number = moment().month()) {
+  // return type
   const currentYear: number = moment().year()
   const firstDayOfMonth: number = moment([currentYear, currentMonth, 1]).day()
 
@@ -47,7 +48,7 @@ export function getMonth(currentMonth: number = moment().month()) {
   return calendarArr
 }
 
-export function formatList(list: Array<Payment>) {
+export function formatList(list: Array<Payment>): dayTasks {
   let formattedList: dayTasks = {}
 
   for (let i = 0; i < list.length; i++) {
