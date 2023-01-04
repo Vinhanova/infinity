@@ -15,13 +15,13 @@ type Payment = {
 }
 
 type dayTasks = {
-  [date: string]: Array<string>
+  [day: number]: Array<string>
 }
 
 const MonthCalendar = (props: Props) => {
   const [currentMonthArr, setCurrentMonthArr] = useState(getMonth())
+  const [paymentsList, setPaymentsList] = useState<dayTasks>({})
   //console.log(currentMonthArr)
-  const [paymentsList, setPaymentsList] = useState({})
 
   useEffect(() => {
     setPaymentsList(formatList(props.list))
@@ -32,9 +32,10 @@ const MonthCalendar = (props: Props) => {
     <div className={`grid h-full w-full grid-cols-7 ${currentMonthArr.length > 5 ? 'grid-rows-6' : 'grid-rows-5'}`}>
       {currentMonthArr.map((week, index1) => (
         <React.Fragment key={index1}>
-          {week.map((day, index2) => (
-            <DayCalendar key={index2} day={day} tasks={paymentsList[day.nr as keyof {}] && !day.outOfBounds ? paymentsList[day.nr as keyof {}] : []} />
-          ))}
+          {week.map((day, index2) => {
+            const tasksOfDay = paymentsList[day.nr] && !day.outOfBounds ? paymentsList[day.nr] : []
+            return <DayCalendar key={index2} day={day} tasks={tasksOfDay} />
+          })}
         </React.Fragment>
       ))}
     </div>

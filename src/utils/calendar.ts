@@ -14,7 +14,7 @@ type Payment = {
 }
 
 type dayTasks = {
-  [date: string]: Array<string>
+  [day: number]: Array<string>
 }
 
 function isOutOfBounds(dayNr: number, row: number, numberOfRows: number) {
@@ -51,7 +51,7 @@ export function formatList(list: Array<Payment>) {
   let formattedList: dayTasks = {}
 
   for (let i = 0; i < list.length; i++) {
-    const day = moment(list[i].date, 'DD-MM-YYYY').format('D')
+    const day = parseInt(moment(list[i].date, 'DD-MM-YYYY').format('D'))
 
     formattedList[day] = formattedList[day] ?? []
     formattedList[day].push(list[i].title)

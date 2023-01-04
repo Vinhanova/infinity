@@ -12,12 +12,11 @@ type Day = {
 
 const DayCalendar = (props: Props) => {
   const [tasks, setTasks] = useState<Array<string>>([])
+  const [day, setDay] = useState(props.day) // Problems might emerge from this variable not updating // Solution: useEffect()
 
   useEffect(() => {
     setTasks(props.tasks)
   }, [props.tasks])
-
-  const day: Day = props.day
 
   return (
     <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} hover:bg-custom-tealblue`}>
