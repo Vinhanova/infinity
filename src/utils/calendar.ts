@@ -5,6 +5,18 @@ type Day = {
   outOfBounds: boolean
 }
 
+type Payment = {
+  id: string
+  title: string
+  price: number
+  category: string
+  date: string
+}
+
+type dayTasks = {
+  [date: string]: Array<string>
+}
+
 function isOutOfBounds(dayNr: number, row: number, numberOfRows: number) {
   if (row > 0 && row + 1 < numberOfRows) return false
   if (row === 0 && dayNr < 20) return false
@@ -23,7 +35,6 @@ export function getMonth(currentMonth: number = moment().month()) {
   let numberOfRows: number = lastDayOfCalendar > 35 ? 6 : 5
 
   const calendarArr: Array<Array<Day>> = [...new Array(numberOfRows)].fill([]).map((_, index) => {
-    console.log(index)
     return new Array(7).fill(null).map(_ => {
       const dayNr: number = moment([currentYear, currentMonth, 1]).add(firstDayOfCalendar++, 'days').date()
       return {
@@ -34,4 +45,17 @@ export function getMonth(currentMonth: number = moment().month()) {
   })
 
   return calendarArr
+}
+
+export function formatList(list: Array<Payment>) {
+  let formattedList: dayTasks = {}
+
+  for (let i = 0; i < list.length; i++) {
+    const day = moment(list[i].date, 'DD-MM-YYYY').format('D')
+
+    formattedList[day] = formattedList[day] ?? []
+    formattedList[day].push(list[i].title)
+  }
+  //console.log('FormattedList', formattedList)
+  return formattedList
 }
