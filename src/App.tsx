@@ -16,12 +16,12 @@ import AddPaymentPage from './pages/WalletPages/AddPaymentPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<AppLayout />}>
+    <Route path='' element={<AppLayout />}>
       <Route index element={<MainPage />} />
-      <Route path='/calendar' element={<CalendarLayout />}>
+      <Route path='calendar' element={<CalendarLayout />}>
         <Route index element={<CalendarPage />} />
       </Route>
-      <Route path='/meal-planner' element={<MealPlannerLayout />}>
+      <Route path='meal-planner' element={<MealPlannerLayout />}>
         <Route index element={<MealPlannerPage />} />
       </Route>
       <Route path='wallet' element={<WalletLayout />}>
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
         <Route path='all-payments' element={<AllPaymentsPage />} />
         <Route path='add-payment' element={<AddPaymentPage />} />
       </Route>
-      <Route path='/investments' element={<InvestmentsLayout />}>
+      <Route path='investments' element={<InvestmentsLayout />}>
         <Route index element={<InvestmentsPage />} />
       </Route>
       <Route path='*' element={<h1>Error</h1>} />
