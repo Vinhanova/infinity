@@ -13,11 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: npm ci
-      - name: Install Firebase
-        run: npm install --save firebase
-      - name: Build dependencies
-        run: npm run build
+        run: npm ci && npm install --save firebase && npm run build
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
