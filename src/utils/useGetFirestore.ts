@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react'
 import { db } from '../firebase'
 import { Payment, Request } from './types'
 
-export function useGetFirestore(dbCollection: string, userId: number, queries?: Array<QueryFieldFilterConstraint>): Request<Array<Payment>> {
+export function useGetFirestore(dbCollection: string, userId: number, queries: Array<QueryFieldFilterConstraint> = []): Request<Array<Payment>> {
   const [request, setRequest] = useState<Request<Array<Payment>>>({ state: 'pending' })
 
   useEffect(() => {
-    const q = query(collection(db, dbCollection), ...(queries ?? []))
+    const q = query(collection(db, dbCollection), ...queries)
 
     const unsubscribe = onSnapshot(q, querySnapshot => {
       let arrAllPayments: Array<Payment> = []
