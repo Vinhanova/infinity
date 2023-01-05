@@ -16,6 +16,6 @@ export type MonthlyPaymentsDic = {
 
 export type Request<T> = {
   state: string
-  value?: T
+  value: T
   error?: any
 }

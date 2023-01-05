@@ -58,7 +58,7 @@ const AllPaymentsPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className='relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg'>{state === 'resolved' && <PaymentsList listPayments={listAllPayments!} />}</div>
+        <div className='relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg'>{state === 'resolved' && <PaymentsList listPayments={listAllPayments} />}</div>
       </div>
     </>
   )

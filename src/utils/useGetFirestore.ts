@@ -1,32 +1,36 @@
-import { collection, onSnapshot, query, QueryFieldFilterConstraint } from 'firebase/firestore'
+import { collection, DocumentData, onSnapshot, Query, query, QueryDocumentSnapshot, QueryFieldFilterConstraint, QuerySnapshot, Unsubscribe } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase'
-import { Payment, Request } from './types'
+import { Request } from './types'
 
-export function useGetFirestore(dbCollection: string, userId: number, queries: Array<QueryFieldFilterConstraint> = []): Request<Array<Payment>> {
-  const [request, setRequest] = useState<Request<Array<Payment>>>({ state: 'pending' })
+export function useGetFirestore(dbCollection: string, userId: number, queries: Array<QueryFieldFilterConstraint> = []): Request<Array<any>> {
+  const [request, setRequest] = useState<Request<Array<any>>>({ state: 'pending', value: [] })
 
   useEffect(() => {
-    const q = query(collection(db, dbCollection), ...queries)
+    const q: Query<DocumentData> = query(collection(db, dbCollection), ...queries)
 
-    const unsubscribe = onSnapshot(q, querySnapshot => {
-      let arrAllPayments: Array<Payment> = []
+    const unsubscribe: Unsubscribe = onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>): void => {
+      let value: Array<any> = []
 
-      querySnapshot.forEach(doc => {
-        arrAllPayments.push({
-          id: doc.id,
-          title: doc.data().title,
-          price: doc.data().price,
-          category: doc.data().category,
-          date: new Date(doc.data().date.seconds * 1000).toLocaleString('pt-PT', { timeZone: 'UTC' })
-        })
+      querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>): void => {
+        if (doc.data().date) {
+          value.push({ id: doc.id, ...doc.data(), date: formatDate(doc.data().date.seconds) })
+        } else {
+          value.push({ id: doc.id, ...doc.data() })
+        }
       })
 
-      setRequest({ state: 'resolved', value: arrAllPayments })
+      setRequest({ state: 'resolved', value })
+
+      // Handle errors
     })
 
-    return () => unsubscribe()
+    return (): void => unsubscribe()
   }, [dbCollection, userId])
 
   return request
+}
+
+function formatDate(dateInSeconds: number): string {
+  return new Date(dateInSeconds * 1000).toLocaleString('pt-PT', { timeZone: 'UTC' })
 }
