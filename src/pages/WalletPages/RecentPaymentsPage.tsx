@@ -4,7 +4,6 @@ import MonthCalendar from '../../features/MonthCalendar'
 import { useGetFirestore } from '../../utils/useGetFirestore'
 
 const RecentPaymentsPage: FC = () => {
-  //const [listAllPayments, setListAllPayments] = useState<Request<Array<Payment>>>()
   const { state, value: listAllPayments, error } = useGetFirestore('payments', 123, [where('date', '>=', new Date('01-01-2023')), where('date', '<', new Date('02-01-2023'))])
 
   return (

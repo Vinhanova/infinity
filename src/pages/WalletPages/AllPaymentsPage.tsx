@@ -1,12 +1,8 @@
-import { collection, onSnapshot, query } from 'firebase/firestore'
-import { FC, useEffect, useState } from 'react'
-import { db } from '../../firebase'
+import { FC } from 'react'
 import PaymentsList from '../../features/PaymentsList'
-import { Payment } from '../../utils/types'
 import { useGetFirestore } from '../../utils/useGetFirestore'
 
 const AllPaymentsPage: FC = () => {
-  //const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])
   const { state, value: listAllPayments, error } = useGetFirestore('payments', 123)
 
   return (
