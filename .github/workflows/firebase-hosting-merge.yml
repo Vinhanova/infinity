@@ -18,6 +18,8 @@ jobs:
         run: npm i -g firebase-tools
       - name: Build dependencies
         run: npm run build
+      - name: Build dependencies
+        run: npm run deploy
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
