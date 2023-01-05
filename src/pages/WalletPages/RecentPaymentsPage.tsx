@@ -30,7 +30,7 @@ const RecentPaymentsPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className='mt-6 h-16 border-2 border-white'>Totall</div>
+        <div className='mt-6 h-16 border-2 border-white'>Total</div>
       </div>
     </>
   )
