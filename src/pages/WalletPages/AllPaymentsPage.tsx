@@ -3,31 +3,11 @@ import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import PaymentsList from '../../features/PaymentsList'
 import { Payment } from '../../utils/types'
+import { useGetFirestore } from '../../utils/useGetFirestore'
 
 const AllPaymentsPage: FC = () => {
-  const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])
-
-  useEffect(() => {
-    const q = query(collection(db, 'payments'))
-
-    const unsubscribe = onSnapshot(q, querySnapshot => {
-      let arrAllPayments: Array<Payment> = []
-
-      querySnapshot.forEach(doc => {
-        arrAllPayments.push({
-          id: doc.id,
-          title: doc.data().title,
-          price: doc.data().price,
-          category: doc.data().category,
-          date: new Date(doc.data().date.seconds * 1000).toLocaleString('pt-PT', { timeZone: 'UTC' })
-        })
-      })
-
-      setListAllPayments(arrAllPayments!)
-    })
-
-    return () => unsubscribe()
-  }, [])
+  //const [listAllPayments, setListAllPayments] = useState<Array<Payment>>([])
+  const { state, value: listAllPayments, error } = useGetFirestore('payments', 123)
 
   return (
     <>
@@ -82,9 +62,7 @@ const AllPaymentsPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className='relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg'>
-          <PaymentsList listPayments={listAllPayments} />
-        </div>
+        <div className='relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg'>{state === 'resolved' && <PaymentsList listPayments={listAllPayments!} />}</div>
       </div>
     </>
   )

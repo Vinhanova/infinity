@@ -13,3 +13,9 @@ export type Day = {
 export type MonthlyPaymentsDic = {
   [day: number]: Array<string>
 }
+
+export type Request<T> = {
+  state: string
+  value?: T
+  error?: any
+}
