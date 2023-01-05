@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm install && tsc && vite build",
-    "preview": "vite preview"
+    "build": "npm install && tsc && vite build && firebase deploy",
+    "preview": "vite preview",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "firebase": "^9.15.0",
