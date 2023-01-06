@@ -1,10 +1,11 @@
 import { where } from 'firebase/firestore'
+import moment from 'moment'
 import { FC } from 'react'
 import MonthCalendar from '../../features/MonthCalendar'
 import { useGetFirestore } from '../../utils/useGetFirestore'
 
 const RecentPaymentsPage: FC = () => {
-  const { state, value: listAllPayments, error } = useGetFirestore('payments', 123, [where('date', '>=', new Date('01-01-2023')), where('date', '<', new Date('02-01-2023'))])
+  const { state, value: listAllPayments, error } = useGetFirestore('payments', 123, [where('date', '>=', moment('01-01-2023', 'MM-DD-YYYY').toDate()), where('date', '<', moment('02-01-2023', 'MM-DD-YYYY').toDate())])
 
   return (
     <>
