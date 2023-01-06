@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom'
 
 const MainNavBar: FC = () => {
   return (
-    <div className='flex h-screen w-16 flex-col justify-between bg-custom-tealblue p-6 text-2xl'>
+    <div className='flex h-full w-16 flex-col justify-between bg-custom-tealblue p-6 text-2xl'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
         <NavLink to='/' className='mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-indigo-400 hover:outline-none'>
           <IoInfiniteSharp />
