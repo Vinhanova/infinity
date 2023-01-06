@@ -9,7 +9,7 @@ const WalletLayout: FC = () => {
       <TopBar
         start={[
           <NavLink to={'/wallet'} className='mr-4 ml-2 py-2 px-0.5 text-2xl'>
-            Wallet
+            WalletX
           </NavLink>,
           <NavLink to={'/wallet/recent-payments'} className='py-2 px-0.5'>
             Recent Payments
