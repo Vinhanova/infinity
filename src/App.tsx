@@ -13,11 +13,16 @@ import CalendarPage from './pages/CalendarPages/CalendarPage'
 import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
 import AllPaymentsPage from './pages/WalletPages/AllPaymentsPage'
 import AddPaymentPage from './pages/WalletPages/AddPaymentPage'
+import { AuthContextProvider, UserAuth } from './Context/AuthContext'
+import LoginPage from './pages/LoginPage'
+import PrivateRoute from './PrivateRoute'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='' element={<AppLayout />}>
-      <Route index element={<MainPage />} />
+      <Route element={<PrivateRoute />}>
+        <Route index element={<MainPage />} />
+      </Route>
       <Route path='calendar' element={<CalendarLayout />}>
         <Route index element={<CalendarPage />} />
       </Route>
@@ -30,9 +35,12 @@ const router = createBrowserRouter(
         <Route path='all-payments' element={<AllPaymentsPage />} />
         <Route path='add-payment' element={<AddPaymentPage />} />
       </Route>
-      <Route path='investments' element={<InvestmentsLayout />}>
-        <Route index element={<InvestmentsPage />} />
+      <Route element={<PrivateRoute />}>
+        <Route path='investments' element={<InvestmentsLayout />}>
+          <Route index element={<InvestmentsPage />} />
+        </Route>
       </Route>
+      <Route path='login' element={<LoginPage />} />
       <Route path='*' element={<h1>Error</h1>} />
     </Route>
   )
@@ -61,7 +69,11 @@ const router = createBrowserRouter(
 ]) */
 
 const App: FC = () => {
-  return <RouterProvider router={router} />
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  )
 }
 
 export default App
