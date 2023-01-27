@@ -17,10 +17,10 @@ type Props = {
 export const AuthContextProvider: FC<Props> = ({ children }) => {
   const [user, setUser] = useState({})
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     const provider = new GoogleAuthProvider()
     // signInWithPopup(auth, provider);
-    signInWithRedirect(auth, provider)
+    await signInWithRedirect(auth, provider)
   }
 
   const logOut = () => {
