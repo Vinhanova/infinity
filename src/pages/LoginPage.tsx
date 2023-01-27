@@ -7,7 +7,7 @@ type Props = {}
 
 const LoginPage = (props: Props) => {
   console.log(UserAuth())
-  const { googleSignIn, logOut, user } = UserAuth()
+  const { googleSignIn, user } = UserAuth()
   const navigate = useNavigate()
 
   const handleGoogleSignIn = async () => {
@@ -21,7 +21,7 @@ const LoginPage = (props: Props) => {
 
   useEffect(() => {
     if (user) {
-      //navigate('/')
+      navigate('/')
     }
   }, [user])
 
@@ -31,7 +31,6 @@ const LoginPage = (props: Props) => {
       <br />
       <GoogleButton onClick={handleGoogleSignIn} />
       <br />
-      <a onClick={logOut}>LOGOUT</a>
     </>
   )
 }
