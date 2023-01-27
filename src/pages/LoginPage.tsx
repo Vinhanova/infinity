@@ -6,9 +6,9 @@ import GoogleButton from 'react-google-button'
 type Props = {}
 
 const LoginPage = (props: Props) => {
-  console.log(UserAuth())
   const { googleSignIn, user } = UserAuth()
   const navigate = useNavigate()
+  console.log('USER >>', user)
 
   const handleGoogleSignIn = async () => {
     try {
@@ -21,7 +21,8 @@ const LoginPage = (props: Props) => {
 
   useEffect(() => {
     if (user) {
-      navigate('/')
+      console.log('Navigate')
+      //navigate('/')
     }
   }, [user])
 
