@@ -13,7 +13,7 @@ const LoginPage = (props: Props) => {
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn()
-      console.log('end')
+      // console.log('end')
     } catch (error) {
       console.log(error)
     }
@@ -31,7 +31,6 @@ const LoginPage = (props: Props) => {
       <div>LoginPage</div>
       <br />
       <GoogleButton onClick={handleGoogleSignIn} />
-      <br />
     </>
   )
 }
