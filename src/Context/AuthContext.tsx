@@ -1,5 +1,5 @@
 import { useContext, createContext, useEffect, useState, FC, ReactNode } from 'react'
-import { GoogleAuthProvider, signOut, onAuthStateChanged, signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { GoogleAuthProvider, signOut, onAuthStateChanged, signInWithPopup } from 'firebase/auth'
 import { auth } from '../firebase'
 
 type test = {
@@ -19,8 +19,8 @@ export const AuthContextProvider: FC<Props> = ({ children }) => {
 
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider()
-    // await signInWithPopup(auth, provider)
-    await signInWithRedirect(auth, provider)
+    await signInWithPopup(auth, provider)
+    // await signInWithRedirect(auth, provider)
   }
 
   const logOut = () => {
@@ -30,7 +30,7 @@ export const AuthContextProvider: FC<Props> = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser!)
-      console.log('USER UPDATE >>', currentUser)
+      // console.log('USER UPDATE >>', currentUser)
     })
     return () => {
       unsubscribe()
