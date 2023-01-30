@@ -1,5 +1,5 @@
-import { useContext, createContext, useEffect, useState, FC, ReactNode } from 'react'
 import { GoogleAuthProvider, signOut, onAuthStateChanged, signInWithPopup } from 'firebase/auth'
+import { useContext, createContext, useEffect, useState, FC, ReactNode } from 'react'
 import { Auth } from '../utils/types'
 import { auth } from '../firebase'
 

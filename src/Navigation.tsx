@@ -13,12 +13,17 @@ import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
 import AllPaymentsPage from './pages/WalletPages/AllPaymentsPage'
 import AddPaymentPage from './pages/WalletPages/AddPaymentPage'
 import LoginPage from './pages/LoginPage'
+import ProfilePage from './pages/ProfilePage'
+import SettingsPage from './pages/SettingsPage'
+import NotFoundPage from './pages/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
 
 const Navigation = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='' element={<AppLayout />}>
+        <Route path='login' element={<LoginPage />} />
+
         <Route element={<PrivateRoute />}>
           <Route index element={<MainPage />} />
         </Route>
@@ -34,19 +39,30 @@ const Navigation = () => {
             <Route index element={<MealPlannerPage />} />
           </Route>
         </Route>
-        <Route path='wallet' element={<WalletLayout />}>
-          <Route index element={<WalletPage />} />
-          <Route path='recent-payments' element={<RecentPaymentsPage />} />
-          <Route path='all-payments' element={<AllPaymentsPage />} />
-          <Route path='add-payment' element={<AddPaymentPage />} />
+        <Route element={<PrivateRoute />}>
+          <Route path='wallet' element={<WalletLayout />}>
+            <Route index element={<WalletPage />} />
+            <Route path='recent-payments' element={<RecentPaymentsPage />} />
+            <Route path='all-payments' element={<AllPaymentsPage />} />
+            <Route path='add-payment' element={<AddPaymentPage />} />
+          </Route>
         </Route>
+
         <Route element={<PrivateRoute />}>
           <Route path='investments' element={<InvestmentsLayout />}>
             <Route index element={<InvestmentsPage />} />
           </Route>
         </Route>
-        <Route path='login' element={<LoginPage />} />
-        <Route path='*' element={<h1>Error</h1>} />
+
+        <Route element={<PrivateRoute />}>
+          <Route path='profile' element={<ProfilePage />} />
+        </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path='settings' element={<SettingsPage />} />
+        </Route>
+
+        <Route path='*' element={<NotFoundPage />} />
       </Route>
     )
   )

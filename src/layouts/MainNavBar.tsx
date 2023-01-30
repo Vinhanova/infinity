@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { BsFillCalendar2WeekFill, BsFillPersonFill } from 'react-icons/bs'
 import { IoInfiniteSharp, IoWalletSharp } from 'react-icons/io5'
 import { FiSettings } from 'react-icons/fi'
 import { FaCoins } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
-import { BsFillCalendar2WeekFill, BsFillPersonFill } from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
+import { FC } from 'react'
 
 const MainNavBar: FC = () => {
   return (
@@ -27,10 +27,10 @@ const MainNavBar: FC = () => {
         </NavLink>
       </div>
       <div className='flex w-full flex-col items-center justify-center space-y-5'>
-        <NavLink to='/homepage' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/profile' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
           <BsFillPersonFill />
         </NavLink>
-        <NavLink to='/homepage' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/settings' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
           <FiSettings />
         </NavLink>
       </div>
