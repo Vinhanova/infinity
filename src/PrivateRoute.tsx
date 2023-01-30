@@ -1,14 +1,21 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { UserAuth } from './Context/AuthContext'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from './firebase'
+import { FC } from 'react'
 
-type Props = {}
-
-const PrivateRoute = (props: Props) => {
-  let { user } = UserAuth() // determine if authorized, from context or however you're doing it
+const PrivateRoute: FC = () => {
+  const [user, loading, error] = useAuthState(auth)
 
   // If authorized, return an outlet that will render child elements
   // If not, return element that will navigate to login page
-  return user ? <Outlet /> : <Navigate to='/login' />
+
+  if (loading) return <div>Loading</div>
+
+  if (error) return <div>Error</div>
+
+  if (user) return <Outlet />
+
+  return <Navigate to='/login' />
 }
 
 export default PrivateRoute

@@ -19,3 +19,9 @@ export type Request<T> = {
   value: T
   error?: any
 }
+
+export type Auth = {
+  googleSignIn?: any
+  logOut?: any
+  user?: any
+}

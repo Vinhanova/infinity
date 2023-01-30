@@ -1,11 +1,9 @@
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserAuth } from '../Context/AuthContext'
 import GoogleButton from 'react-google-button'
 
-type Props = {}
-
-const LoginPage = (props: Props) => {
+const LoginPage: FC = () => {
   const { googleSignIn, user } = UserAuth()
   const navigate = useNavigate()
   //console.log('USER >>', user)

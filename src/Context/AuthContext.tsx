@@ -1,14 +1,9 @@
 import { useContext, createContext, useEffect, useState, FC, ReactNode } from 'react'
 import { GoogleAuthProvider, signOut, onAuthStateChanged, signInWithPopup } from 'firebase/auth'
+import { Auth } from '../utils/types'
 import { auth } from '../firebase'
 
-type test = {
-  googleSignIn?: any
-  logOut?: any
-  user?: any
-}
-
-const AuthContext = createContext<test>({})
+const AuthContext = createContext<Auth>({})
 
 type Props = {
   children: ReactNode
