@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react'
 
 type Props = {
-  start: Array<ReactNode>
-  end: Array<ReactNode>
+  start: ReactNode[]
+  end: ReactNode[]
 }
 
 const WalletNavBar: FC<Props> = ({ start, end }) => {

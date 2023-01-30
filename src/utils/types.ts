@@ -11,7 +11,7 @@ export type Day = {
 }
 
 export type MonthlyPaymentsDic = {
-  [day: number]: Array<string>
+  [day: number]: string[]
 }
 
 export type Request<T> = {

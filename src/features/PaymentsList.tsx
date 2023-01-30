@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Payment } from '../utils/types'
 
 type Props = {
-  listPayments: Array<Payment>
+  listPayments: Payment[]
 }
 
 const PaymentsList: FC<Props> = ({ listPayments }) => {

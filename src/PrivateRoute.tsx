@@ -6,9 +6,6 @@ import { FC } from 'react'
 const PrivateRoute: FC = () => {
   const [user, loading, error] = useAuthState(auth)
 
-  // If authorized, return an outlet that will render child elements
-  // If not, return element that will navigate to login page
-
   if (loading) return <div>Loading</div>
 
   if (error) return <div>Error</div>

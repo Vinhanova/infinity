@@ -4,7 +4,7 @@ import { MonthlyPaymentsDic, Payment } from '../utils/types'
 import DayCalendar from './DayCalendar'
 
 type Props = {
-  list: Array<Payment>
+  list: Payment[]
 }
 
 const MonthCalendar: FC<Props> = ({ list }) => {

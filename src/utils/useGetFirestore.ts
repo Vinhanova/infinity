@@ -1,16 +1,16 @@
 import { collection, DocumentData, onSnapshot, Query, query, QueryDocumentSnapshot, QueryFieldFilterConstraint, QuerySnapshot, Unsubscribe } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { db } from '../firebase'
 import { Request } from './types'
+import { db } from '../firebase'
 
-export function useGetFirestore(dbCollection: string, userId: number, queries: Array<QueryFieldFilterConstraint> = []): Request<Array<any>> {
-  const [request, setRequest] = useState<Request<Array<any>>>({ state: 'pending', value: [] })
+export function useGetFirestore(dbCollection: string, userId: number, queries: QueryFieldFilterConstraint[] = []): Request<any[]> {
+  const [request, setRequest] = useState<Request<any[]>>({ state: 'pending', value: [] })
 
   useEffect(() => {
     const q: Query<DocumentData> = query(collection(db, dbCollection), ...queries)
 
     const unsubscribe: Unsubscribe = onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>): void => {
-      let value: Array<any> = []
+      let value: any[] = []
 
       querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>): void => {
         if (doc.data().date) {

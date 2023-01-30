@@ -34,6 +34,7 @@ const MainNavBar: FC = () => {
           <FiSettings />
         </NavLink>
       </div>
+
       {/* <div className='flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  '>
           <a className='hover:outline-none hover:text-indigo-400 text-left  text-white flex justify-between items-center w-full py-5 space-x-14  '>
             <p className='text-sm leading-5  uppercase'>Profile Overview</p>

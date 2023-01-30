@@ -3,11 +3,11 @@ import { Day } from '../utils/types'
 
 type Props = {
   day: Day
-  dailyPaymentsList: Array<string>
+  dailyPaymentsList: string[]
 }
 
 const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
-  //const [paymentsList, setPaymentsList] = useState<Array<string>>([])
+  //const [paymentsList, setPaymentsList] = useState<string[]>([])
   //const [dayInfo, setDayInfo] = useState(day) // Problems might emerge from this variable not updating // Solution: useEffect()
 
   return (

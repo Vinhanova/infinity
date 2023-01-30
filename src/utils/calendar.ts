@@ -11,7 +11,7 @@ export function getMonth(currentMonth: number = moment().month()) {
 
   let numberOfRows: number = lastDayOfCalendar > 35 ? 6 : 5
 
-  const calendarArr: Array<Array<Day>> = [...new Array(numberOfRows)].fill([]).map((_, index) => {
+  const calendarArr: Day[][] = [...new Array(numberOfRows)].fill([]).map((_, index) => {
     return new Array(7).fill(null).map(_ => {
       const dayNr: number = moment([currentYear, currentMonth, 1]).add(firstDayOfCalendar++, 'days').date()
       return {
@@ -24,7 +24,7 @@ export function getMonth(currentMonth: number = moment().month()) {
   return calendarArr
 }
 
-export function formatPaymentsList(list: Array<Payment>): MonthlyPaymentsDic {
+export function formatPaymentsList(list: Payment[]): MonthlyPaymentsDic {
   let formattedList: MonthlyPaymentsDic = {}
 
   for (let i = 0; i < list.length; i++) {

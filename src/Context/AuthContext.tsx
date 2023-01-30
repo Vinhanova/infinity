@@ -3,11 +3,11 @@ import { useContext, createContext, useEffect, useState, FC, ReactNode } from 'r
 import { Auth } from '../utils/types'
 import { auth } from '../firebase'
 
-const AuthContext = createContext<Auth>({})
-
 type Props = {
   children: ReactNode
 }
+
+const AuthContext = createContext<Auth>({})
 
 export const AuthContextProvider: FC<Props> = ({ children }) => {
   const [user, setUser] = useState({})
