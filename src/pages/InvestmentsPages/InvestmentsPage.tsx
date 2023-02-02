@@ -13,13 +13,14 @@ type userStocks = {
 const InvestmentsPage: FC = () => {
   const [stocks, setStocks] = useState<{}>({})
   const [userStocks, setUserStocks] = useState<userStocks>({
-    '^GSPC': { name: 'SP500', quantity: 0 },
-    '^IXIC': { name: 'NASDAQ', quantity: 0 },
-    TSLA: { name: 'TESLA', quantity: 150 },
-    AAPL: { name: 'APPLE', quantity: 23 },
-    'BTC-USD': { name: 'BTC', quantity: 10 },
-    'ETH-USD': { name: 'ETH', quantity: 12 },
-    'DOGE-USD': { name: 'DOGE', quantity: 12 }
+    '^GSPC': { name: 'S&P 500', quantity: 0 },
+    '^IXIC': { name: 'NASDAQ', quantity: 213 },
+    '^DJI': { name: 'DOW 30', quantity: 123 },
+    TSLA: { name: 'TESLA', quantity: 12 },
+    AAPL: { name: 'APPLE', quantity: 321 },
+    'BTC-USD': { name: 'BITCOIN', quantity: 3 },
+    'ETH-USD': { name: 'ETHEREUM', quantity: 21 },
+    'DOGE-USD': { name: 'DOGE', quantity: 3124 }
   })
 
   useEffect(() => {
@@ -59,12 +60,12 @@ const InvestmentsPage: FC = () => {
         <div className='mt-8 w-3/4'>
           {_.map(stocks, (stock: any) => (
             <div key={stock.id} className='mb-5 w-full border-2'>
-              <p>{userStocks[stock.id].name}:</p>
+              <p>{userStocks[stock.id].name + ' (' + stock.id + ')'}:</p>
               <div className='flex justify-between'>
                 <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
                   {stock.price.toFixed('2')} ({stock.changePercent.toFixed(2)}%)
                 </p>
-                <p className='mr-2'>{(stock.price * userStocks[stock.id].quantity).toFixed(2)} €</p>
+                <p className='mr-2'>{(stock.price * userStocks[stock.id].quantity).toFixed(2)} $</p>
               </div>
             </div>
           ))}
