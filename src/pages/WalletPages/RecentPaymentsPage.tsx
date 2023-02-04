@@ -1,8 +1,8 @@
+import { useQueryFirestore } from '../../utils/useGetFirestore'
+import MonthCalendar from '../../features/MonthCalendar'
 import { where } from 'firebase/firestore'
 import moment from 'moment'
 import { FC } from 'react'
-import MonthCalendar from '../../features/MonthCalendar'
-import { useQueryFirestore } from '../../utils/useGetFirestore'
 
 const RecentPaymentsPage: FC = () => {
   const { state, data: listAllPayments, error } = useQueryFirestore('payments', 123, [where('date', '>=', moment('01-01-2023', 'MM-DD-YYYY').toDate()), where('date', '<', moment('02-01-2023', 'MM-DD-YYYY').toDate())])

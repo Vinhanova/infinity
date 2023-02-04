@@ -50,7 +50,9 @@ const InvestmentsPage: FC = () => {
         <div className='mt-8 w-3/4'>
           {state === 'pending' && <h1>Pending</h1>}
           {state === 'error' && <h1>{error.toString()}</h1>}
-          {state === 'success' &&
+          {state === 'success' && _.isEmpty(stocks) ? (
+            <h1>0 stocks</h1>
+          ) : (
             _.map(stocks, (stock: any) => (
               <div key={stock.id} className='mb-5 w-full border-2'>
                 <p>{userStocks![stock.id].name + ' (' + stock.id + ')'}:</p>
@@ -61,7 +63,8 @@ const InvestmentsPage: FC = () => {
                   <p className='mr-2'>{(stock.price * userStocks![stock.id].quantity).toFixed(2)} $</p>
                 </div>
               </div>
-            ))}
+            ))
+          )}
         </div>
       </div>
     </>
