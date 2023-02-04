@@ -1,7 +1,7 @@
 import { useDocFirestore } from '../../utils/useGetFirestore'
 import { UserAuth } from '../../Context/AuthContext'
-import { userStocks } from '../../utils/types'
 import { FC, useEffect, useState } from 'react'
+import { userStocks } from '../../utils/types'
 import protobuf from 'protobufjs'
 import { Buffer } from 'buffer'
 import _ from 'underscore'
