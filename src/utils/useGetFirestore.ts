@@ -1,31 +1,43 @@
-import { collection, DocumentData, onSnapshot, Query, query, QueryDocumentSnapshot, QueryFieldFilterConstraint, QuerySnapshot, Unsubscribe } from 'firebase/firestore'
+import { collection, doc, DocumentData, getDoc, onSnapshot, Query, query, QueryDocumentSnapshot, QueryFieldFilterConstraint, QuerySnapshot, Unsubscribe } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { Request } from './types'
 import { db } from '../firebase'
 
-export function useGetFirestore(dbCollection: string, userId: number, queries: QueryFieldFilterConstraint[] = []): Request<any[]> {
-  const [request, setRequest] = useState<Request<any[]>>({ state: 'pending', value: [] })
+export function useQueryFirestore(dbCollection: string, userId: number, queries: QueryFieldFilterConstraint[] = []): Request<any[]> {
+  const [request, setRequest] = useState<Request<any[]>>({ state: 'pending', data: [] })
 
   useEffect(() => {
     const q: Query<DocumentData> = query(collection(db, dbCollection), ...queries)
 
     const unsubscribe: Unsubscribe = onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>): void => {
-      let value: any[] = []
+      let data: any[] = []
 
       querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>): void => {
         if (doc.data().date) {
-          value.push({ id: doc.id, ...doc.data(), date: formatDate(doc.data().date.seconds) })
+          data.push({ id: doc.id, ...doc.data(), date: formatDate(doc.data().date.seconds) })
         } else {
-          value.push({ id: doc.id, ...doc.data() })
+          data.push({ id: doc.id, ...doc.data() })
         }
       })
 
-      setRequest({ state: 'resolved', value })
+      setRequest({ state: 'success', data })
 
       // Handle errors
     })
 
     return (): void => unsubscribe()
+  }, [dbCollection, userId])
+
+  return request
+}
+
+export function useDocFirestore<T>(dbCollection: string, userId: string): Request<T> {
+  const [request, setRequest] = useState<Request<T>>({ state: 'pending' })
+
+  useEffect(() => {
+    getDoc(doc(db, dbCollection, userId))
+      .then(data => setRequest({ state: 'success', data: data.data() }))
+      .catch(error => setRequest({ state: 'error', error: error }))
   }, [dbCollection, userId])
 
   return request

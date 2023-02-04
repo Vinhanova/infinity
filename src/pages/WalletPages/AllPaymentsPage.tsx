@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import PaymentsList from '../../features/PaymentsList'
-import { useGetFirestore } from '../../utils/useGetFirestore'
+import { useQueryFirestore } from '../../utils/useGetFirestore'
 
 const AllPaymentsPage: FC = () => {
-  const { state, value: listAllPayments, error } = useGetFirestore('payments', 123)
+  const { state, data: listAllPayments, error } = useQueryFirestore('payments', 123)
 
   return (
     <>
@@ -58,7 +58,7 @@ const AllPaymentsPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className='relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg'>{state === 'resolved' && <PaymentsList listPayments={listAllPayments} />}</div>
+        <div className='relative w-3/4 overflow-x-auto shadow-md sm:rounded-lg'>{state === 'resolved' && <PaymentsList listPayments={listAllPayments!} />}</div>
       </div>
     </>
   )

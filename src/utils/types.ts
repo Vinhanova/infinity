@@ -16,7 +16,7 @@ export type MonthlyPaymentsDic = {
 
 export type Request<T> = {
   state: string
-  value: T
+  data?: any
   error?: any
 }
 
@@ -24,4 +24,11 @@ export type Auth = {
   googleSignIn?: any
   logOut?: any
   user?: any
+}
+
+export type userStocks = {
+  [ticker: string]: {
+    name: string
+    quantity: number
+  }
 }

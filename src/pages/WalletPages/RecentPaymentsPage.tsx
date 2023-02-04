@@ -2,16 +2,20 @@ import { where } from 'firebase/firestore'
 import moment from 'moment'
 import { FC } from 'react'
 import MonthCalendar from '../../features/MonthCalendar'
-import { useGetFirestore } from '../../utils/useGetFirestore'
+import { useQueryFirestore } from '../../utils/useGetFirestore'
 
 const RecentPaymentsPage: FC = () => {
-  const { state, value: listAllPayments, error } = useGetFirestore('payments', 123, [where('date', '>=', moment('01-01-2023', 'MM-DD-YYYY').toDate()), where('date', '<', moment('02-01-2023', 'MM-DD-YYYY').toDate())])
+  const { state, data: listAllPayments, error } = useQueryFirestore('payments', 123, [where('date', '>=', moment('01-01-2023', 'MM-DD-YYYY').toDate()), where('date', '<', moment('02-01-2023', 'MM-DD-YYYY').toDate())])
 
   return (
     <>
       <div className='m-16'>
         <div className='flex gap-x-6'>
-          <div className='h-80 w-3/4 border-2 border-white'>{state === 'resolved' && <MonthCalendar list={listAllPayments} />}</div>
+          <div className='h-80 w-3/4 border-2 border-white'>
+            {state === 'pending' && <h1>Pending</h1>}
+            {state === 'error' && <h1>{error}</h1>}
+            {state === 'success' && <MonthCalendar list={listAllPayments!} />}
+          </div>
           <div className='flex w-1/4 justify-center border-2 border-white text-center'>
             <div className='w-full'>
               <h1>Media</h1>
