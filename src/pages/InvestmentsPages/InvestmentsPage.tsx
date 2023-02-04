@@ -49,7 +49,7 @@ const InvestmentsPage: FC = () => {
       <div className='flex w-full flex-col items-center'>
         <div className='mt-8 w-3/4'>
           {state === 'pending' && <h1>Pending</h1>}
-          {state === 'error' && <h1>{error}</h1>}
+          {state === 'error' && <h1>{error.toString()}</h1>}
           {state === 'success' &&
             _.map(stocks, (stock: any) => (
               <div key={stock.id} className='mb-5 w-full border-2'>

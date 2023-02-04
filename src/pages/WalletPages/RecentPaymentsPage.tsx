@@ -13,7 +13,7 @@ const RecentPaymentsPage: FC = () => {
         <div className='flex gap-x-6'>
           <div className='h-80 w-3/4 border-2 border-white'>
             {state === 'pending' && <h1>Pending</h1>}
-            {state === 'error' && <h1>{error}</h1>}
+            {state === 'error' && <h1>{error.toString()}</h1>}
             {state === 'success' && <MonthCalendar list={listAllPayments!} />}
           </div>
           <div className='flex w-1/4 justify-center border-2 border-white text-center'>
