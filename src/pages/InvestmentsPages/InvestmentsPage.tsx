@@ -41,6 +41,7 @@ const InvestmentsPage: FC = () => {
         ws.onclose = function close() {
           console.log('disconnected')
         }
+        //onLeavingPage => ws.close?
       })
     }
   }, [userStocks])
@@ -57,13 +58,13 @@ const InvestmentsPage: FC = () => {
             {state === 'pending' && <h1>Pending</h1>}
             {state === 'error' && <h1>{error.toString()}</h1>}
             {state === 'success' && _.isEmpty(stocks) ? (
-              <h1>0 stocks</h1>
+              <h1 className='p-2'>No stocks found</h1>
             ) : (
               _.map(stocks, (stock: any) => {
                 return (
-                  <div key={stock.id} className='mb-5 w-full border-2'>
+                  <div key={stock.id} className='w-full border-t-2 p-2'>
                     <div className='flex justify-between'>
-                      <p>{userStocks![stock.id].name + ' (' + stock.id + ')'}:</p>
+                      <p className='font-medium'>{userStocks![stock.id].name + ' (' + stock.id + ')'}:</p>
                       <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
                         {stock.price.toFixed('2')} ({stock.changePercent.toFixed(2)}%)
                       </p>
@@ -74,9 +75,9 @@ const InvestmentsPage: FC = () => {
               })
             )}
           </div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between border-t-2 p-2'>
             <h1>Total: </h1>
-            <div>
+            <div className='text-right'>
               <h1>{total} $</h1>
               <h1>{(total * 0.92).toFixed(2)} €</h1>
             </div>

@@ -1,5 +1,6 @@
 import { BsFillCalendar2WeekFill, BsFillPersonFill } from 'react-icons/bs'
 import { IoInfiniteSharp, IoWalletSharp } from 'react-icons/io5'
+import { UserAuth } from '../Context/AuthContext'
 import { FiSettings } from 'react-icons/fi'
 import { FaCoins } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
@@ -7,6 +8,8 @@ import { NavLink } from 'react-router-dom'
 import { FC } from 'react'
 
 const MainNavBar: FC = () => {
+  const { user } = UserAuth()
+
   return (
     <div className='flex h-full w-16 flex-col justify-between bg-custom-tealblue p-6 text-2xl'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
@@ -26,12 +29,12 @@ const MainNavBar: FC = () => {
           <FaCoins />
         </NavLink>
       </div>
-      <div className='flex w-full flex-col items-center justify-center space-y-5'>
-        <NavLink to='/profile' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
-          <BsFillPersonFill />
-        </NavLink>
+      <div className='mb-4 flex w-full flex-col items-center justify-center space-y-6'>
         <NavLink to='/settings' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
           <FiSettings />
+        </NavLink>
+        <NavLink to='/profile' className='cursor-pointer rounded hover:text-indigo-400 hover:outline-none'>
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='scale-[2.25] rounded border' /> : <BsFillPersonFill className='-mt-1.5 -mb-2 text-3xl' />}
         </NavLink>
       </div>
 
