@@ -1,5 +1,5 @@
 import { useDocFirestore } from '../../utils/useGetFirestore'
-import { useGetAllTickers } from '../../utils/useGetTicker'
+import { useGetAllTickers } from '../../utils/useGetAllTickers'
 import { UserAuth } from '../../Context/AuthContext'
 import { FC, useEffect, useState } from 'react'
 import { userStocks } from '../../utils/types'
@@ -12,14 +12,17 @@ const InvestmentsPage: FC = () => {
   const [stocks, setStocks] = useState<{}>({})
   const [newStocks, setNewStocks] = useState<any>({})
   const [total, setTotal] = useState<number>(0)
+  const [tickers, setTickers] = useState<string[]>([])
 
   const { state, data: userStocks, error } = useDocFirestore<userStocks>(`stocks`, user.uid)
+  const initialTickerInfo = useGetAllTickers({ tickers })
 
   useEffect(() => {
-    //const { data } = useGetAllTickers(['DOGE-USD', 'ADA-USD', 'BNB-USD', 'SOL-USD', 'AAPL', 'BTC-USD', 'TSLA', 'ETH-USD'])
-    const initialTickers = useGetAllTickers(_.keys(userStocks))
-    //_.keys(userStocks)
-    console.log('newdata', initialTickers)
+    console.log('initialTickerInfo', initialTickerInfo)
+  }, [initialTickerInfo])
+
+  useEffect(() => {
+    setTickers(_.keys(userStocks))
   }, [userStocks])
 
   useEffect(() => {
@@ -72,7 +75,7 @@ const InvestmentsPage: FC = () => {
 
       // Listen for messages
       socket.addEventListener('message', function (event) {
-        const data = JSON.parse(event.data).data[0]
+        const data = JSON.parse(event.data)?.data[0]
         //console.log('----- ', data.s, data)
         setNewStocks((newStocks: any) => ({ ...newStocks, [data.s]: data }))
       })
