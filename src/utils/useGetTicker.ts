@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react'
 import { Request } from './types'
 import axios from 'axios'
 
-export function useGetTicker(ticker: string) {
-  const [tickerInfo, setTickerInfo] = useState<Request<{}>>({ state: 'pending', data: [] })
+export function useGetAllTickers(tickers: string[]) {
+  let initialTickerInfo: Request<{}> = { state: 'pending', data: {} }
+  let requestsCounter = 0
 
-  useEffect(() => {
-    var url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=${import.meta.env.ALPHAVANTAGE_API_KEY}`
+  axios
+    .all(
+      tickers.map(ticker => {
+        if (ticker[0] === '^') return
+        else return axios.get(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
+      })
+    )
+    .then(
+      axios.spread((...data) => {
+        console.log('data', data)
+        data.map(d => (initialTickerInfo.data[tickers[requestsCounter++]] = d?.data.c))
+      })
+    )
+    .catch(error => {
+      initialTickerInfo.state = 'error'
+      initialTickerInfo.error = error
+    })
+    .finally(() => (initialTickerInfo.state !== 'error' ? (initialTickerInfo.state = 'success') : (initialTickerInfo.state = 'error')))
 
-    axios
-      .get(url)
-      .then(data => setTickerInfo({ state: 'success', data: data.data }))
-      .catch(error => setTickerInfo({ state: 'error', error: error }))
-  }, [])
-
-  useEffect(() => {
-    console.log(tickerInfo.state === 'success' && tickerInfo.data['Global Quote']['05. price'])
-  }, [tickerInfo])
-
-  return tickerInfo
+  return initialTickerInfo
 }

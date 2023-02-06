@@ -30,5 +30,6 @@ export type userStocks = {
   [ticker: string]: {
     name: string
     quantity: number
+    watchlist: boolean
   }
 }
