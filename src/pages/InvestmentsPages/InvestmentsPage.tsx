@@ -5,12 +5,15 @@ import { userStocks } from '../../utils/types'
 import protobuf from 'protobufjs'
 import { Buffer } from 'buffer'
 import _ from 'underscore'
+import { useGetTicker } from '../../utils/useGetTicker'
 
 const InvestmentsPage: FC = () => {
   const { user } = UserAuth()
   const { state, data: userStocks, error } = useDocFirestore<userStocks>(`stocks`, user.uid)
   const [stocks, setStocks] = useState<{}>({})
   const [total, setTotal] = useState<number>(0)
+
+  const { data } = useGetTicker('TSLA')
 
   useEffect(() => {
     if (userStocks) {
@@ -34,7 +37,7 @@ const InvestmentsPage: FC = () => {
 
         ws.onmessage = function incoming(message) {
           const stockInfo: any = Yaticker.decode(new Buffer(message.data, 'base64'))
-          console.log(stockInfo)
+          //console.log(stockInfo)
           setStocks(stocks => ({ ...stocks, [stockInfo.id]: stockInfo }))
         }
 
