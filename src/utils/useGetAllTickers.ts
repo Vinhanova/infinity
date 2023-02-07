@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Request } from './types'
 import axios from 'axios'
 
-export function useGetAllTickers({ tickers }: any): any {
+export function useGetAllTickers(tickers: any): any {
   const [initialTickerInfo, setInitialTickerInfo] = useState<Request<[]>>({ state: 'pending', data: [] })
 
   useEffect(() => {

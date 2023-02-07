@@ -1,95 +1,34 @@
 import { useDocFirestore } from '../../utils/useGetFirestore'
 import { useGetAllTickers } from '../../utils/useGetAllTickers'
+import { useYFWebSocket } from '../../utils/useYFWebSocket'
+import { useFHWebSocket } from '../../utils/useFHWebSocket'
 import { UserAuth } from '../../Context/AuthContext'
 import { FC, useEffect, useState } from 'react'
 import { userStocks } from '../../utils/types'
-import protobuf from 'protobufjs'
-import { Buffer } from 'buffer'
 import _ from 'underscore'
 
 const InvestmentsPage: FC = () => {
   const { user } = UserAuth()
-  const [stocks, setStocks] = useState<{}>({})
-  const [newStocks, setNewStocks] = useState<any>({})
   const [total, setTotal] = useState<number>(0)
   const [tickers, setTickers] = useState<string[]>([])
 
   const { state, data: userStocks, error } = useDocFirestore<userStocks>(`stocks`, user.uid)
-  const initialTickerInfo = useGetAllTickers({ tickers })
+  const initialTickerInfo = useGetAllTickers(tickers)
 
-  useEffect(() => {
-    console.log('initialTickerInfo', initialTickerInfo)
-  }, [initialTickerInfo])
+  const stocks = useYFWebSocket(userStocks)
+  const newStocks = useFHWebSocket(userStocks)
 
   useEffect(() => {
     setTickers(_.keys(userStocks))
   }, [userStocks])
 
   useEffect(() => {
-    if (userStocks) {
-      const ws = new WebSocket('wss://streamer.finance.yahoo.com')
-
-      protobuf.load('./YPricingData.proto', (error, root) => {
-        if (error) {
-          return console.log(error)
-        }
-
-        const Yaticker = root!.lookupType('yaticker')
-
-        ws.onopen = function open() {
-          console.log('connected')
-          ws.send(
-            JSON.stringify({
-              subscribe: _.keys(userStocks)
-            })
-          )
-        }
-
-        ws.onmessage = function incoming(message) {
-          const stockInfo: any = Yaticker.decode(new Buffer(message.data, 'base64'))
-          //console.log('>>>>> ', stockInfo.id, +stockInfo.price.toFixed(2))
-          setStocks(stocks => ({ ...stocks, [stockInfo.id]: stockInfo }))
-        }
-
-        ws.onclose = function close() {
-          console.log('disconnected')
-        }
-        //onLeavingPage => ws.close?
-      })
-
-      const socket = new WebSocket('wss://ws.finnhub.io?token=cfgimjpr01qlga2uev4gcfgimjpr01qlga2uev50')
-
-      // Connection opened -> Subscribe
-      socket.addEventListener('open', function (event) {
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'TSLA' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'AAPL' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:BTCUSDT' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:ETHUSDT' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:DOGEUSDT' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:ADAUSDT' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:SOLUSDT' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: '^DJI' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: '^GSPC' }))
-        socket.send(JSON.stringify({ type: 'subscribe', symbol: '^IXIC' }))
-      })
-
-      // Listen for messages
-      socket.addEventListener('message', function (event) {
-        const data = JSON.parse(event.data)?.data[0]
-        //console.log('----- ', data.s, data)
-        setNewStocks((newStocks: any) => ({ ...newStocks, [data.s]: data }))
-      })
-
-      // Unsubscribe
-      var unsubscribe = function (symbol: string) {
-        socket.send(JSON.stringify({ type: 'unsubscribe', symbol: symbol }))
-      }
-    }
-  }, [userStocks])
-
-  useEffect(() => {
     setTotal(+_.reduce(stocks, (total: number, stock: any) => total + stock.price * userStocks![stock.id].quantity, 0).toFixed(2))
   }, [stocks])
+
+  useEffect(() => {
+    console.log('initialTickerInfo', initialTickerInfo)
+  }, [initialTickerInfo])
 
   function toFixed(num: number, fixed: number): string {
     var re = new RegExp('^-?\\d+(?:.\\d{0,' + (fixed || -1) + '})?')
