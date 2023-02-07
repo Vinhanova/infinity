@@ -13,9 +13,16 @@ const InvestmentsPage: FC = () => {
   const [tickers, setTickers] = useState<string[]>([])
 
   const { state, data: userStocks, error } = useDocFirestore<userStockDic>(`stocks`, user.uid)
-  const initialStockInfo = useGetAllStocks(tickers)
 
-  const stocks = useYFWebSocket(userStocks)
+  const initialStocksInfo = useGetAllStocks(tickers)
+  const updatedStocksInfo = useYFWebSocket(userStocks)
+  const [stocksInfo, setStocksInfo] = useState<object[]>([])
+
+  useEffect(() => {
+    if (stocksInfo.length) return
+
+    setStocksInfo(initialStocksInfo.data)
+  }, [initialStocksInfo])
 
   useEffect(() => {
     setTickers(_.keys(userStocks))
@@ -24,27 +31,67 @@ const InvestmentsPage: FC = () => {
   useEffect(() => {
     setTotal(
       toFixed(
-        _.reduce(stocks, (total: number, stock: any) => total + stock.price * userStocks![stock.id].quantity, 0),
+        _.reduce(updatedStocksInfo, (total: number, stock: any) => total + stock.price * userStocks![stock.id].quantity, 0),
         2
       )
     )
     setTotal2(
       toFixed(
-        _.reduce(initialStockInfo.data, (total: number, stock: any) => total + stock.c * userStocks[stock.id].quantity, 0),
+        _.reduce(stocksInfo, (total: number, stock: any) => total + stock.price * userStocks[stock.id].quantity, 0),
         2
       )
       // static array
       // does not update with new info (stocks)
     )
-  }, [stocks, initialStockInfo])
+  }, [updatedStocksInfo, initialStocksInfo])
+
+  /* useEffect(() => {
+    if (updatedStocksInfo.length === 0) return
+    _.map(updatedStocksInfo, (updatedStock: any) => {
+      const stockIndex = initialStocksInfo.data.findIndex((initialStock: any) => initialStock.id === updatedStock.id)
+
+      if (stockIndex !== -1) {
+        let stocksInfoAux: object[] = [...stocksInfo]
+        // 2. Make a shallow copy of the item you want to mutate
+        let stockAux: {} = stocksInfoAux[stockIndex]
+        // 3. Replace the property you're intested in
+        stockAux = updatedStock
+        // 4. Put it back into our array. N.B. we *are* mutating the array here,
+        //    but that's why we made a copy first
+        stocksInfoAux[stockIndex] = stockAux
+        console.log(stocksInfoAux)
+        setStocksInfo(() => [...stocksInfoAux])
+        //updatedStocksInfo[updatedStock]
+      } else {
+        //updatedStock
+        return
+      }
+    })
+  }, [updatedStocksInfo]) */
+
+  /* useEffect(() => {
+    console.log('initialStocksInfo', initialStocksInfo)
+  }, [initialStocksInfo]) */
 
   useEffect(() => {
-    console.log('initialTickerInfo', initialStockInfo)
-  }, [initialStockInfo])
+    console.log('userStocks', userStocks)
+  }, [userStocks])
+
+  /* useEffect(() => {
+    console.log('updatedStocksInfo', updatedStocksInfo)
+  }, [updatedStocksInfo]) */
+
+  /* useEffect(() => {
+    console.log('stocksInfo', stocksInfo)
+  }, [stocksInfo]) */
 
   function toFixed(num: number, fixed: number): number {
     var re = new RegExp('^-?\\d+(?:.\\d{0,' + (fixed || -1) + '})?')
     return +num?.toString()?.match(re)! ? +num?.toString()?.match(re)![0] : 0
+  }
+
+  function findKey(obj: any, value: any): string {
+    return Object.keys(obj).find(key => obj[key] === value)!
   }
 
   return (
@@ -54,10 +101,10 @@ const InvestmentsPage: FC = () => {
           <div>
             {state === 'pending' && <h1>Pending</h1>}
             {state === 'error' && <h1>{error.toString()}</h1>}
-            {state === 'success' && _.isEmpty(stocks) ? (
+            {state === 'success' && _.isEmpty(updatedStocksInfo) ? (
               <h1 className='p-2'>No stocks found</h1>
             ) : (
-              _.map(stocks, (stock: any) => {
+              _.map(updatedStocksInfo, (stock: any) => {
                 if (userStocks[stock.id].quantity === 0) return
 
                 return (
@@ -84,23 +131,60 @@ const InvestmentsPage: FC = () => {
         </div>
         <div className='mt-8 w-3/4'>
           <div>
-            {initialStockInfo.state === 'pending' && <h1>Pending</h1>}
-            {initialStockInfo.state === 'error' && <h1>{error}</h1>}
-            {initialStockInfo.state === 'success' && _.isEmpty(stocks) ? (
+            {initialStocksInfo.state === 'pending' && <h1>Pending</h1>}
+            {initialStocksInfo.state === 'error' && <h1>{error}</h1>}
+            {initialStocksInfo.state === 'success' && _.isEmpty(updatedStocksInfo) ? (
               <h1 className='p-2'>No stocks found</h1>
             ) : (
-              initialStockInfo.data?.map((initialStock: any) => {
-                if (userStocks[initialStock.id].quantity === 0) return
-                //stocks?[initialStock.id] ? stocks[initialStock.id].price :
+              state === 'success' &&
+              _.map(userStocks, (userStock: any) => {
+                if (userStock.quantity === 0) return
+
+                const keyAux = findKey(userStocks, userStock)
+                const initialStockAux = _.find(initialStocksInfo.data, s => s.id === keyAux)
+                const updatedStockAux = _.find(updatedStocksInfo, s => s.id === keyAux)
+
                 return (
-                  <div key={initialStock.id} className='w-full border-t-2 p-2'>
+                  <div key={keyAux} className='w-full border-t-2 p-2'>
                     <div className='flex justify-between'>
-                      <p className='font-medium'>{userStocks![initialStock.id].name + ' (' + initialStock.id + ')'}:</p>
-                      <p className={initialStock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
-                        {stocks[initialStock.id] ? toFixed(stocks[initialStock.id].price, stocks[initialStock.id].price < 1 ? 3 : 2) : toFixed(initialStock.c, initialStock.c < 1 ? 3 : 2)} ({toFixed(initialStock.changePercent, 2)}%)
+                      <p className='font-medium'>{userStock.name + ' (' + keyAux + ')'}:</p>
+                      <p className={updatedStockAux ? (updatedStockAux.changePercent > 0 ? 'text-green-500' : 'text-red-500') : 'text-white'}>
+                        {toFixed(updatedStockAux!?.price, updatedStockAux!?.price < 1 ? 3 : 2) || toFixed(initialStockAux?.price, initialStockAux?.price < 1 ? 3 : 2)} ({toFixed(updatedStockAux!?.changePercent, 2)}%)
                       </p>
                     </div>
-                    <p className='text-right'>{toFixed(initialStock.price * userStocks![initialStock.id].quantity, 2)} $</p>
+                    <p className='text-right'>{initialStockAux ? toFixed(initialStockAux.price * userStock.quantity, 2) : '?'} $</p>
+                  </div>
+                )
+              })
+            )}
+          </div>
+          <div className='flex justify-between border-t-2 p-2'>
+            <h1>Total: </h1>
+            <div className='text-right'>
+              <h1>{total2} $</h1>
+              <h1>{toFixed(total2 * 0.92, 2)} €</h1>
+            </div>
+          </div>
+        </div>
+        <div className='mt-8 w-3/4'>
+          <div>
+            {initialStocksInfo.state === 'pending' && <h1>Pending</h1>}
+            {initialStocksInfo.state === 'error' && <h1>{error}</h1>}
+            {initialStocksInfo.state === 'success' && _.isEmpty(updatedStocksInfo) ? (
+              <h1 className='p-2'>No stocks found</h1>
+            ) : (
+              stocksInfo?.map((stock: any) => {
+                if (userStocks[stock.id].quantity === 0) return
+                //stocks?[initialStock.id] ? stocks[initialStock.id].price :
+                return (
+                  <div key={stock.id} className='w-full border-t-2 p-2'>
+                    <div className='flex justify-between'>
+                      <p className='font-medium'>{userStocks![stock.id].name + ' (' + stock.id + ')'}:</p>
+                      <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
+                        {toFixed(stock.price, stock.price < 1 ? 3 : 2)} ({toFixed(stock.changePercent, 2)}%)
+                      </p>
+                    </div>
+                    <p className='text-right'>{toFixed(stock.price * userStocks![stock.id].quantity, 2)} $</p>
                   </div>
                 )
               })
