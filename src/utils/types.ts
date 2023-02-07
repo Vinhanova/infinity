@@ -27,9 +27,11 @@ export type Auth = {
 }
 
 export type userStocks = {
-  [ticker: string]: {
-    name: string
-    quantity: number
-    watchlist: boolean
-  }
+  [ticker: string]: userStock
+}
+
+export type userStock = {
+  name: string
+  quantity: number
+  watchlist: boolean
 }
