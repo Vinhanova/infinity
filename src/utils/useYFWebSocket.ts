@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import protobuf from 'protobufjs'
 import { Buffer } from 'buffer'
 import _ from 'underscore'
+import { yHStock } from './types'
 
 export const useYFWebSocket = (userStocks: any) => {
-  const [stocks, setStocks] = useState<{}>({})
+  const [stocks, setStocks] = useState<yHStock[]>([])
 
   useEffect(() => {
     if (userStocks) {

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Request } from './types'
 import axios from 'axios'
 
-export function useGetAllTickers(tickers: any): any {
-  const [initialTickerInfo, setInitialTickerInfo] = useState<Request<[]>>({ state: 'pending', data: [] })
+export function useGetAllStocks(tickers: any): any {
+  const [initialStocksInfo, setInitialStocksInfo] = useState<Request<[]>>({ state: 'pending', data: [] })
 
   useEffect(() => {
     axios
@@ -18,12 +18,14 @@ export function useGetAllTickers(tickers: any): any {
         axios.spread((...data) => {
           data.map((d: any) => {
             const ticketInfo = d.data
-            setInitialTickerInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: ticketInfo } }))
+            //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: ticketInfo } }))
+            setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, { id: d.config.url.match(/symbol=(.*?)&/)[1], ...ticketInfo }] }))
+            //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, ticketInfo] }))
           })
         })
       )
-      .catch(error => setInitialTickerInfo({ state: 'error', error: error.message }))
+      .catch(error => setInitialStocksInfo({ state: 'error', error: error.message }))
   }, [tickers])
 
-  return initialTickerInfo
+  return initialStocksInfo
 }

@@ -26,7 +26,7 @@ export type Auth = {
   user?: any
 }
 
-export type userStocks = {
+export type userStockDic = {
   [ticker: string]: userStock
 }
 
@@ -34,4 +34,18 @@ export type userStock = {
   name: string
   quantity: number
   watchlist: boolean
+}
+
+export type yHStock = {
+  change: number
+  changePercent: number
+  dayVolume: number
+  exchange: string
+  id: string
+  lastSize: number
+  marketHours: number
+  price: number
+  priceHint: number
+  quoteType: number
+  time: number
 }
