@@ -91,6 +91,11 @@ const InvestmentsPage: FC = () => {
     setTotal(+_.reduce(stocks, (total: number, stock: any) => total + stock.price * userStocks![stock.id].quantity, 0).toFixed(2))
   }, [stocks])
 
+  function toFixed(num: number, fixed: number): string {
+    var re = new RegExp('^-?\\d+(?:.\\d{0,' + (fixed || -1) + '})?')
+    return num.toString().match(re)![0]
+  }
+
   return (
     <>
       <div className='flex w-full items-center space-x-3'>
@@ -109,7 +114,7 @@ const InvestmentsPage: FC = () => {
                     <div className='flex justify-between'>
                       <p className='font-medium'>{userStocks![stock.id].name + ' (' + stock.id + ')'}:</p>
                       <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
-                        {stock.price.toFixed('2')} ({stock.changePercent.toFixed(2)}%)
+                        {toFixed(stock.price, stock.price < 1 ? 3 : 2)} ({toFixed(stock.changePercent, 2)}%)
                       </p>
                     </div>
                     <p className='text-right'>{(stock.price * userStocks![stock.id].quantity).toFixed(2)} $</p>
@@ -122,7 +127,7 @@ const InvestmentsPage: FC = () => {
             <h1>Total: </h1>
             <div className='text-right'>
               <h1>{total} $</h1>
-              <h1>{(total * 0.92).toFixed(2)} €</h1>
+              <h1>{toFixed(total * 0.92, 2)} €</h1>
             </div>
           </div>
         </div>
@@ -138,7 +143,7 @@ const InvestmentsPage: FC = () => {
                   <div key={stock.s} className='w-full border-t-2 p-2'>
                     <div className='flex justify-between'>
                       <p className='font-medium'>{stock.s}:</p>
-                      <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>{stock.p.toFixed(2)}</p>
+                      <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>{toFixed(stock.p, stock.p < 1 ? 3 : 2)}</p>
                     </div>
                   </div>
                 )
