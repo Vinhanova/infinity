@@ -23,16 +23,21 @@ const InvestmentsPage: FC = () => {
   }, [userStocks])
 
   useEffect(() => {
-    setTotal(+_.reduce(stocks, (total: number, stock: any) => total + stock.price * userStocks![stock.id].quantity, 0).toFixed(2))
+    setTotal(
+      toFixed(
+        _.reduce(stocks, (total: number, stock: any) => total + stock.price * userStocks![stock.id].quantity, 0),
+        2
+      )
+    )
   }, [stocks])
 
   useEffect(() => {
     console.log('initialTickerInfo', initialTickerInfo)
   }, [initialTickerInfo])
 
-  function toFixed(num: number, fixed: number): string {
+  function toFixed(num: number, fixed: number): number {
     var re = new RegExp('^-?\\d+(?:.\\d{0,' + (fixed || -1) + '})?')
-    return num.toString().match(re)![0]
+    return +num.toString().match(re)![0]
   }
 
   return (
@@ -56,7 +61,7 @@ const InvestmentsPage: FC = () => {
                         {toFixed(stock.price, stock.price < 1 ? 3 : 2)} ({toFixed(stock.changePercent, 2)}%)
                       </p>
                     </div>
-                    <p className='text-right'>{(stock.price * userStocks![stock.id].quantity).toFixed(2)} $</p>
+                    <p className='text-right'>{toFixed(stock.price * userStocks![stock.id].quantity, 2)} $</p>
                   </div>
                 )
               })
