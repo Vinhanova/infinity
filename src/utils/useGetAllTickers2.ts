@@ -3,7 +3,7 @@ import { Request } from './types'
 import axios from 'axios'
 
 export function useGetAllStocks(tickers: any): any {
-  const [initialStocksInfo, setInitialStocksInfo] = useState<Request<[]>>({ state: 'pending', data: [] })
+  const [initialStocksInfo, setInitialStocksInfo] = useState<Request>({ state: 'pending', data: [] })
 
   useEffect(() => {
     axios
