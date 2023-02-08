@@ -52,7 +52,7 @@ const Navigation = () => {
         <Route element={<PrivateRoute />}>
           <Route path='investments' element={<InvestmentsLayout />}>
             <Route index element={<div>InvestmentsPage</div>} />
-            <Route path='1' element={<InvestmentsPage />} />
+            <Route path='test' element={<InvestmentsPage />} />
           </Route>
         </Route>
 

@@ -68,7 +68,7 @@ const InvestmentsPage: FC = () => {
   return (
     <>
       <div className='flex flex-col items-center space-x-3'>
-        <div className='my-8 w-3/4 text-center'>
+        <div className='my-8 w-11/12 text-center sm:w-3/4'>
           {stocksInfoState === 'pending' && <h1 className='mb-8'>Loading...</h1>}
 
           {initialStocksInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1>}
@@ -84,7 +84,10 @@ const InvestmentsPage: FC = () => {
                     return (
                       <div key={stock.id} className='w-full border-t-2 p-2'>
                         <div className='flex justify-between'>
-                          <p className='font-medium'>{userStocksData![stock.id].name + ' (' + stock.id + ')'}:</p>
+                          <p className='font-medium'>
+                            {userStocksData![stock.id].name}
+                            <span className='ml-1 hidden sm:inline-block'>{`(${stock.id})`}</span>:
+                          </p>
                           <p className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
                             {toFixed(stock.price, stock.price < 1 ? 3 : 2)} ({toFixed(stock.changePercent, 2)}%)
                           </p>
