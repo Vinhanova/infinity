@@ -67,8 +67,8 @@ const InvestmentsPage: FC = () => {
 
   return (
     <>
-      <div className='flex w-full flex-col items-center space-x-3'>
-        <div className='mt-8 w-3/4 text-center'>
+      <div className='flex flex-col items-center space-x-3'>
+        <div className='my-8 w-3/4 text-center'>
           {stocksInfoState === 'pending' && <h1 className='mb-8'>Loading...</h1>}
 
           {initialStocksInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1>}
