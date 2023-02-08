@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply text-white;
+  @apply bg-custom-jet text-white;
 }

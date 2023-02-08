@@ -4,9 +4,9 @@ import MainNavBar from './MainNavBar'
 
 const AppLayout: FC = () => {
   return (
-    <div className='relative min-h-screen bg-custom-jet'>
+    <div className='overflow-hidden'>
       <MainNavBar />
-      <div className='ml-16 bg-custom-jet'>
+      <div className='ml-16'>
         <Outlet />
       </div>
     </div>
