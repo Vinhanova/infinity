@@ -11,11 +11,11 @@ const InvestmentsLayout: FC = () => {
           <NavLink to={'/investments'} className='mr-4 ml-2 py-2 px-0.5 text-2xl'>
             Investments
           </NavLink>,
-          <NavLink to={'/investments/x'} className='py-2 px-0.5'>
-            X
+          <NavLink to={'/investments/1'} className='py-2 px-0.5'>
+            1
           </NavLink>,
-          <NavLink to={'/investments/y'} className='py-2 px-0.5'>
-            Y
+          <NavLink to={'/investments/2'} className='py-2 px-0.5'>
+            2
           </NavLink>
         ]}
         end={[

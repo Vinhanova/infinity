@@ -17,6 +17,7 @@ import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
+import InvestmentsPage2 from './pages/InvestmentsPages/InvestmentsPage2'
 
 const Navigation = () => {
   const router = createBrowserRouter(
@@ -50,7 +51,9 @@ const Navigation = () => {
 
         <Route element={<PrivateRoute />}>
           <Route path='investments' element={<InvestmentsLayout />}>
-            <Route index element={<InvestmentsPage />} />
+            <Route index element={<div>InvestmentsPage</div>} />
+            <Route path='1' element={<InvestmentsPage />} />
+            <Route path='2' element={<InvestmentsPage2 />} />
           </Route>
         </Route>
 

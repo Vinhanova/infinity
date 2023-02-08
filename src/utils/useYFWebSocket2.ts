@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import protobuf from 'protobufjs'
 import { Buffer } from 'buffer'
-import { Request } from './types'
-
 import _ from 'underscore'
+import { yHStock } from './types'
 
 export const useYFWebSocket = (userStocks: any) => {
-  const [stocks, setStocks] = useState<Request>({ state: 'pending' })
+  const [stocks, setStocks] = useState<yHStock[]>([])
 
   useEffect(() => {
     if (userStocks) {
@@ -20,7 +19,7 @@ export const useYFWebSocket = (userStocks: any) => {
         const Yaticker = root!.lookupType('yaticker')
 
         ws.onopen = function open() {
-          setStocks({ state: 'connected' })
+          console.log('connected')
           ws.send(
             JSON.stringify({
               subscribe: _.keys(userStocks)
@@ -31,11 +30,11 @@ export const useYFWebSocket = (userStocks: any) => {
         ws.onmessage = function incoming(message) {
           const stockInfo: any = Yaticker.decode(new Buffer(message.data, 'base64'))
           //console.log('>>>>> ', stockInfo.id, +stockInfo.price.toFixed(2))
-          setStocks(prevStocks => ({ state: 'success', data: { ...prevStocks.data, [stockInfo.id]: stockInfo } }))
+          setStocks(stocks => ({ ...stocks, [stockInfo.id]: stockInfo }))
         }
 
         ws.onclose = function close() {
-          setStocks({ ...stocks, state: 'disconnected' })
+          console.log('disconnected')
         }
         //onLeavingPage => ws.close?
       })

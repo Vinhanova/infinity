@@ -14,7 +14,8 @@ export type MonthlyPaymentsDic = {
   [day: number]: string[]
 }
 
-export type Request<T> = {
+// T
+export type Request = {
   state: string
   data?: any
   error?: any
