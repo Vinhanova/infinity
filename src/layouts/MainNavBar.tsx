@@ -34,7 +34,7 @@ const MainNavBar: FC = () => {
           <FiSettings />
         </NavLink>
         <NavLink to='/profile' className='cursor-pointer rounded hover:text-indigo-400 hover:outline-none'>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='scale-[2.25] rounded border' /> : <BsFillPersonFill className='-mt-1.5 -mb-2 text-3xl' />}
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='scale-[1.5] rounded border sm:scale-[2.25]' /> : <BsFillPersonFill className='-mt-1.5 -mb-2 text-3xl' />}
         </NavLink>
       </div>
 
