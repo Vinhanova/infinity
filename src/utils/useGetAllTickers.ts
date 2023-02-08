@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Request } from './types'
 import axios from 'axios'
+import _ from 'underscore'
 
 export function useGetAllStocks(tickers: any): any {
-  const [initialStocksInfo, setInitialStocksInfo] = useState<Request>({ state: 'pending', data: [] })
+  const [initialStocksInfo, setInitialStocksInfo] = useState<Request>({ state: 'pending' })
 
   useEffect(() => {
+    if (_.isEmpty(tickers)) return
+
     axios
       .all(
         tickers
@@ -20,11 +23,10 @@ export function useGetAllStocks(tickers: any): any {
             const ticketInfo = d.data
             setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: null } } }))
             //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: null, ...ticketInfo }] }))
-            //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, ticketInfo] }))
           })
         })
       )
-      .catch(error => setInitialStocksInfo({ state: 'error', error: error.message }))
+      .catch(error => setInitialStocksInfo({ state: 'error', error: error }))
   }, [tickers])
 
   return initialStocksInfo

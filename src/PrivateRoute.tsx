@@ -6,7 +6,7 @@ import { FC } from 'react'
 const PrivateRoute: FC = () => {
   const [user, loading, error] = useAuthState(auth)
 
-  if (loading) return <div>Loading</div>
+  if (loading) return <div>Loading...</div>
 
   if (error) return <div>Error</div>
 

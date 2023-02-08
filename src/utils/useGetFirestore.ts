@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { Request } from './types'
 import { db } from '../firebase'
 
-export function useQueryFirestore(dbCollection: string, userId: number, queries: QueryFieldFilterConstraint[] = []): Request<any[]> {
-  const [request, setRequest] = useState<Request<any[]>>({ state: 'pending', data: [] })
+export function useQueryFirestore(dbCollection: string, userId: number, queries: QueryFieldFilterConstraint[] = []): Request {
+  const [request, setRequest] = useState<Request>({ state: 'pending', data: [] })
 
   useEffect(() => {
     const q: Query<DocumentData> = query(collection(db, dbCollection), ...queries)
@@ -31,8 +31,8 @@ export function useQueryFirestore(dbCollection: string, userId: number, queries:
   return request
 }
 
-export function useDocFirestore<T>(dbCollection: string, userId: string): Request<T> {
-  const [request, setRequest] = useState<Request<T>>({ state: 'pending' })
+export function useDocFirestore<T>(dbCollection: string, userId: string): Request {
+  const [request, setRequest] = useState<Request>({ state: 'pending' })
 
   useEffect(() => {
     getDoc(doc(db, dbCollection, userId))
