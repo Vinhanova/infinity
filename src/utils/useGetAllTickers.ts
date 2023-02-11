@@ -21,7 +21,7 @@ export function useGetAllStocks(tickers: any): any {
         axios.spread((...data) => {
           data.map((d: any) => {
             const ticketInfo = d.data
-            setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: null } } }))
+            setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: ticketInfo.dp } } }))
             //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: null, ...ticketInfo }] }))
           })
         })
