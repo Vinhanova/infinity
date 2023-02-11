@@ -33,8 +33,8 @@ const MainNavBar: FC = () => {
         <NavLink to='/settings' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
           <FiSettings />
         </NavLink>
-        <NavLink to='/profile' className='w-8 cursor-pointer rounded hover:text-indigo-400 hover:outline-none'>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='w-full rounded border-2' /> : <BsFillPersonFill className='-mt-1.5 -mb-2 text-3xl' />}
+        <NavLink to='/profile' className='h-8 w-8 cursor-pointer rounded hover:text-indigo-400 hover:outline-none'>
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded border-2' /> : <BsFillPersonFill className='-mt-1.5 -mb-2 text-3xl' />}
         </NavLink>
       </div>
 
