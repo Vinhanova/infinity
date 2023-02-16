@@ -1,5 +1,5 @@
 import { useDocFirestore } from '../../utils/useGetFirestore'
-import { useGetAllStocks } from '../../utils/useGetAllTickers'
+import { useGetAllStocks, useGetStock } from '../../utils/useGetAllTickers'
 import { useYFWebSocket } from '../../utils/useYFWebSocket'
 import { Request, userStockDic } from '../../utils/types'
 import { UserAuth } from '../../Context/AuthContext'
@@ -11,6 +11,7 @@ const InvestmentsPage: FC = () => {
   const [tickers, setTickers] = useState<string[]>([])
 
   const { state: userStocksState, data: userStocksData, error: userStocksError } = useDocFirestore<userStockDic>(`stocks`, user.uid)
+  const { state: USDEURInfoState, data: USDEURInfoData, error: USDEURInfoError } = useGetStock('USDEUR=X')
   const { state: initialStocksInfoState, data: initialStocksInfoData, error: initialStocksInfoError } = useGetAllStocks(tickers)
   const { state: updatedStocksInfoState, data: updatedStocksInfoData } = useYFWebSocket(userStocksData)
 
@@ -98,10 +99,13 @@ const InvestmentsPage: FC = () => {
                   })}
                 </div>
                 <div className='flex justify-between border-t-2 p-2'>
-                  <h1>Total: </h1>
+                  <div className='text-left'>
+                    <h1>Total: </h1>
+                    <h1>(USD/EUR: {USDEURInfoData?.c.toFixed(3)})</h1>
+                  </div>
                   <div className='text-right'>
                     <h1>{total} $</h1>
-                    <h1>{toFixed(total * 0.93, 2)} €</h1>
+                    <h1>{toFixed(total * USDEURInfoData?.c, 2)} €</h1>
                   </div>
                 </div>
               </>
