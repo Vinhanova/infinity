@@ -72,7 +72,7 @@ const InvestmentsPage: FC = () => {
         <div className='mt-4 mb-2 w-11/12 text-center sm:mt-8 sm:mb-6 sm:w-3/4'>
           {(USDEURInfoState === 'pending' || stocksInfoState === 'pending') && <h1 className='mb-8'>Loading...</h1>}
 
-          {USDEURInfoState === 'error' && stocksInfoState === 'error' && (initialStocksInfoError?.response?.status === 429 ? <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1> : <div className='mb-8 text-red-500'>Error</div>)}
+          {(USDEURInfoState === 'error' || stocksInfoState === 'error') && (initialStocksInfoError?.response?.status === 429 ? <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1> : <div className='mb-8 text-red-500'>Error</div>)}
 
           {USDEURInfoState === 'success' &&
             stocksInfoState === 'success' &&
