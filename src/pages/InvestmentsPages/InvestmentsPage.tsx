@@ -70,11 +70,12 @@ const InvestmentsPage: FC = () => {
     <>
       <div className='flex flex-col items-center space-x-3'>
         <div className='mt-4 mb-2 w-11/12 text-center sm:mt-8 sm:mb-6 sm:w-3/4'>
-          {stocksInfoState === 'pending' && <h1 className='mb-8'>Loading...</h1>}
+          {(USDEURInfoState === 'pending' || stocksInfoState === 'pending') && <h1 className='mb-8'>Loading...</h1>}
 
-          {stocksInfoState === 'error' && (initialStocksInfoError?.response?.status === 429 ? <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1> : <div className='mb-8 text-red-500'>Error</div>)}
+          {USDEURInfoState === 'error' && stocksInfoState === 'error' && (initialStocksInfoError?.response?.status === 429 ? <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1> : <div className='mb-8 text-red-500'>Error</div>)}
 
-          {stocksInfoState === 'success' &&
+          {USDEURInfoState === 'success' &&
+            stocksInfoState === 'success' &&
             (_.isEmpty(stocksInfoData) ? (
               <h1 className='p-2'>No stocks found</h1>
             ) : (
