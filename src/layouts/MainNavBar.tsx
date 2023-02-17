@@ -13,28 +13,28 @@ const MainNavBar: FC = () => {
   return (
     <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl sm:w-16'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
-        <NavLink to='/' className='mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-custom-jet/50'}>
           <IoInfiniteSharp />
         </NavLink>
-        <NavLink to='/calendar' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
+        {/* <NavLink to='/calendar' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
           <BsFillCalendar2WeekFill />
-        </NavLink>
-        <NavLink to='/meal-planner' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
+        </NavLink> */}
+        {/* <NavLink to='/meal-planner' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
           <GiMeal />
-        </NavLink>
-        <NavLink to='/wallet' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
+        </NavLink> */}
+        <NavLink to='/wallet' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
           <IoWalletSharp />
         </NavLink>
-        <NavLink to='/investments' className='cursor-pointer rounded p-2.5 text-xl hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/investments' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
           <FaCoins />
         </NavLink>
       </div>
       <div className='mb-4 flex w-full flex-col items-center justify-center space-y-6'>
-        <NavLink to='/settings' className='cursor-pointer rounded p-2 hover:text-indigo-400 hover:outline-none'>
+        <NavLink to='/settings' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
           <FiSettings />
         </NavLink>
-        <NavLink to='/profile' className='h-8 w-8 cursor-pointer rounded hover:text-indigo-400 hover:outline-none'>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded border-2' /> : <BsFillPersonFill className='-mt-1.5 -mb-2 text-3xl' />}
+        <NavLink to='/profile' className={({ isActive }) => (isActive ? '[&>*]:border-custom-jet ' : '') + 'h-8 w-8 cursor-pointer'}>
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded border-2 hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
         </NavLink>
       </div>
 

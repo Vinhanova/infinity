@@ -17,7 +17,6 @@ import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
-import InvestmentsPage2 from './pages/InvestmentsPages/InvestmentsPage2'
 
 const Navigation = () => {
   const router = createBrowserRouter(
@@ -29,17 +28,18 @@ const Navigation = () => {
           <Route index element={<MainPage />} />
         </Route>
 
-        <Route element={<PrivateRoute />}>
+        {/* <Route element={<PrivateRoute />}>
           <Route path='calendar' element={<CalendarLayout />}>
             <Route index element={<CalendarPage />} />
           </Route>
-        </Route>
+        </Route> */}
 
-        <Route element={<PrivateRoute />}>
+        {/* <Route element={<PrivateRoute />}>
           <Route path='meal-planner' element={<MealPlannerLayout />}>
             <Route index element={<MealPlannerPage />} />
           </Route>
-        </Route>
+        </Route> */}
+
         <Route element={<PrivateRoute />}>
           <Route path='wallet' element={<WalletLayout />}>
             <Route index element={<WalletPage />} />
