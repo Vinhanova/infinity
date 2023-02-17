@@ -27,7 +27,7 @@ const LoginPage: FC = () => {
 
   return (
     <>
-      <div className='flex h-full flex-col items-center justify-center'>
+      <div className='mt-32 flex flex-col items-center justify-between'>
         <IoInfiniteSharp className='mb-20 text-9xl' />
         <GoogleButton onClick={handleGoogleSignIn} className='mb-10' />
       </div>
