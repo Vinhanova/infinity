@@ -11,8 +11,8 @@ const InvestmentsLayout: FC = () => {
           <NavLink to={'/investments'} className='mr-4 ml-2 py-2 px-0.5 text-2xl'>
             Investments
           </NavLink>,
-          <NavLink to={'/investments/test'} className='py-2 px-0.5'>
-            Test
+          <NavLink to={'/investments/portfolio'} className='py-2 px-0.5'>
+            Portfolio
           </NavLink>
         ]}
         end={[
