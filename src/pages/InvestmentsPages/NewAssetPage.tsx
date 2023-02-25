@@ -12,7 +12,7 @@ const NewAssetPage: FC = () => {
 
   const [asset, setAsset] = useState<userStock>({
     name: '',
-    quantity: 0,
+    quantity: 1,
     watchlist: false
   })
 
@@ -47,7 +47,7 @@ const NewAssetPage: FC = () => {
         </div>
         <div>
           <p>Quantity</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} required />
+          <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' required min={1} />
         </div>
         {/* <div>
           <p>Watchlist</p>
