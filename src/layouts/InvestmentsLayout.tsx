@@ -16,9 +16,9 @@ const InvestmentsLayout: FC = () => {
           </NavLink>
         ]}
         end={[
-          <NavLink to={'/investments/z'} className='flex rounded border-2 border-white p-1.5 sm:py-2 sm:px-3'>
-            <span className='hidden sm:block'>Add</span>
-            <GoPlus className='sm:ml-1 sm:mt-0.5' />
+          <NavLink to={'/investments/new-asset'} className='flex rounded border-2 border-white p-1.5 sm:py-2 sm:px-3'>
+            <span className='hidden sm:block'>New Asset</span>
+            <GoPlus className='sm:ml-1 sm:mt-[0.15rem]' />
           </NavLink>
         ]}
       />
