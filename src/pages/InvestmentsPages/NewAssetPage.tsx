@@ -34,7 +34,7 @@ const NewAssetPage: FC = () => {
           </label>
           <label>
             <input type='radio' name='myRadio' value='option2' />
-            Crypto
+            Cryptocurrency
           </label>
         </div> */}
         <div>
