@@ -2,6 +2,7 @@ import { collection, doc, DocumentData, getDoc, onSnapshot, Query, query, QueryD
 import { useEffect, useState } from 'react'
 import { Request } from './types'
 import { db } from '../firebase'
+import _ from 'underscore'
 
 export function useQueryFirestore(dbCollection: string, userId: number, queries: QueryFieldFilterConstraint[] = []): Request {
   const [request, setRequest] = useState<Request>({ state: 'pending', data: [] })
@@ -35,9 +36,14 @@ export function useDocFirestore<T>(dbCollection: string, userId: string): Reques
   const [request, setRequest] = useState<Request>({ state: 'pending' })
 
   useEffect(() => {
-    getDoc(doc(db, dbCollection, userId))
-      .then(data => setRequest({ state: 'success', data: data.data() }))
-      .catch(error => setRequest({ state: 'error', error: error }))
+    getDoc(doc(db, dbCollection, userId)).then(data => {
+      if (data.data() === undefined) {
+        setRequest({ state: 'error', error: 'Not found' })
+        return
+      }
+
+      setRequest({ state: 'success', data: data.data() })
+    })
   }, [dbCollection, userId])
 
   return request

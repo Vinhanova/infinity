@@ -1,44 +1,46 @@
+import { useGetAllTickers, useGetTicker } from '../../utils/useGetTickers'
 import { useDocFirestore } from '../../utils/useGetFirestore'
-import { useGetAllStocks, useGetStock } from '../../utils/useGetAllTickers'
 import { useYFWebSocket } from '../../utils/useYFWebSocket'
 import { Request, userStockDic } from '../../utils/types'
 import { UserAuth } from '../../Context/AuthContext'
 import { FC, useEffect, useState } from 'react'
 import _ from 'underscore'
+import { Link } from 'react-router-dom'
 
 const InvestmentsPage: FC = () => {
   const { user } = UserAuth()
-  const [tickers, setTickers] = useState<string[]>([])
+  const [tickers, setTickers] = useState<Request>({ state: 'pending' })
 
-  const { state: userStocksState, data: userStocksData, error: userStocksError } = useDocFirestore<userStockDic>(`stocks`, user.uid)
-  const { state: USDEURInfoState, data: USDEURInfoData, error: USDEURInfoError } = useGetStock('USDEUR=X')
-  const { state: initialStocksInfoState, data: initialStocksInfoData, error: initialStocksInfoError } = useGetAllStocks(tickers)
-  const { state: updatedStocksInfoState, data: updatedStocksInfoData } = useYFWebSocket(userStocksData)
+  const { state: userTickersState, data: userTickersData, error: userTickersError } = useDocFirestore<userStockDic>(`stocks`, user.uid)
+  const { state: USDEURInfoState, data: USDEURInfoData, error: USDEURInfoError } = useGetTicker('USDEUR=X')
+  const { state: initialTickersInfoState, data: initialTickersInfoData, error: initialTickersInfoError } = useGetAllTickers(tickers)
+  const { state: updatedTickersInfoState, data: updatedTickersInfoData } = useYFWebSocket(userTickersData)
 
   const [stocksInfo, setStocksInfo] = useState<Request>({ state: 'pending', data: {} })
   const { state: stocksInfoState, data: stocksInfoData, error: stocksInfoError } = stocksInfo
 
   const [total, setTotal] = useState<number>(0)
+  const [listState, setListState] = useState<string>('pending')
 
   useEffect(() => {
-    setTickers(_.keys(userStocksData))
-  }, [userStocksData])
+    setTickers({ state: userTickersState, data: _.keys(userTickersData), error: userTickersError })
+  }, [userTickersState])
 
   useEffect(() => {
-    if (initialStocksInfoState === 'pending') return
+    if (initialTickersInfoState === 'pending') return
 
-    if (initialStocksInfoState === 'error') {
-      setStocksInfo({ state: 'error', error: '"initialStocksInfo" Error' })
+    if (initialTickersInfoState === 'error') {
+      setStocksInfo({ state: 'error', error: initialTickersInfoError })
       return
     }
 
-    setStocksInfo({ state: 'success', data: initialStocksInfoData })
-  }, [initialStocksInfoState])
+    setStocksInfo({ state: 'success', data: initialTickersInfoData })
+  }, [initialTickersInfoState])
 
   useEffect(() => {
     setTotal(
       toFixed(
-        _.reduce(stocksInfoData, (total: number, stock: any) => total + stock.price * userStocksData[stock.id].quantity, 0),
+        _.reduce(stocksInfoData, (total: number, stock: any) => total + stock.price * userTickersData[stock.id].quantity, 0),
         2
       )
     )
@@ -46,14 +48,23 @@ const InvestmentsPage: FC = () => {
 
   useEffect(() => {
     if (stocksInfoState === 'success') {
-      _.map(updatedStocksInfoData, (updatedStock: any) => {
-        const ticker: string = findKey(updatedStocksInfoData, updatedStock)
+      _.map(updatedTickersInfoData, (updatedStock: any) => {
+        const ticker: string = findKey(updatedTickersInfoData, updatedStock)
         if (!stocksInfoData[ticker as keyof object]) return
 
         setStocksInfo(prevStocksInfo => ({ state: prevStocksInfo.state, data: { ...prevStocksInfo.data, [ticker]: updatedStock } }))
       })
     }
-  }, [updatedStocksInfoData])
+  }, [updatedTickersInfoData])
+
+  useEffect(() => {
+    if (USDEURInfoState === 'error' || stocksInfoState === 'error') {
+      setListState('error')
+      return
+    }
+
+    if (USDEURInfoState === 'success' && stocksInfoState === 'success') setListState('success')
+  }, [USDEURInfoState, stocksInfoState])
 
   function toFixed(num: number, fixed: number): number {
     if (!num) return 0
@@ -70,31 +81,42 @@ const InvestmentsPage: FC = () => {
     <>
       <div className='flex flex-col items-center space-x-3'>
         <div className='mt-4 mb-2 w-11/12 text-center sm:mt-8 sm:mb-6 sm:w-3/4'>
-          {(USDEURInfoState === 'pending' || stocksInfoState === 'pending') && <h1 className='mb-8'>Loading...</h1>}
+          {listState === 'pending' && <h1 className='mb-8'>Loading...</h1>}
 
-          {(USDEURInfoState === 'error' || stocksInfoState === 'error') && (initialStocksInfoError?.response?.status === 429 ? <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1> : <div className='mb-8 text-red-500'>Error</div>)}
+          {listState === 'error' &&
+            ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1>) ||
+              (stocksInfoError === 'No tickers found' && (
+                <div className='mb-8'>
+                  <h3>
+                    0 assets found, you can add a new asset{' '}
+                    <Link to='/investments/new-asset' className='underline'>
+                      here
+                    </Link>
+                    .
+                  </h3>
+                </div>
+              )))}
 
-          {USDEURInfoState === 'success' &&
-            stocksInfoState === 'success' &&
+          {listState === 'success' &&
             (_.isEmpty(stocksInfoData) ? (
               <h1 className='p-2'>No stocks found</h1>
             ) : (
               <>
                 <div>
                   {_.map(stocksInfoData, (stock: any) => {
-                    if (userStocksData[stock.id].quantity === 0) return
+                    if (userTickersData[stock.id].quantity === 0) return
                     return (
                       <div key={stock.id} className='w-full border-t-2 p-2'>
                         <div className='flex justify-between'>
                           <p className='font-medium'>
-                            {userStocksData![stock.id].name}
+                            {userTickersData![stock.id].name}
                             <span className='ml-1 hidden sm:inline-block'>{`(${stock.id})`}</span>:
                           </p>
                           <p className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
                             {toFixed(stock.price, stock.price < 1 ? 3 : 2)} ({toFixed(stock.changePercent, 2)}%)
                           </p>
                         </div>
-                        <p className='text-right'>{toFixed(stock.price * userStocksData![stock.id].quantity, 2)} $</p>
+                        <p className='text-right'>{toFixed(stock.price * userTickersData![stock.id].quantity, 2)} $</p>
                       </div>
                     )
                   })}
