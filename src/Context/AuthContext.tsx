@@ -35,6 +35,6 @@ export const AuthContextProvider: FC<Props> = ({ children }) => {
   return <AuthContext.Provider value={{ googleSignIn, logOut, user }}>{children}</AuthContext.Provider>
 }
 
-export const UserAuth = () => {
+export const useUserAuth = () => {
   return useContext(AuthContext)
 }

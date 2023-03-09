@@ -1,6 +1,6 @@
 import { BsFillCalendar2WeekFill, BsFillPersonFill } from 'react-icons/bs'
 import { IoInfiniteSharp, IoWalletSharp } from 'react-icons/io5'
-import { UserAuth } from '../Context/AuthContext'
+import { useUserAuth } from '../Context/AuthContext'
 import { FiSettings } from 'react-icons/fi'
 import { FaCoins } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom'
 import { FC } from 'react'
 
 const MainNavBar: FC = () => {
-  const { user } = UserAuth()
+  const { user } = useUserAuth()
 
   return (
     <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl sm:w-16'>

@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { GoPlus } from 'react-icons/go'
 import { NavLink, Outlet } from 'react-router-dom'
+import { InvestmentsContextProvider } from '../Context/InvestmentsContext'
 import TopBar from './TopBar'
 
 const InvestmentsLayout: FC = () => {
@@ -22,7 +23,9 @@ const InvestmentsLayout: FC = () => {
           </NavLink>
         ]}
       />
-      <Outlet />
+      <InvestmentsContextProvider>
+        <Outlet />
+      </InvestmentsContextProvider>
     </>
   )
 }

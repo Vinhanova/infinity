@@ -1,8 +1,8 @@
-import { UserAuth } from '../Context/AuthContext'
+import { useUserAuth } from '../Context/AuthContext'
 import { FC } from 'react'
 
 const ProfilePage: FC = () => {
-  const { logOut, user } = UserAuth()
+  const { logOut, user } = useUserAuth()
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { UserAuth } from '../../Context/AuthContext'
+import { useUserAuth } from '../../Context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { userStock } from '../../utils/types'
@@ -7,7 +7,7 @@ import { db } from '../../firebase'
 
 const NewAssetPage: FC = () => {
   const navigate = useNavigate()
-  const { user } = UserAuth()
+  const { user } = useUserAuth()
   const [ticker, setTicker] = useState<string>('')
 
   const [asset, setAsset] = useState<userStock>({

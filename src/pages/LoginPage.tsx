@@ -1,11 +1,11 @@
 import { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserAuth } from '../Context/AuthContext'
+import { useUserAuth } from '../Context/AuthContext'
 import GoogleButton from 'react-google-button'
 import { IoInfiniteSharp } from 'react-icons/io5'
 
 const LoginPage: FC = () => {
-  const { googleSignIn, user } = UserAuth()
+  const { googleSignIn, user } = useUserAuth()
   const navigate = useNavigate()
   //console.log('USER >>', user)
 
