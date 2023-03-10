@@ -5,7 +5,7 @@ import { FC } from 'react'
 import _ from 'underscore'
 
 const InvestmentsPage: FC = () => {
-  const { listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, total } = useInvestmentsContext()
+  const { listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalUSD, totalEUR } = useInvestmentsContext()
 
   return (
     <>
@@ -57,8 +57,8 @@ const InvestmentsPage: FC = () => {
                     <h1>(USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</h1>
                   </div>
                   <div className='text-right'>
-                    <h1>{total} $</h1>
-                    <h1>{toFixed(total * exchangeRateInfoData?.c, 2)} €</h1>
+                    <h1>{totalUSD} $</h1>
+                    <h1>{toFixed(totalEUR, 2)} €</h1>
                   </div>
                 </div>
               </>

@@ -25,7 +25,8 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const [stocksInfo, setStocksInfo] = useState<Request>({ state: 'pending', data: {} })
   const { state: stocksInfoState, data: stocksInfoData, error: stocksInfoError } = stocksInfo
 
-  const [total, setTotal] = useState<number>(0)
+  const [totalUSD, setTotalUSD] = useState<number>(0)
+  const [totalEUR, setTotalEUR] = useState<number>(0)
   const [listState, setListState] = useState<string>('pending')
 
   useEffect(() => {
@@ -44,13 +45,15 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   }, [initialTickersInfoState])
 
   useEffect(() => {
-    setTotal(
+    setTotalUSD(
       toFixed(
         _.reduce(stocksInfoData, (total: number, stock: any) => total + stock.price * userTickersData[stock.id].quantity, 0),
         2
       )
     )
   }, [stocksInfoData])
+
+  useEffect(() => setTotalEUR(totalUSD * exchangeRateInfoData?.c), [totalUSD, exchangeRateInfoData])
 
   useEffect(() => {
     if (stocksInfoState === 'success') {
@@ -72,7 +75,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
     if (exchangeRateInfoState === 'success' && stocksInfoState === 'success') setListState('success')
   }, [exchangeRateInfoState, stocksInfoState])
 
-  return <InvestmentsContext.Provider value={{ listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, total }}>{children}</InvestmentsContext.Provider>
+  return <InvestmentsContext.Provider value={{ listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalUSD, totalEUR }}>{children}</InvestmentsContext.Provider>
 }
 
 export const useInvestmentsContext = () => {
