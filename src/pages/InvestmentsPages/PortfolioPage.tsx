@@ -1,13 +1,8 @@
-import { useGetAllTickers, useGetTicker } from '../../utils/useGetTickers'
-import { useDocFirestore } from '../../utils/useGetFirestore'
-import { useYFWebSocket } from '../../utils/useYFWebSocket'
-import { Request, userStockDic } from '../../utils/types'
-import { useUserAuth } from '../../Context/AuthContext'
-import { FC, useEffect, useState } from 'react'
-import _, { findKey } from 'underscore'
-import { Link } from 'react-router-dom'
-import { toFixed } from '../../utils/utils'
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { toFixed } from '../../utils/utils'
+import { Link } from 'react-router-dom'
+import { FC } from 'react'
+import _ from 'underscore'
 
 const InvestmentsPage: FC = () => {
   const { listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, total } = useInvestmentsContext()
