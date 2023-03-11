@@ -8,7 +8,7 @@ const InvestmentsOverviewPage: FC = () => {
 
   return (
     <div className='flex items-center justify-center'>
-      <div className='mt-8 flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'>
+      <div className='my-8 flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'>
         <div className='flex w-full justify-between px-4 xs:px-0'>
           <div className='text-left'>
             <h1>Total: </h1>
@@ -19,7 +19,7 @@ const InvestmentsOverviewPage: FC = () => {
             <h1>{toFixed(totalEUR, 2)} €</h1>
           </div>
         </div>
-        <div className='mb-8 flex w-full items-center justify-center'>
+        <div className='flex w-full items-center justify-center'>
           <PieChart />
         </div>
       </div>
