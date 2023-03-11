@@ -19,7 +19,7 @@ const InvestmentsOverviewPage: FC = () => {
             <h1>{toFixed(totalEUR, 2)} €</h1>
           </div>
         </div>
-        <div className='flex w-full items-center justify-center'>
+        <div className='mb-8 flex w-full items-center justify-center'>
           <PieChart />
         </div>
       </div>
