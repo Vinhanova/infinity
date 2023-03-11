@@ -1,7 +1,8 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import { GoPlus } from 'react-icons/go'
 import { NavLink, Outlet } from 'react-router-dom'
 import { InvestmentsContextProvider } from '../Context/InvestmentsContext'
+import ErrorBoundary from '../utils/ErrorBoundary'
 import TopBar from './TopBar'
 
 const InvestmentsLayout: FC = () => {
@@ -23,9 +24,13 @@ const InvestmentsLayout: FC = () => {
           </NavLink>
         ]}
       />
-      <InvestmentsContextProvider>
-        <Outlet />
-      </InvestmentsContextProvider>
+      <ErrorBoundary fallback={<h1>Error...</h1>}>
+        <Suspense fallback={<h1>Loading Suspense...</h1>}>
+          <InvestmentsContextProvider>
+            <Outlet />
+          </InvestmentsContextProvider>
+        </Suspense>
+      </ErrorBoundary>
     </>
   )
 }
