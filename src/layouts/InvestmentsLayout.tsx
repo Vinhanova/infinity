@@ -1,8 +1,8 @@
-import { FC, Suspense } from 'react'
-import { GoPlus } from 'react-icons/go'
-import { NavLink, Outlet } from 'react-router-dom'
 import { InvestmentsContextProvider } from '../Context/InvestmentsContext'
-import ErrorBoundary from '../utils/ErrorBoundary'
+import { NavLink, Outlet } from 'react-router-dom'
+import ErrorBoundary from '../ErrorBoundary'
+import { GoPlus } from 'react-icons/go'
+import { FC, Suspense } from 'react'
 import TopBar from './TopBar'
 
 const InvestmentsLayout: FC = () => {
