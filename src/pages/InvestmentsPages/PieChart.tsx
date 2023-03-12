@@ -15,7 +15,7 @@ const PieChart: FC = () => {
       {
         label: '€',
         data: _.map(stocksInfoData, stock => {
-          return (stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData.c).toFixed(2)
+          return (stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)
         }),
         /* '#2A2B2E', '#007991' */
 
