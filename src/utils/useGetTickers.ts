@@ -38,32 +38,20 @@ export function useGetAllTickers(tickers: Request): any {
 }
 
 export function useGetTicker(ticker: string): any {
-  const [loading, setLoading] = useState<boolean>(false)
-  const [tickerInfo, setTickerInfo] = useState<any>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [initialStockInfo, setInitialStockInfo] = useState<Request>({ state: 'pending' })
 
   useEffect(() => {
     if (_.isEmpty(ticker)) return
 
-    const controller = new AbortController()
-    setLoading(true)
-
     axios
-      .get(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${import.meta.env.VITE_FINNHUB_API_KEY}`, { signal: controller.signal })
+      .get(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
       .then(data => {
-        const tickerInfo = data.data
-
-        if (typeof tickerInfo.c !== 'number') setError('Invalid Data')
-        else setTickerInfo(tickerInfo)
+        const ticketInfo = data.data
+        setInitialStockInfo(initialTickerInfo => ({ state: 'success', data: ticketInfo }))
         //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: null, ...ticketInfo }] }))
       })
-      .catch(error => {
-        if (error.code !== 'ERR_CANCELED') setError(error)
-      })
-      .finally(() => setLoading(false))
+      .catch(error => setInitialStockInfo({ state: 'error', error: error }))
   }, [ticker])
 
-  if (error) throw new Error(error)
-
-  return { tickerInfo }
+  return initialStockInfo
 }
