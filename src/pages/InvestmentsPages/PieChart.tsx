@@ -6,15 +6,20 @@ import _ from 'underscore'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-const PieChart: FC = () => {
-  const { purchasedAssetsList, userTickersData, exchangeRateInfoData } = useInvestmentsContext()
+type Props = {
+  title: string
+  list: object
+}
+
+const PieChart: FC<Props> = ({ title, list }) => {
+  const { userTickersData, exchangeRateInfoData } = useInvestmentsContext()
 
   const data = {
-    labels: _.keys(purchasedAssetsList),
+    labels: _.keys(list),
     datasets: [
       {
         label: '€',
-        data: _.map(purchasedAssetsList, stock => {
+        data: _.map(list, (stock: any) => {
           return (stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)
         }),
         /* '#2A2B2E', '#007991' */
@@ -26,7 +31,15 @@ const PieChart: FC = () => {
     ]
   }
 
-  return <Pie data={data} />
+  if (_.isEmpty(list) || _.every(list, (asset: any) => asset.price === undefined)) return <></>
+  //<h3 className='m-8'>No Data for {title}</h3>
+
+  return (
+    <div className='w-full border-t-2 py-8'>
+      <h3 className='mb-4 text-2xl'>{title}</h3>
+      <Pie data={data} />
+    </div>
+  )
 }
 
 export default PieChart

@@ -6,7 +6,7 @@ import { toFixed } from '../../utils/utils'
 import PieChart from './PieChart'
 
 const InvestmentsOverviewPage: FC = () => {
-  const { purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, totalUSD, totalEUR, exchangeRateInfoData } = useInvestmentsContext()
+  const { stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, totalUSD, totalEUR, exchangeRateInfoData } = useInvestmentsContext()
 
   return (
     <div className='my-4 w-full text-center sm:my-8'>
@@ -42,8 +42,11 @@ const InvestmentsOverviewPage: FC = () => {
                   <h1>{toFixed(totalEUR, 2)} €</h1>
                 </div>
               </div>
-              <div className='flex w-full items-center justify-center'>
-                <PieChart />
+              <div className='flex w-full flex-col items-center justify-center'>
+                <PieChart title='Portfolio' list={purchasedAssetsList} />
+                <PieChart title='WatchList' list={watchlistAssetsList} />
+                <PieChart title='Cryptocurrencies' list={cryptoList} />
+                <PieChart title='Stocks' list={stocksList} />
               </div>
             </div>
           </div>

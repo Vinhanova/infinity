@@ -51,11 +51,11 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   useEffect(() => {
     setTotalUSD(
       toFixed(
-        _.reduce(stocksInfoData, (total: number, stock: any) => total + stock.price * userTickersData[stock.id].quantity, 0),
+        _.reduce(purchasedAssetsList, (total: number, asset: any) => total + asset.price * userTickersData[asset.id].quantity, 0),
         2
       )
     )
-  }, [stocksInfoData])
+  }, [purchasedAssetsList])
 
   useEffect(() => setTotalEUR(totalUSD * exchangeRateInfoData?.c), [totalUSD, exchangeRateInfoData])
 
@@ -83,18 +83,20 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
     if (_.isEmpty(stocksInfoData)) return
 
     _.map(stocksInfoData, (asset: any) => {
-      switch (asset.type) {
-        case 'stock':
-          setStocksList((prev: any) => ({ ...prev, asset }))
-          break
-        case 'crypto':
-          setCryptoList((prev: any) => ({ ...prev, asset }))
-        default:
-          console.log('Asset Type Error')
-      }
+      if (asset.state === 'purchased') {
+        setPurchasedAssetsList((prev: any) => ({ ...prev, [asset.id]: asset }))
 
-      if (asset.state === 'purchased') setPurchasedAssetsList((prev: any) => ({ ...prev, [asset.id]: asset }))
-      else setWatchlistAssetsList((prev: any) => ({ ...prev, [asset.id]: asset }))
+        switch (asset.type) {
+          case 'stock':
+            setStocksList((prev: any) => ({ ...prev, [asset.id]: asset }))
+            break
+          case 'cryptocurrency':
+            setCryptoList((prev: any) => ({ ...prev, [asset.id]: asset }))
+            break
+          default:
+            console.log('Asset Type Error')
+        }
+      } else setWatchlistAssetsList((prev: any) => ({ ...prev, [asset.id]: asset }))
     })
   }, [stocksInfoData])
 
