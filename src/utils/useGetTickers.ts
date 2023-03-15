@@ -16,17 +16,16 @@ export function useGetAllTickers(tickers: Request): any {
 
     axios
       .all(
-        tickers.data
-          .filter((ticker: any) => ticker[0] !== '^') // To remove
-          .map((ticker: any) => {
-            return axios.get(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
-          })
+        _.keys(tickers.data)
+        .map((ticker: any) => {
+          return axios.get(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
+        })
       )
       .then(
         axios.spread((...data) => {
           data.map((d: any) => {
             const ticketInfo = d.data
-            setInitialTickersInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: ticketInfo.dp } } }))
+            setInitialTickersInfo(initialTickerInfo => ({ state: 'success', data: { ...initialTickerInfo.data, [d.config.url.match(/symbol=(.*?)&/)[1]]: { id: d.config.url.match(/symbol=(.*?)&/)[1], type: tickers.data[d.config.url.match(/symbol=(.*?)&/)[1]].type, state: tickers.data[d.config.url.match(/symbol=(.*?)&/)[1]].state, price: ticketInfo.c, changePercent: ticketInfo.dp } } }))
             //setInitialStocksInfo(initialTickerInfo => ({ state: 'success', data: [...initialTickerInfo.data, { id: d.config.url.match(/symbol=(.*?)&/)[1], price: ticketInfo.c, changePercent: null, ...ticketInfo }] }))
           })
         })

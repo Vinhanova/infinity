@@ -7,14 +7,14 @@ import _ from 'underscore'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const PieChart: FC = () => {
-  const { stocksInfoData, userTickersData, exchangeRateInfoData } = useInvestmentsContext()
+  const { purchasedAssetsList, userTickersData, exchangeRateInfoData } = useInvestmentsContext()
 
   const data = {
-    labels: _.keys(stocksInfoData),
+    labels: _.keys(purchasedAssetsList),
     datasets: [
       {
         label: '€',
-        data: _.map(stocksInfoData, stock => {
+        data: _.map(purchasedAssetsList, stock => {
           return (stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)
         }),
         /* '#2A2B2E', '#007991' */

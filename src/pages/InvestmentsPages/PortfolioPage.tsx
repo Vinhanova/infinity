@@ -5,7 +5,7 @@ import { FC } from 'react'
 import _ from 'underscore'
 
 const InvestmentsPage: FC = () => {
-  const { listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalUSD, totalEUR } = useInvestmentsContext()
+  const { purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, userTickersData, exchangeRateInfoData, totalUSD, totalEUR } = useInvestmentsContext()
 
   return (
     <>
@@ -28,12 +28,12 @@ const InvestmentsPage: FC = () => {
               )))}
 
           {listState === 'success' &&
-            (_.isEmpty(stocksInfoData) ? (
+            (_.isEmpty(purchasedAssetsList) ? (
               <h1 className='p-2'>No stocks found</h1>
             ) : (
               <>
                 <div>
-                  {_.map(stocksInfoData, (stock: any) => {
+                  {_.map(purchasedAssetsList, (stock: any) => {
                     if (userTickersData[stock.id].quantity === 0) return
                     return (
                       <div key={stock.id} className='w-full border-t-2 p-2'>

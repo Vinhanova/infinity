@@ -28,9 +28,13 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const [totalUSD, setTotalUSD] = useState<number>(0)
   const [totalEUR, setTotalEUR] = useState<number>(0)
   const [listState, setListState] = useState<string>('pending')
+  const [purchasedAssetsList, setPurchasedAssetsList] = useState<any>({})
+  const [watchlistAssetsList, setWatchlistAssetsList] = useState<any>({})
+  const [stocksList, setStocksList] = useState<any>({})
+  const [cryptoList, setCryptoList] = useState<any>({})
 
   useEffect(() => {
-    setTickers({ state: userTickersState, data: _.keys(userTickersData), error: userTickersError })
+    setTickers({ state: userTickersState, data: userTickersData, error: userTickersError })
   }, [userTickersState])
 
   useEffect(() => {
@@ -61,7 +65,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
         const ticker: string = findKey(updatedTickersInfoData, updatedStock)!
         if (!stocksInfoData[ticker as keyof object]) return
 
-        setStocksInfo(prevStocksInfo => ({ state: prevStocksInfo.state, data: { ...prevStocksInfo.data, [ticker]: updatedStock } }))
+        setStocksInfo(prevStocksInfo => ({ state: prevStocksInfo.state, data: { ...prevStocksInfo.data, [ticker]: { ...prevStocksInfo.data[ticker], ...updatedStock } } }))
       })
     }
   }, [updatedTickersInfoData])
@@ -75,7 +79,26 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
     if (exchangeRateInfoState === 'success' && stocksInfoState === 'success') setListState('success')
   }, [exchangeRateInfoState, stocksInfoState])
 
-  return <InvestmentsContext.Provider value={{ listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalUSD, totalEUR }}>{children}</InvestmentsContext.Provider>
+  useEffect(() => {
+    if (_.isEmpty(stocksInfoData)) return
+
+    _.map(stocksInfoData, (asset: any) => {
+      switch (asset.type) {
+        case 'stock':
+          setStocksList((prev: any) => ({ ...prev, asset }))
+          break
+        case 'crypto':
+          setCryptoList((prev: any) => ({ ...prev, asset }))
+        default:
+          console.log('Asset Type Error')
+      }
+
+      if (asset.state === 'purchased') setPurchasedAssetsList((prev: any) => ({ ...prev, [asset.id]: asset }))
+      else setWatchlistAssetsList((prev: any) => ({ ...prev, [asset.id]: asset }))
+    })
+  }, [stocksInfoData])
+
+  return <InvestmentsContext.Provider value={{ stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalUSD, totalEUR }}>{children}</InvestmentsContext.Provider>
 }
 
 export const useInvestmentsContext = () => {

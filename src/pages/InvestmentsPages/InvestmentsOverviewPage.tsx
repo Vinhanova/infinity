@@ -6,7 +6,7 @@ import { toFixed } from '../../utils/utils'
 import PieChart from './PieChart'
 
 const InvestmentsOverviewPage: FC = () => {
-  const { listState, initialTickersInfoError, stocksInfoError, stocksInfoData, totalUSD, totalEUR, exchangeRateInfoData } = useInvestmentsContext()
+  const { purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, totalUSD, totalEUR, exchangeRateInfoData } = useInvestmentsContext()
 
   return (
     <div className='my-4 w-full text-center sm:my-8'>
@@ -27,7 +27,7 @@ const InvestmentsOverviewPage: FC = () => {
           )))}
 
       {listState === 'success' &&
-        (_.isEmpty(stocksInfoData) ? (
+        (_.isEmpty(purchasedAssetsList) ? (
           <h1 className='p-2'>No stocks found</h1>
         ) : (
           <div className='flex items-center justify-center'>
