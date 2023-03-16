@@ -41,7 +41,7 @@ const InvestmentsOverviewPage: FC = () => {
                 </div>
               </div>
               <PieChart
-                title='Portfolio'
+                title='All Assets'
                 labels={_.keys(purchasedAssetsList)}
                 dataContent={_.map(purchasedAssetsList, (stock: any) => {
                   //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
