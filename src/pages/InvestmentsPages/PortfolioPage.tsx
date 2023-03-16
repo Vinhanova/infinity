@@ -53,11 +53,9 @@ const InvestmentsPage: FC = () => {
                 </div>
                 <div className='flex justify-between border-t-2 p-2'>
                   <div className='text-left'>
-                    <h1>Total: </h1>
-                    <h1>(USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</h1>
+                    <h1>(USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}) Total: </h1>
                   </div>
                   <div className='text-right'>
-                    <h1>{totalUSD} $</h1>
                     <h1>{toFixed(totalEUR, 2)} €</h1>
                   </div>
                 </div>
