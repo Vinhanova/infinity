@@ -1,10 +1,10 @@
 import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'react'
-import { useDocFirestore } from '../utils/useGetFirestore'
-import { Request, userStockDic } from '../utils/types'
 import { useGetAllTickers, useGetTicker } from '../utils/useGetTickers'
+import { useDocFirestore } from '../utils/useGetFirestore'
 import { useYFWebSocket } from '../utils/useYFWebSocket'
-import { useUserAuth } from './AuthContext'
+import { Request, userStockDic } from '../utils/types'
 import { findKey, toFixed } from '../utils/utils'
+import { useUserAuth } from './AuthContext'
 import _ from 'underscore'
 
 type Props = {

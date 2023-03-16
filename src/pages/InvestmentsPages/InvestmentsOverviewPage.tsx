@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import { Link } from 'react-router-dom'
-import _ from 'underscore'
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { toFixed } from '../../utils/utils'
+import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
+import { FC } from 'react'
+import _ from 'underscore'
 
 const InvestmentsOverviewPage: FC = () => {
   const { stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, totalUSD, totalEUR, totalStocks, totalCryptocurrencies, exchangeRateInfoData, userTickersData } = useInvestmentsContext()
@@ -32,14 +32,7 @@ const InvestmentsOverviewPage: FC = () => {
         ) : (
           <div className='flex items-center justify-center'>
             <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'>
-              <div className='flex w-full justify-between px-4 xs:px-0'>
-                <div className='text-left'>
-                  <h1>(USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}) Total: </h1>
-                </div>
-                <div className='text-right'>
-                  <h1>{toFixed(totalEUR, 2)} €</h1>
-                </div>
-              </div>
+              <h3>USD/EUR Exchange Rate: {exchangeRateInfoData?.c.toFixed(3)}</h3>
               <PieChart
                 title='All Assets'
                 labels={_.keys(purchasedAssetsList)}
@@ -49,6 +42,14 @@ const InvestmentsOverviewPage: FC = () => {
                 })}
                 total={totalEUR}
               />
+              <div className='flex w-full justify-between px-4 xs:px-0'>
+                <div className='text-left'>
+                  <h3>All Assets Total: </h3>
+                </div>
+                <div className='text-right'>
+                  <h3>{toFixed(totalEUR, 2)} €</h3>
+                </div>
+              </div>
               <PieChart
                 title='Stocks'
                 labels={_.keys(stocksList)}
@@ -58,6 +59,16 @@ const InvestmentsOverviewPage: FC = () => {
                 })}
                 total={totalStocks}
               />
+              {totalStocks && (
+                <div className='flex w-full justify-between px-4 xs:px-0'>
+                  <div className='text-left'>
+                    <h3>Total Stocks: </h3>
+                  </div>
+                  <div className='text-right'>
+                    <h3>{toFixed(totalStocks, 2)} €</h3>
+                  </div>
+                </div>
+              )}
               <PieChart
                 title='Cryptocurrencies'
                 labels={_.keys(cryptoList)}
@@ -67,6 +78,16 @@ const InvestmentsOverviewPage: FC = () => {
                 })}
                 total={totalCryptocurrencies}
               />
+              {totalCryptocurrencies && (
+                <div className='flex w-full justify-between px-4 xs:px-0'>
+                  <div className='text-left'>
+                    <h3>Total Cryptocurrencies: </h3>
+                  </div>
+                  <div className='text-right'>
+                    <h3>{toFixed(totalCryptocurrencies, 2)} €</h3>
+                  </div>
+                </div>
+              )}
               <PieChart
                 title='WatchList'
                 labels={_.keys(watchlistAssetsList)}
