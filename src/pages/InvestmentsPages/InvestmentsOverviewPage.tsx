@@ -43,8 +43,8 @@ const InvestmentsOverviewPage: FC = () => {
                 </div>
               </div>
               <PieChart title='Portfolio' list={purchasedAssetsList} />
-              <PieChart title='Cryptocurrencies' list={cryptoList} />
               <PieChart title='Stocks' list={stocksList} />
+              <PieChart title='Cryptocurrencies' list={cryptoList} />
               <PieChart title='WatchList' list={watchlistAssetsList} />
             </div>
           </div>
