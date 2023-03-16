@@ -42,12 +42,10 @@ const InvestmentsOverviewPage: FC = () => {
                   <h1>{toFixed(totalEUR, 2)} €</h1>
                 </div>
               </div>
-              <div className='flex w-full flex-col items-center justify-center'>
-                <PieChart title='Portfolio' list={purchasedAssetsList} />
-                <PieChart title='WatchList' list={watchlistAssetsList} />
-                <PieChart title='Cryptocurrencies' list={cryptoList} />
-                <PieChart title='Stocks' list={stocksList} />
-              </div>
+              <PieChart title='Portfolio' list={purchasedAssetsList} />
+              <PieChart title='Cryptocurrencies' list={cryptoList} />
+              <PieChart title='Stocks' list={stocksList} />
+              <PieChart title='WatchList' list={watchlistAssetsList} />
             </div>
           </div>
         ))}

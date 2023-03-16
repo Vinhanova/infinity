@@ -35,8 +35,8 @@ const PieChart: FC<Props> = ({ title, list }) => {
   //<h3 className='m-8'>No Data for {title}</h3>
 
   return (
-    <div className='mt-4 w-full pb-8'>
-      <h3 className='m-4 mt-0 border-t-2 pt-4 text-2xl xs:m-0'>{title}</h3>
+    <div className='w-full'>
+      <h3 className='mx-4 border-t-2 py-4 text-2xl xs:m-0'>{title}</h3>
       <Pie data={data} />
     </div>
   )
