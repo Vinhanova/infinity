@@ -27,14 +27,15 @@ export type Auth = {
   user?: any
 }
 
-export type userStockDic = {
-  [ticker: string]: userStock
+export type ADic = {
+  [ticker: string]: Asset
 }
 
-export type userStock = {
+export type Asset = {
   name: string
   quantity: number
-  watchlist: boolean
+  type: string
+  state: string
 }
 
 export type yHStock = {

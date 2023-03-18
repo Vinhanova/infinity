@@ -1,7 +1,7 @@
 import { useUserAuth } from '../../Context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
-import { userStock } from '../../utils/types'
+import { Asset } from '../../utils/types'
 import { FC, useState } from 'react'
 import { db } from '../../firebase'
 
@@ -10,10 +10,11 @@ const NewAssetPage: FC = () => {
   const { user } = useUserAuth()
   const [ticker, setTicker] = useState<string>('')
 
-  const [asset, setAsset] = useState<userStock>({
+  const [asset, setAsset] = useState<Asset>({
     name: '',
     quantity: 1,
-    watchlist: false
+    type: '',
+    state: 'purchased'
   })
 
   async function createAsset(e: { preventDefault: () => void }) {
@@ -38,6 +39,17 @@ const NewAssetPage: FC = () => {
           </label>
         </div> */}
         <div>
+          <p>Type:</p>
+          <label className='mr-4'>
+            <input type='radio' name='type' value='cryptocurrency' className='mr-1' onChange={e => setAsset({ ...asset, type: e.target.value })} required />
+            Cryptocurrency
+          </label>
+          <label>
+            <input type='radio' name='type' value='stock' className='mr-1' onChange={e => setAsset({ ...asset, type: e.target.value })} required />
+            Stock
+          </label>
+        </div>
+        <div>
           <p>Ticker</p>
           <input className='w-full rounded py-1 px-2 text-custom-jet  outline-custom-tealblue' value={ticker} onChange={e => setTicker(e.target.value)} required />
         </div>
@@ -47,7 +59,7 @@ const NewAssetPage: FC = () => {
         </div>
         <div>
           <p>Quantity</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' min={1} required />
+          <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' min={asset.type === 'stock' ? 1 : 0.000000001} step={asset.type === 'stock' ? 1 : 0.000000001} required />
         </div>
         {/* <div>
           <p>Watchlist</p>
