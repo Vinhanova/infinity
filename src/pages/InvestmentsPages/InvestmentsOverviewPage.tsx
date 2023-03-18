@@ -59,7 +59,7 @@ const InvestmentsOverviewPage: FC = () => {
                 })}
                 total={totalStocks}
               />
-              {totalStocks && (
+              {totalStocks > 0 && (
                 <div className='flex w-full justify-between px-4 xs:px-0'>
                   <div className='text-left'>
                     <h3>Total Stocks: </h3>
@@ -78,7 +78,7 @@ const InvestmentsOverviewPage: FC = () => {
                 })}
                 total={totalCryptocurrencies}
               />
-              {totalCryptocurrencies && (
+              {totalCryptocurrencies > 0 && (
                 <div className='flex w-full justify-between px-4 xs:px-0'>
                   <div className='text-left'>
                     <h3>Total Cryptocurrencies: </h3>
