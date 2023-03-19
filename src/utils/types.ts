@@ -27,7 +27,7 @@ export type Auth = {
   user?: any
 }
 
-export type ADic = {
+export type AssetDic = {
   [ticker: string]: Asset
 }
 

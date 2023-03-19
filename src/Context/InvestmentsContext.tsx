@@ -2,7 +2,7 @@ import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'r
 import { useGetAllTickers, useGetTicker } from '../utils/useGetTickers'
 import { useDocFirestore } from '../utils/useGetFirestore'
 import { useYFWebSocket } from '../utils/useYFWebSocket'
-import { Request, userStockDic } from '../utils/types'
+import { Request, AssetDic } from '../utils/types'
 import { findKey, toFixed } from '../utils/utils'
 import { useUserAuth } from './AuthContext'
 import _ from 'underscore'
@@ -17,7 +17,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const { user } = useUserAuth()
   const [tickers, setTickers] = useState<Request>({ state: 'pending' })
 
-  const { state: userTickersState, data: userTickersData, error: userTickersError } = useDocFirestore<userStockDic>(`stocks`, user.uid)
+  const { state: userTickersState, data: userTickersData, error: userTickersError } = useDocFirestore<AssetDic>(`stocks`, user.uid)
   const { state: exchangeRateInfoState, data: exchangeRateInfoData, error: exchangeRateInfoError } = useGetTicker('USDEUR=X')
   const { state: initialTickersInfoState, data: initialTickersInfoData, error: initialTickersInfoError } = useGetAllTickers(tickers)
   const { state: updatedTickersInfoState, data: updatedTickersInfoData } = useYFWebSocket(userTickersData)
