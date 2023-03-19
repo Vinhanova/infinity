@@ -50,6 +50,7 @@ const InvestmentsOverviewPage: FC = () => {
                   <h3>{toFixed(totalEUR, 2)} €</h3>
                 </div>
               </div>
+              <PieChart title='Stocks vs Cryptocurrencies' labels={['Stocks', 'Cryptocurrencies']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
               <PieChart
                 title='Stocks'
                 labels={_.keys(stocksList)}

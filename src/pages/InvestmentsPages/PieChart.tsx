@@ -1,5 +1,5 @@
-import { FC } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { FC, useEffect, useState } from 'react'
 import { Pie } from 'react-chartjs-2'
 import _ from 'underscore'
 
@@ -13,14 +13,24 @@ type Props = {
 }
 
 const PieChart: FC<Props> = ({ title, labels, dataContent, total }) => {
+  const [colors, setColors] = useState<{ [k: string]: string }>({ 'rgba(255, 99, 132, 0.2)': 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 100, 0.2)': 'rgba(75, 192, 100, 1)', 'rgba(255, 206, 86, 0.2)': 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 0.2)': 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 0.2)': 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 0.2)': 'rgba(255, 159, 64, 1)', 'rgba(200, 250, 0, 0.2)': 'rgba(200, 250, 0, 1)', 'rgba(250, 250, 200, 0.2)': 'rgba(250, 250, 200, 1)' })
+
+  const randomSort = (a: any, b: any) => Math.random() - 0.5
+
+  useEffect(() => {
+    const randomizedArray = Object.entries(colors).sort(randomSort)
+    const randomizedColors = Object.fromEntries(randomizedArray)
+    setColors(randomizedColors)
+  }, [])
+
   const data = {
     labels: labels,
     datasets: [
       {
         data: dataContent,
         /* '#2A2B2E', '#007991' */
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 100, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(200, 250, 0, 0.2)', 'rgba(250, 250, 200, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 100, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(200, 250, 0, 1)', 'rgba(250, 250, 200, 1)'],
+        backgroundColor: _.keys(colors),
+        borderColor: _.map(colors, color => color),
         borderWidth: 1
       }
     ]
