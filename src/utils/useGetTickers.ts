@@ -16,8 +16,7 @@ export function useGetAllTickers(tickers: Request): any {
 
     axios
       .all(
-        _.keys(tickers.data)
-        .map((ticker: any) => {
+        _.keys(tickers.data).map((ticker: any) => {
           return axios.get(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
         })
       )

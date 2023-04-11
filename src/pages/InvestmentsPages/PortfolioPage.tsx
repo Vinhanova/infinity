@@ -32,32 +32,82 @@ const InvestmentsPage: FC = () => {
               <h1 className='p-2'>No stocks found</h1>
             ) : (
               <>
-                <div>
-                  {_.map(purchasedAssetsList, (stock: any) => {
-                    if (userTickersData[stock.id].quantity === 0) return
-                    return (
-                      <div key={stock.id} className='w-full border-t-2 p-2'>
-                        <div className='flex justify-between'>
-                          <p className='font-medium'>
-                            {userTickersData![stock.id].name}
-                            <span className='ml-1 hidden sm:inline-block'>{`(${stock.id})`}</span>:
-                          </p>
-                          <p className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
-                            {toFixed(stock.price, stock.price < 1 ? 3 : 2)} ({toFixed(stock.changePercent, 2)}%)
-                          </p>
-                        </div>
-                        <p className='text-right'>{toFixed(stock.price * userTickersData![stock.id].quantity, 2)} $</p>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className='flex justify-between border-t-2 p-2'>
-                  <div className='text-left'>
-                    <h1>(USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}) Total: </h1>
-                  </div>
-                  <div className='text-right'>
-                    <h1>{toFixed(totalEUR, 2)} €</h1>
-                  </div>
+                <div className='relative overflow-x-auto sm:rounded-lg'>
+                  <table className='w-full text-left text-base'>
+                    <thead className='border-b-2 uppercase'>
+                      <tr>
+                        <th scope='col' className='px-6 py-3'>
+                          <div className='flex items-center'>
+                            Asset Name
+                            <a href='#'>
+                              <svg xmlns='http://www.w3.org/2000/svg' className='ml-1 h-3 w-3' aria-hidden='true' fill='currentColor' viewBox='0 0 320 512'>
+                                <path d='M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z' />
+                              </svg>
+                            </a>
+                          </div>
+                        </th>
+                        <th scope='col' className='bg-white/5 px-6 py-3'>
+                          <div className='flex items-center justify-end'>
+                            Price
+                            <a href='#'>
+                              <svg xmlns='http://www.w3.org/2000/svg' className='ml-1 h-3 w-3' aria-hidden='true' fill='currentColor' viewBox='0 0 320 512'>
+                                <path d='M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z' />
+                              </svg>
+                            </a>
+                          </div>
+                        </th>
+                        <th scope='col' className='px-6 py-3'>
+                          <div className='flex items-center justify-end'>
+                            24h Change
+                            <a href='#'>
+                              <svg xmlns='http://www.w3.org/2000/svg' className='ml-1 h-3 w-3' aria-hidden='true' fill='currentColor' viewBox='0 0 320 512'>
+                                <path d='M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z' />
+                              </svg>
+                            </a>
+                          </div>
+                        </th>
+                        <th scope='col' className='bg-white/5 px-6 py-3'>
+                          <div className='flex items-center justify-end'>
+                            Portfolio Value
+                            <a href='#'>
+                              <svg xmlns='http://www.w3.org/2000/svg' className='ml-1 h-3 w-3' aria-hidden='true' fill='currentColor' viewBox='0 0 320 512'>
+                                <path d='M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z' />
+                              </svg>
+                            </a>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {_.map(purchasedAssetsList, (stock: any) => {
+                        if (userTickersData[stock.id].quantity === 0) return
+                        return (
+                          <tr key={stock.id} className='border-t border-white/20'>
+                            <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium'>
+                              {userTickersData![stock.id].name}
+                              <span className='ml-1 hidden sm:inline-block'>{`(${stock.id})`}</span>:
+                            </th>
+                            <td className='bg-white/5 px-6 py-4 text-right'>{stock.price.toFixed(stock.price < 1 ? 3 : 2)} $</td>
+                            <td className='px-6 py-4 text-right'>
+                              <span className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>{stock.change ? (stock.change > 0 ? '+' : '') + `${stock.change?.toFixed(2)} (${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%)` : `${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%`}</span>
+                            </td>
+                            <td className='bg-white/5 px-6 py-4 text-right'>{toFixed(stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c, 2)} €</td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr className='border-t-2 font-semibold uppercase'>
+                        <th scope='row' className='px-6 py-3'>
+                          Total
+                          <span className='text-sm'> (USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</span>:
+                        </th>
+                        <td></td>
+                        <td></td>
+                        <td className='px-6 py-3 text-right'>{toFixed(totalEUR, 2)} €</td>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
               </>
             ))}
