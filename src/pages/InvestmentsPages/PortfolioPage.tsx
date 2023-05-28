@@ -56,7 +56,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
-                        <th scope='col' className='px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
+                        <th scope='col' className='hidden px-3 py-2 sm:table-cell lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center justify-end'>
                             24h Change
                             <a href='#'>
@@ -66,7 +66,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
-                        <th scope='col' className='bg-white/5 px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
+                        <th scope='col' className='hidden bg-white/5 px-3 py-2 sm:table-cell lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center justify-end'>
                             Portfolio 24h Change
                             <a href='#'>
@@ -94,14 +94,15 @@ const InvestmentsPage: FC = () => {
                         return (
                           <tr key={stock.id} className='border-t border-white/20 text-sm lg:text-base'>
                             <th scope='row' className='whitespace-nowrap px-[3px] py-[7px] font-medium lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                              {userTickersData![stock.id].name}
-                              <span className='ml-1 hidden sm:inline-block'>{`(${stock.id})`}</span>:
+                              <span className='hidden lg:inline-block'>{userTickersData![stock.id].name} (</span>
+                              {stock.id}
+                              <span className='hidden lg:inline-block'>)</span>
                             </th>
                             <td className='bg-white/5 px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{stock.price.toFixed(stock.price < 1 ? 3 : 2)} $</td>
-                            <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                            <td className='hidden px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                               <span className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>{stock.change ? (stock.change > 0 ? '+' : '') + `${stock.change?.toFixed(2)} (${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%)` : `${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%`}</span>
                             </td>
-                            <td className={`bg-white/5 px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : 'Loading...'}</td>
+                            <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : 'Loading...'}</td>
                             <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c, 2)} €</td>
                           </tr>
                         )
@@ -114,8 +115,8 @@ const InvestmentsPage: FC = () => {
                           <span className='text-sm'> (USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</span>:
                         </th>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td className='hidden sm:table-cell'></td>
+                        <td className='hidden sm:table-cell'></td>
                         <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(totalEUR, 2)} €</td>
                       </tr>
                     </tfoot>
