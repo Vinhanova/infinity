@@ -1,6 +1,6 @@
-import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import MainNavBar from './MainNavBar'
+import { FC } from 'react'
 
 const AppLayout: FC = () => {
   return (
