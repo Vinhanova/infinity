@@ -10,7 +10,7 @@ const InvestmentsPage: FC = () => {
   return (
     <>
       <div className='flex flex-col items-center space-x-3'>
-        <div className='mt-4 mb-2 w-11/12 text-center sm:mt-8 sm:mb-6 sm:w-3/4'>
+        <div className='mt-4 mb-2 w-11/12 text-center sm:mb-0 xl:mb-6 xl:mt-8 xl:w-3/4'>
           {listState === 'pending' && <h1 className='mb-8'>Loading...</h1>}
 
           {listState === 'error' &&
@@ -33,10 +33,10 @@ const InvestmentsPage: FC = () => {
             ) : (
               <>
                 <div className='relative overflow-x-auto sm:rounded-lg'>
-                  <table className='w-full text-left text-base'>
+                  <table className='w-full text-left text-sm lg:text-base'>
                     <thead className='border-b-2 uppercase'>
                       <tr>
-                        <th scope='col' className='px-6 py-3'>
+                        <th scope='col' className='px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center'>
                             Asset Name
                             <a href='#'>
@@ -46,7 +46,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
-                        <th scope='col' className='bg-white/5 px-6 py-3'>
+                        <th scope='col' className='bg-white/5 px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center justify-end'>
                             Price
                             <a href='#'>
@@ -56,7 +56,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
-                        <th scope='col' className='px-6 py-3'>
+                        <th scope='col' className='px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center justify-end'>
                             24h Change
                             <a href='#'>
@@ -66,7 +66,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
-                        <th scope='col' className='bg-white/5 px-6 py-3'>
+                        <th scope='col' className='bg-white/5 px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center justify-end'>
                             Portfolio 24h Change
                             <a href='#'>
@@ -76,7 +76,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
-                        <th scope='col' className='px-6 py-3'>
+                        <th scope='col' className='px-3 py-2 lg:px-3 lg:py-4 xl:px-6 xl:py-3'>
                           <div className='flex items-center justify-end'>
                             Portfolio Value
                             <a href='#'>
@@ -92,31 +92,31 @@ const InvestmentsPage: FC = () => {
                       {_.map(purchasedAssetsList, (stock: any) => {
                         if (userTickersData[stock.id].quantity === 0) return
                         return (
-                          <tr key={stock.id} className='border-t border-white/20'>
-                            <th scope='row' className='whitespace-nowrap px-6 py-4 font-medium'>
+                          <tr key={stock.id} className='border-t border-white/20 text-sm lg:text-base'>
+                            <th scope='row' className='whitespace-nowrap px-[3px] py-[7px] font-medium lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                               {userTickersData![stock.id].name}
                               <span className='ml-1 hidden sm:inline-block'>{`(${stock.id})`}</span>:
                             </th>
-                            <td className='bg-white/5 px-6 py-4 text-right'>{stock.price.toFixed(stock.price < 1 ? 3 : 2)} $</td>
-                            <td className='px-6 py-4 text-right'>
+                            <td className='bg-white/5 px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{stock.price.toFixed(stock.price < 1 ? 3 : 2)} $</td>
+                            <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                               <span className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>{stock.change ? (stock.change > 0 ? '+' : '') + `${stock.change?.toFixed(2)} (${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%)` : `${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%`}</span>
                             </td>
-                            <td className={`bg-white/5 px-6 py-4 text-right ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : 'Loading...'}</td>
-                            <td className='px-6 py-4 text-right'>{toFixed(stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c, 2)} €</td>
+                            <td className={`bg-white/5 px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : 'Loading...'}</td>
+                            <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c, 2)} €</td>
                           </tr>
                         )
                       })}
                     </tbody>
                     <tfoot>
                       <tr className='border-t-2 font-semibold uppercase'>
-                        <th scope='row' className='px-6 py-3'>
+                        <th scope='row' className='px-[3px] py-[7px] lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                           Total
                           <span className='text-sm'> (USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</span>:
                         </th>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td className='px-6 py-3 text-right'>{toFixed(totalEUR, 2)} €</td>
+                        <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(totalEUR, 2)} €</td>
                       </tr>
                     </tfoot>
                   </table>

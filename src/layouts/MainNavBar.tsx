@@ -11,7 +11,7 @@ const MainNavBar: FC = () => {
   const { user } = useUserAuth()
 
   return (
-    <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl sm:w-16'>
+    <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl xl:w-16'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
         <NavLink to='/' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-custom-jet/50'}>
           <IoInfiniteSharp />
