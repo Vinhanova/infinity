@@ -23,12 +23,13 @@ export function getMonth(currentMonth: number = moment().month()) {
 
   return calendarArr
 }
-
-export function formatPaymentsList(list: Payment[]): MonthlyPaymentsDic {
+// use type Payment[] in list (needs update)
+export function formatPaymentsList(list: any[]): MonthlyPaymentsDic {
   let formattedList: MonthlyPaymentsDic = {}
 
   for (let i = 0; i < list.length; i++) {
-    const day = parseInt(moment(list[i].date, 'DD-MM-YYYY').format('D'))
+    //const day = parseInt(moment(list[i].date, 'DD-MM-YYYY').format('D'))
+    const day = parseInt(moment.unix(list[i].date.seconds).format('D'))
 
     formattedList[day] = formattedList[day] ?? []
     formattedList[day].push(list[i].title)

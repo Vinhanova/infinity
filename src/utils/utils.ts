@@ -8,3 +8,8 @@ export function toFixed(num: number, fixed: number): number {
 export function findKey(obj: any, value: any): string {
   return Object.keys(obj).find(key => obj[key] === value)!
 }
+
+// Probably is not being used
+export function formatDate(dateInSeconds: number): string {
+  return new Date(dateInSeconds * 1000).toLocaleString('pt-PT', { timeZone: 'UTC' })
+}
