@@ -1,9 +1,12 @@
-import { FC } from 'react'
-import PaymentsList from '../../features/PaymentsList'
 import { useQueryFirestore } from '../../utils/useGetFirestore'
+import PaymentsList from '../../features/PaymentsList'
+import { useUserAuth } from '../../Context/AuthContext'
+import { FC } from 'react'
 
 const AllPaymentsPage: FC = () => {
-  const { state, data: listAllPayments, error } = useQueryFirestore('payments', 123)
+  const { user } = useUserAuth()
+
+  const { state, data: listAllPayments, error } = useQueryFirestore('payments', user.uid)
 
   return (
     <>
