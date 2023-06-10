@@ -1,11 +1,19 @@
 import { useQueryFirestore } from '../../utils/useGetFirestore'
 import MonthCalendar from '../../features/MonthCalendar'
-import { where } from 'firebase/firestore'
-import moment from 'moment'
-import { FC } from 'react'
+import { useUserAuth } from '../../Context/AuthContext'
+import { FC, useEffect } from 'react'
+import _ from 'underscore'
 
 const RecentPaymentsPage: FC = () => {
-  const { state, data: listAllPayments, error } = useQueryFirestore('payments', 123, [where('date', '>=', moment('01-01-2023', 'MM-DD-YYYY').toDate()), where('date', '<', moment('02-01-2023', 'MM-DD-YYYY').toDate())])
+  const { user } = useUserAuth()
+
+  const { state, data: listAllPayments, error } = useQueryFirestore(`payments`, user.uid)
+  //const { state, data: listAllPayments, error } = useDocFirestore<any>('payments', user.uid)
+
+  useEffect(() => {
+    console.log(listAllPayments)
+    console.log(_.map(listAllPayments, (val, key) => val))
+  }, [listAllPayments])
 
   return (
     <>
@@ -14,7 +22,7 @@ const RecentPaymentsPage: FC = () => {
           <div className='h-80 w-3/4 border-2 border-white'>
             {state === 'pending' && <h1>Pending</h1>}
             {state === 'error' && <h1>{error.toString()}</h1>}
-            {state === 'success' && <MonthCalendar list={listAllPayments!} />}
+            {state === 'success' && <MonthCalendar list={_.map(listAllPayments, (val, key) => val)} />}
           </div>
           <div className='flex w-1/4 justify-center border-2 border-white text-center'>
             <div className='w-full'>
