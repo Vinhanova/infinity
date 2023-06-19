@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Payment } from '../utils/types'
+import moment from 'moment'
 
 type Props = {
   listPayments: Payment[]
@@ -39,7 +40,7 @@ const PaymentsList: FC<Props> = ({ listPayments }) => {
         <tbody>
           {listPayments?.map((payment: Payment) => {
             return (
-              <tr key={payment.id} className='border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600'>
+              <tr key={payment.date!.seconds} className='border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600'>
                 <td className='w-4 p-4'>
                   <div className='flex items-center'>
                     <input id='checkbox-table-search-1' type='checkbox' className='h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600' />
@@ -53,7 +54,7 @@ const PaymentsList: FC<Props> = ({ listPayments }) => {
                 </th>
                 <td className='py-4 px-6'>{payment.price}</td>
                 <td className='py-4 px-6'>{payment.category}</td>
-                <td className='py-4 px-6'>{payment.date}</td>
+                <td className='py-4 px-6'>{moment(payment.date!.seconds).toString()}</td>
                 <td className='py-4 px-6'>
                   {/* <!-- Modal toggle --> */}
                   <a href='#' type='button' data-modal-toggle='editUserModal' className='font-medium text-blue-600 hover:underline dark:text-blue-500'>
