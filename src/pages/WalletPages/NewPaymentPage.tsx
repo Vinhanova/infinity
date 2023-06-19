@@ -41,7 +41,7 @@ const AddPaymentPage: FC = () => {
         <br />
         <div className='flex w-full justify-center text-center'>
           <button type='submit' className='rounded border-2 px-4 py-2'>
-            Add new Asset
+            Add new Payment
           </button>
         </div>
       </form>
