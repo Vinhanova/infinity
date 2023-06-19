@@ -1,10 +1,13 @@
 export type Payment = {
-  id: string
   title: string
   price: number
   category: string
-  date: string
+  date?: {
+    seconds: number
+    millisenconds: number
+  }
 }
+
 export type Day = {
   nr: number
   outOfBounds: boolean

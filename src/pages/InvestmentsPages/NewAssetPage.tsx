@@ -17,7 +17,7 @@ const NewAssetPage: FC = () => {
     state: 'purchased'
   })
 
-  async function createAsset(e: { preventDefault: () => void }) {
+  async function addAsset(e: { preventDefault: () => void }) {
     e.preventDefault()
     await setDoc(doc(db, 'stocks', user.uid), { [ticker.toUpperCase()]: asset }, { merge: true })
       .then(res => navigate('/investments/portfolio'))
@@ -26,18 +26,7 @@ const NewAssetPage: FC = () => {
 
   return (
     <div className='my-8 flex flex-col items-center justify-center text-center sm:m-12'>
-      <form className='flex w-8/12 flex-col gap-2 text-left md:w-6/12 lg:w-4/12 [&_p]:mb-1' onSubmit={createAsset}>
-        {/* <div>
-          <p>Type </p>
-          <label className='mr-4'>
-            <input type='radio' name='myRadio' value='option1' />
-            Stock
-          </label>
-          <label>
-            <input type='radio' name='myRadio' value='option2' />
-            Cryptocurrency
-          </label>
-        </div> */}
+      <form className='flex w-8/12 flex-col gap-2 text-left md:w-6/12 lg:w-4/12 [&_p]:mb-1' onSubmit={addAsset}>
         <div>
           <p>Type:</p>
           <label className='mr-4'>
