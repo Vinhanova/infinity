@@ -18,7 +18,7 @@ const MonthCalendar: FC<Props> = ({ list }) => {
   //console.log('MonthCalendar', paymentsList)
 
   return (
-    <div className={`grid h-full w-full grid-cols-7 ${currentMonthArr.length > 5 ? 'grid-rows-6' : 'grid-rows-5'}`}>
+    <div className={`grid h-full w-full grid-cols-7 text-center ${currentMonthArr.length > 5 ? 'grid-rows-6' : 'grid-rows-5'}`}>
       {currentMonthArr.map((week, index1) => (
         <React.Fragment key={index1}>
           {week.map((day, index2) => {

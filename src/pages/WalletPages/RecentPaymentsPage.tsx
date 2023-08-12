@@ -1,28 +1,35 @@
 import { useQueryFirestore } from '../../utils/useGetFirestore'
 import MonthCalendar from '../../features/MonthCalendar'
 import { useUserAuth } from '../../Context/AuthContext'
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import _ from 'underscore'
+import moment from 'moment'
+//import 'react-calendar/dist/Calendar.css'
 
 const RecentPaymentsPage: FC = () => {
   const { user } = useUserAuth()
+  const currentMonth = '08 2023'
 
   const { state, data: listAllPayments, error } = useQueryFirestore(`payments`, user.uid)
+  const [listMonthlyPayments, setListMonthlyPayments] = useState<any>([])
   //const { state, data: listAllPayments, error } = useDocFirestore<any>('payments', user.uid)
 
   useEffect(() => {
-    console.log(listAllPayments)
-    console.log(_.map(listAllPayments, (val, key) => val))
+    setListMonthlyPayments(_.filter(listAllPayments, (val, key) => moment.unix(key).format('MM YYYY') === currentMonth))
   }, [listAllPayments])
+
+  useEffect(() => {
+    console.log(listMonthlyPayments)
+  }, [listMonthlyPayments])
 
   return (
     <>
-      <div className='m-16'>
-        <div className='flex gap-x-6'>
-          <div className='h-80 w-3/4 border-2 border-white'>
+      <div className='m-[2.5%] h-[80%]'>
+        <div className='flex h-[90%] gap-x-6'>
+          <div className='h-full w-3/4 border-2 border-white'>
             {state === 'pending' && <h1>Pending</h1>}
             {state === 'error' && <h1>{error.toString()}</h1>}
-            {state === 'success' && <MonthCalendar list={_.map(listAllPayments, (val, key) => val)} />}
+            {state === 'success' && <MonthCalendar list={listMonthlyPayments} />}
           </div>
           <div className='flex w-1/4 justify-center border-2 border-white text-center'>
             <div className='w-full'>
