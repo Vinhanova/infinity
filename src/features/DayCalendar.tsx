@@ -17,8 +17,8 @@ const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
     for (let i = 0; i <= 2; i++) {
       if (dailyPaymentsList[i])
         rows.push(
-          <button onClick={() => alert(moment.unix(dailyPaymentsList[i].date.seconds).format('hh:mm:ss'))} className='mb-1 w-[90%] rounded-md bg-custom-tealblue'>
-            <div key={i} className='flex justify-between px-2 hover:bg-black'>
+          <button onClick={() => alert(moment.unix(dailyPaymentsList[i].date.seconds).format('hh:mm:ss'))} className='mb-1 w-[90%] rounded-md bg-custom-tealblue px-2 group-hover:bg-custom-jet/50 group-hover:hover:bg-slate-200 group-hover:hover:text-custom-jet'>
+            <div key={i} className='flex justify-between'>
               <h4>{dailyPaymentsList[i].title}</h4>
               <h4>{dailyPaymentsList[i].price} €</h4>
             </div>
@@ -28,8 +28,8 @@ const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
 
     if (dailyPaymentsList.length > 2)
       rows.push(
-        <button key={3} className='rounded hover:bg-black'>
-          <h4>+</h4>
+        <button key={3} className='rounded-md px-2 text-sm hover:bg-slate-200 hover:text-custom-jet'>
+          <h4>+ {dailyPaymentsList.length - 3}</h4>
         </button>
       )
 
@@ -37,9 +37,9 @@ const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
   }
 
   return (
-    <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} hover:bg-custom-tealblue`}>
+    <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} group rounded bg-custom-jet hover:bg-custom-tealblue`}>
       <h3 className='text-lg'>{day.nr}</h3>
-      <div className='flex max-h-[80%] w-full flex-col items-center justify-center'>{printFirst3Rows()}</div>
+      <div className='flex max-h-[80%] w-full flex-col items-center justify-center overflow-hidden'>{printFirst3Rows()}</div>
     </div>
   )
 }
