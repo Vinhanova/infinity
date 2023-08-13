@@ -24,15 +24,15 @@ const RecentPaymentsPage: FC = () => {
 
   return (
     <>
-      <div className='m-[2.5%] h-[80%]'>
-        <div className='flex h-[90%] gap-x-6'>
-          <div className='h-full w-3/4 rounded border-2 border-white'>
+      <div className='m-[2.5%] h-full'>
+        <div className='flex h-full flex-col gap-y-6 2xl:flex-row 2xl:gap-x-6 2xl:gap-y-0'>
+          <div className='h-[80%] w-full rounded border-2 border-white 2xl:w-3/4'>
             {state === 'pending' && <h1>Pending</h1>}
             {state === 'error' && <h1>{error.toString()}</h1>}
             {state === 'success' && <MonthCalendar list={listMonthlyPayments} />}
           </div>
-          <div className='flex w-1/4 justify-center rounded border-2 border-white text-center'>
-            <div className='w-full'>
+          <div className='flex w-1/4 justify-center rounded border-2 border-white text-center 2xl:h-[80%]'>
+            <div className='h-full w-full'>
               <h1>Media</h1>
               <p>132</p>
               <p>103</p>
@@ -40,7 +40,7 @@ const RecentPaymentsPage: FC = () => {
               <p>117</p>
               <p>60</p>
             </div>
-            <div className='w-full justify-center border-l-2 border-white'>
+            <div className='h-full w-full justify-center border-l-2 border-white'>
               <h1>Saldo</h1>
               <p>132</p>
               <p>103</p>
