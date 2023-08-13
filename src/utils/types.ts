@@ -4,7 +4,7 @@ export type Payment = {
   category: string
   date?: {
     seconds: number
-    millisenconds: number
+    milliseconds: number
   }
 }
 

@@ -32,7 +32,7 @@ export function formatPaymentsList(list: any[]): MonthlyPaymentsDic {
     const day = parseInt(moment.unix(list[i].date.seconds).format('D'))
 
     formattedList[day] = formattedList[day] ?? []
-    formattedList[day].push(list[i].title)
+    formattedList[day].push(list[i])
   }
   //console.log('FormattedList', formattedList)
   return formattedList
