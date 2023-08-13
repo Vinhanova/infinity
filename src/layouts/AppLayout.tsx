@@ -6,7 +6,7 @@ const AppLayout: FC = () => {
   return (
     <div className='h-screen overflow-hidden'>
       <MainNavBar />
-      <div className='ml-12 h-full xl:ml-16'>
+      <div className='ml-12 h-full overflow-x-hidden xl:ml-16'>
         <Outlet />
       </div>
     </div>
