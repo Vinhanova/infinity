@@ -8,7 +8,7 @@ import moment from 'moment'
 
 const RecentPaymentsPage: FC = () => {
   const { user } = useUserAuth()
-  const currentMonth = '08 2023'
+  const currentMonth = moment().format('MM YYYY')
 
   const { state, data: listAllPayments, error } = useQueryFirestore(`payments`, user.uid)
   const [listMonthlyPayments, setListMonthlyPayments] = useState<any>([])

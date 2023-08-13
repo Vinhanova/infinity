@@ -39,7 +39,7 @@ const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
   return (
     <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} group rounded bg-custom-jet hover:bg-custom-tealblue`}>
       <h3 className='text-lg'>{day.nr}</h3>
-      <div className='flex max-h-[80%] w-full flex-col items-center justify-center overflow-hidden'>{printFirst3Rows()}</div>
+      <div className='max-h-[80%] w-full items-center justify-center overflow-auto'>{printFirst3Rows()}</div>
     </div>
   )
 }
