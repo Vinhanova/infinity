@@ -17,8 +17,8 @@ const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
     for (let i = 0; i <= 2; i++) {
       if (dailyPaymentsList[i])
         rows.push(
-          <button onClick={() => alert(moment.unix(dailyPaymentsList[i].date.seconds).format('hh:mm:ss'))} className='mb-1 w-[90%] rounded-md bg-custom-tealblue px-2 group-hover:bg-custom-jet/50 group-hover:hover:bg-slate-200 group-hover:hover:text-custom-jet'>
-            <div key={i} className='flex justify-between'>
+          <button key={i} onClick={() => alert(moment.unix(dailyPaymentsList[i].date.seconds).format('hh:mm:ss'))} className='mb-1 w-[90%] rounded-md bg-custom-tealblue px-2 group-hover:bg-custom-jet/50 group-hover:hover:bg-slate-200 group-hover:hover:text-custom-jet'>
+            <div className='flex justify-between'>
               <h4 className='font-semibold'>{dailyPaymentsList[i].title}</h4>
               <h4>{dailyPaymentsList[i].price} €</h4>
             </div>
@@ -37,9 +37,11 @@ const DayCalendar: FC<Props> = ({ day, dailyPaymentsList }) => {
   }
 
   return (
-    <div className={`${day.outOfBounds && 'bg-zinc-800 text-slate-400'} group rounded bg-custom-jet hover:bg-custom-tealblue`}>
-      <h3 className='text-lg font-bold'>{day.nr}</h3>
-      <div className='max-h-[80%] w-full items-center justify-center overflow-auto'>{printFirst3Rows()}</div>
+    <div className='border-2 border-zinc-800'>
+      <div className={`group h-full w-full rounded hover:bg-custom-tealblue ${day.outOfBounds ? 'bg-zinc-800 text-slate-400' : 'bg-custom-jet'}`}>
+        <h3 className='text-lg font-bold'>{day.nr}</h3>
+        <div className='max-h-[80%] w-full items-center justify-center overflow-auto'>{printFirst3Rows()}</div>
+      </div>
     </div>
   )
 }

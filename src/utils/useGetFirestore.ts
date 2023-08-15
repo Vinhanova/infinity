@@ -15,8 +15,6 @@ export function useQueryFirestore(dbCollection: string, userId: string): Request
     const unsubscribe: Unsubscribe = onSnapshot(q, (querySnapshot: any): void => {
       //let data: any[] = []
 
-      console.log(querySnapshot.data())
-
       /* querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>): void => {
         if (doc.data().date) {
           data.push({ id: doc.id, ...doc.data(), date: formatDate(doc.data().date.seconds) })
@@ -41,7 +39,6 @@ export function useDocFirestore<T>(dbCollection: string, userId: string): Reques
 
   useEffect(() => {
     getDoc(doc(db, dbCollection, userId)).then(data => {
-      console.log(data.data())
       if (data.data() === undefined) {
         setRequest({ state: 'error', error: 'Not found' })
         return

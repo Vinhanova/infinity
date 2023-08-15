@@ -17,7 +17,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const { user } = useUserAuth()
   const [tickers, setTickers] = useState<Request>({ state: 'pending' })
 
-  const { state: userTickersState, data: userTickersData, error: userTickersError } = useDocFirestore<AssetDic>(`stocks`, user.uid)
+  const { state: userTickersState, data: userTickersData, error: userTickersError } = useDocFirestore<AssetDic>(`stocks`, user.uid) // can't change to "assets"
   const { state: exchangeRateInfoState, data: exchangeRateInfoData, error: exchangeRateInfoError } = useGetTicker('USDEUR=X')
   const { state: initialTickersInfoState, data: initialTickersInfoData, error: initialTickersInfoError } = useGetAllTickers(tickers)
   const { state: updatedTickersInfoState, data: updatedTickersInfoData } = useYFWebSocket(userTickersData)
@@ -33,7 +33,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const [purchasedAssetsList, setPurchasedAssetsList] = useState<any>({})
   const [watchlistAssetsList, setWatchlistAssetsList] = useState<any>({})
   const [stocksList, setStocksList] = useState<any>({})
-  const [cryptocurrenciesList, setCryptocurrenciesList] = useState<any>({})
+  const [cryptoList, setCryptoList] = useState<any>({})
 
   useEffect(() => {
     setTickers({ state: userTickersState, data: userTickersData, error: userTickersError })
@@ -61,8 +61,8 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   }, [stocksList, exchangeRateInfoData])
 
   useEffect(() => {
-    setTotalCryptocurrencies(toFixed(_.reduce(cryptocurrenciesList, (total: number, asset: any) => total + asset.price * userTickersData[asset.id].quantity, 0) * exchangeRateInfoData?.c, 2))
-  }, [cryptocurrenciesList, exchangeRateInfoData])
+    setTotalCryptocurrencies(toFixed(_.reduce(cryptoList, (total: number, asset: any) => total + asset.price * userTickersData[asset.id].quantity, 0) * exchangeRateInfoData?.c, 2))
+  }, [cryptoList, exchangeRateInfoData])
 
   useEffect(() => {
     if (stocksInfoState === 'success') {
@@ -96,7 +96,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
             setStocksList((prev: any) => ({ ...prev, [asset.id]: asset }))
             break
           case 'cryptocurrency':
-            setCryptocurrenciesList((prev: any) => ({ ...prev, [asset.id]: asset }))
+            setCryptoList((prev: any) => ({ ...prev, [asset.id]: asset }))
             break
           default:
             console.log('Asset Type Error')
@@ -105,7 +105,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
     })
   }, [stocksInfoData])
 
-  return <InvestmentsContext.Provider value={{ stocksList, cryptoList: cryptocurrenciesList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalStocks, totalCryptocurrencies, totalUSD, totalEUR }}>{children}</InvestmentsContext.Provider>
+  return <InvestmentsContext.Provider value={{ stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalStocks, totalCryptocurrencies, totalUSD, totalEUR }}>{children}</InvestmentsContext.Provider>
 }
 
 export const useInvestmentsContext = () => {

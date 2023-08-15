@@ -1,3 +1,4 @@
+import { useWalletContext } from '../../Context/WalletContext'
 import { useUserAuth } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { doc, setDoc } from 'firebase/firestore'
@@ -9,6 +10,7 @@ import moment from 'moment'
 const AddPaymentPage: FC = () => {
   const navigate = useNavigate()
   const { user } = useUserAuth()
+  const { walletInfo, setWalletInfo } = useWalletContext()
   const [newDate, setNewDate] = useState('-1')
   const [newTime, setNewTime] = useState('-1')
 
@@ -24,7 +26,11 @@ const AddPaymentPage: FC = () => {
 
   async function addPayment(e: { preventDefault: () => void }) {
     e.preventDefault()
-    await setDoc(doc(db, 'payments', user.uid), { [payment.date!.seconds.toString()]: { ...payment, date: { seconds: payment.date!.seconds, milliseconds: payment.date!.milliseconds } } }, { merge: true })
+    await setDoc(doc(db, 'payments', user.uid), { [payment.date!.seconds.toString()]: { ...payment, date: { seconds: payment.date!.seconds, milliseconds: payment.date!.milliseconds } } }, { merge: true }).catch(err => alert(err))
+
+    setWalletInfo({ ...walletInfo, data: { cash: walletInfo.data?.cash - payment.price } })
+
+    await setDoc(doc(db, 'wallets', user.uid), { cash: walletInfo.data?.cash - payment.price }, { merge: true })
       .then(res => navigate('/wallet/recent-payments'))
       .catch(err => alert(err))
   }
