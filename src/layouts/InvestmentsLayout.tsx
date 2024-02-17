@@ -11,15 +11,15 @@ const InvestmentsLayout: FC = () => {
       <TopBar
         start={[
           <NavLink to={'/investments'} className='mr-4 ml-2 py-2 px-0.5 text-xl sm:text-2xl'>
-            Investments
+            Investimentos
           </NavLink>,
           <NavLink to={'/investments/portfolio'} className='py-2 px-0.5'>
-            Portfolio
+            Portfólio
           </NavLink>
         ]}
         end={[
           <NavLink to={'/investments/new-asset'} className='flex rounded border-2 border-white p-1.5 sm:py-2 sm:px-3'>
-            <span className='hidden sm:block'>New Asset</span>
+            <span className='hidden sm:block'>Adicionar Ativo</span>
             <GoPlus className='sm:ml-1 sm:mt-[0.15rem]' />
           </NavLink>
         ]}

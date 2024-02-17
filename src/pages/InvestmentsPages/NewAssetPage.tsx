@@ -28,14 +28,14 @@ const NewAssetPage: FC = () => {
     <div className='my-8 flex flex-col items-center justify-center text-center sm:m-12'>
       <form className='flex w-8/12 flex-col gap-2 text-left md:w-6/12 lg:w-4/12 [&_p]:mb-1' onSubmit={addAsset}>
         <div>
-          <p>Type:</p>
+          <p>Tipo:</p>
           <label className='mr-4'>
             <input type='radio' name='type' value='cryptocurrency' className='mr-1' onChange={e => setAsset({ ...asset, type: e.target.value })} required />
-            Cryptocurrency
+            Cryptomoedas
           </label>
           <label>
             <input type='radio' name='type' value='stock' className='mr-1' onChange={e => setAsset({ ...asset, type: e.target.value })} required />
-            Stock
+            Ações
           </label>
         </div>
         <div>
@@ -43,11 +43,11 @@ const NewAssetPage: FC = () => {
           <input className='w-full rounded py-1 px-2 text-custom-jet  outline-custom-tealblue' value={ticker} onChange={e => setTicker(e.target.value)} required />
         </div>
         <div>
-          <p>Name</p>
+          <p>Nome</p>
           <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={asset.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />
         </div>
         <div>
-          <p>Quantity</p>
+          <p>Quantidade</p>
           <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' min={asset.type === 'stock' ? 1 : 0.000000001} step={asset.type === 'stock' ? 1 : 0.000000001} required />
         </div>
         {/* <div>
@@ -56,7 +56,7 @@ const NewAssetPage: FC = () => {
         <br />
         <div className='flex w-full justify-center text-center'>
           <button type='submit' className='rounded border-2 px-4 py-2'>
-            Add new Asset
+            Adicionar
           </button>
         </div>
       </form>

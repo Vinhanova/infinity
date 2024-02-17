@@ -13,13 +13,13 @@ const InvestmentsOverviewPage: FC = () => {
       {listState === 'pending' && <h1 className='mb-8'>Loading...</h1>}
 
       {listState === 'error' &&
-        ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Warning: Slow Down (429)</h1>) ||
+        ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Aviso: Muitos pedidos em simultâneo (429)</h1>) ||
           (stocksInfoError === 'No tickers found' && (
             <div className='mb-8'>
               <h3>
-                0 assets found, you can add a new asset{' '}
+                Não foram encontrados ativos, pode adicionar novos ativos{' '}
                 <Link to='/investments/new-asset' className='underline'>
-                  here
+                  aqui
                 </Link>
                 .
               </h3>
@@ -28,13 +28,19 @@ const InvestmentsOverviewPage: FC = () => {
 
       {listState === 'success' &&
         (_.isEmpty(purchasedAssetsList) ? (
-          <h1 className='p-2'>No stocks found</h1>
+          <h1 className='p-2'>
+            Não foram encontrados ativos, pode adicionar novos ativos{' '}
+            <Link to='/investments/new-asset' className='underline'>
+              aqui
+            </Link>
+            .
+          </h1>
         ) : (
           <div className='flex items-center justify-center'>
             <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'>
-              <h3>USD/EUR Exchange Rate: {exchangeRateInfoData?.c.toFixed(3)}</h3>
+              <h3>Cotação USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}</h3>
               <PieChart
-                title='All Assets'
+                title='Todos os ativos'
                 labels={_.keys(purchasedAssetsList)}
                 dataContent={_.map(purchasedAssetsList, (stock: any) => {
                   //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
@@ -44,15 +50,15 @@ const InvestmentsOverviewPage: FC = () => {
               />
               <div className='flex w-full justify-between px-4 xs:px-0'>
                 <div className='text-left'>
-                  <h3>All Assets Total: </h3>
+                  <h3>Total: </h3>
                 </div>
                 <div className='text-right'>
                   <h3>{toFixed(totalEUR, 2)} €</h3>
                 </div>
               </div>
-              <PieChart title='Stocks vs Cryptocurrencies' labels={['Stocks', 'Cryptocurrencies']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
+              <PieChart title='Ações vs Cryptomoedas' labels={['Ações', 'Cryptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
               <PieChart
-                title='Stocks'
+                title='Ações'
                 labels={_.keys(stocksList)}
                 dataContent={_.map(stocksList, (stock: any) => {
                   //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
@@ -63,7 +69,7 @@ const InvestmentsOverviewPage: FC = () => {
               {totalStocks > 0 && (
                 <div className='flex w-full justify-between px-4 xs:px-0'>
                   <div className='text-left'>
-                    <h3>Total Stocks: </h3>
+                    <h3>Total Ações: </h3>
                   </div>
                   <div className='text-right'>
                     <h3>{toFixed(totalStocks, 2)} €</h3>
@@ -71,7 +77,7 @@ const InvestmentsOverviewPage: FC = () => {
                 </div>
               )}
               <PieChart
-                title='Cryptocurrencies'
+                title='Cryptomoedas'
                 labels={_.keys(cryptoList)}
                 dataContent={_.map(cryptoList, (stock: any) => {
                   //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
@@ -82,7 +88,7 @@ const InvestmentsOverviewPage: FC = () => {
               {totalCryptocurrencies > 0 && (
                 <div className='flex w-full justify-between px-4 xs:px-0'>
                   <div className='text-left'>
-                    <h3>Total Cryptocurrencies: </h3>
+                    <h3>Total Cryptomoedas: </h3>
                   </div>
                   <div className='text-right'>
                     <h3>{toFixed(totalCryptocurrencies, 2)} €</h3>
