@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         custom: {
           tealblue: '#007991',
+          'tealblue-hl': '#00aacc', //highlight
           jet: '#2A2B2E'
         }
       }

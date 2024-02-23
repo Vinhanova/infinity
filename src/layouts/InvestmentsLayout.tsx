@@ -13,11 +13,11 @@ const InvestmentsLayout: FC = () => {
       <TopBar
         start={[
           <span className='mr-4 ml-2 py-2 px-0.5 text-xl sm:text-2xl'>Investimentos</span>,
-          <NavLink to={'/investments'} className='flex items-center gap-1 py-2 px-0.5 hover:text-custom-tealblue'>
+          <NavLink to={'/investments/'} className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5 hover:text-custom-tealblue-hl/50'}>
             <FaRegChartBar className='text-xl' />
             <span className='font-normal'>Estatísticas</span>
           </NavLink>,
-          <NavLink to={'/investments/portfolio'} className='flex items-center gap-1 py-2 px-0.5 hover:text-custom-tealblue'>
+          <NavLink to={'/investments/portfolio'} className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5 hover:text-custom-tealblue-hl/50'}>
             <IoListSharp className='text-xl' />
             <span className='font-normal'>Vista Geral</span>
           </NavLink>
