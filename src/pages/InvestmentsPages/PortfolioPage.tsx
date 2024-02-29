@@ -14,7 +14,7 @@ const InvestmentsPage: FC = () => {
           {listState === 'pending' && <h1 className='mb-8'>A carregar...</h1>}
 
           {listState === 'error' &&
-            ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Aviso: Muitos pedidos em simultâneo (429)</h1>) ||
+            ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
               (stocksInfoError === 'No tickers found' && (
                 <div className='mb-8'>
                   <h3>

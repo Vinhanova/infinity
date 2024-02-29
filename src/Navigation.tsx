@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from 'react-router-dom'
 import AppLayout from './layouts/AppLayout'
 import WalletLayout from './layouts/WalletLayout'
 import MealPlannerLayout from './layouts/MealPlannerLayout'
@@ -53,8 +53,9 @@ const Navigation = () => {
 
         <Route element={<PrivateRoute />}>
           <Route path='investments' element={<InvestmentsLayout />}>
-            <Route index element={<InvestmentsOverviewPage />} />
-            <Route path='portfolio' element={<InvestmentsPage />} />
+            <Route index element={<Navigate to='dashboard' replace />} />
+            <Route path='dashboard' element={<InvestmentsOverviewPage />} />
+            <Route path='list' element={<InvestmentsPage />} />
             <Route path='new-asset' element={<NewAssetPage />} />
           </Route>
         </Route>

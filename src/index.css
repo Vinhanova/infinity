@@ -5,3 +5,19 @@
 body {
   @apply bg-custom-jet text-white;
 }
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@media (hover: hover) {
+  #main-link:hover {
+    @apply text-custom-jet/60;
+  }
+
+  #submenu-link:hover {
+    @apply border-custom-tealblue-hl/50 text-custom-tealblue-hl/50;
+  }
+}

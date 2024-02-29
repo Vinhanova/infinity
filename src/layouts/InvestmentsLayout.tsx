@@ -13,19 +13,19 @@ const InvestmentsLayout: FC = () => {
       <TopBar
         start={[
           <span className='mr-4 ml-2 py-2 px-0.5 text-xl sm:text-2xl'>Investimentos</span>,
-          <NavLink to={'/investments/'} className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5 hover:text-custom-tealblue-hl/50'}>
+          <NavLink to={'/investments/dashboard'} id='submenu-link' className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5'}>
             <FaRegChartBar className='text-xl' />
-            <span className='font-normal'>Estatísticas</span>
+            <span className='hidden font-normal sm:block'>Estatísticas</span>
           </NavLink>,
-          <NavLink to={'/investments/portfolio'} className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5 hover:text-custom-tealblue-hl/50'}>
+          <NavLink to={'/investments/list'} id='submenu-link' className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5'}>
             <IoListSharp className='text-xl' />
-            <span className='font-normal'>Vista Geral</span>
+            <span className='hidden font-normal sm:block'>Vista Geral</span>
           </NavLink>
         ]}
         end={[
-          <NavLink to={'/investments/new-asset'} className='flex rounded border-2 border-white p-1.5 sm:py-2 sm:px-3'>
+          <NavLink to={'/investments/new-asset'} id='submenu-link' className={({ isActive }) => (isActive ? 'hidden ' : '') + 'flex rounded border-2 border-white p-1.5 sm:py-1.5 sm:px-3'}>
             <span className='hidden sm:block'>Adicionar</span>
-            <GoPlus className='text-base sm:ml-1 sm:mt-[0.15rem]' />
+            <GoPlus className='text-base sm:ml-1 sm:mt-[2.4px]' />
           </NavLink>
         ]}
       />

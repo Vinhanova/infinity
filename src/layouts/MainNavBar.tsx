@@ -13,7 +13,7 @@ const MainNavBar: FC = () => {
   return (
     <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl xl:w-16'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
-        <NavLink to='/' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl hover:text-custom-jet/50'}>
+        <NavLink to='/' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl'}>
           <IoInfiniteSharp />
         </NavLink>
         {/* <NavLink to='/calendar' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
@@ -22,19 +22,19 @@ const MainNavBar: FC = () => {
         {/* <NavLink to='/meal-planner' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
           <GiMeal />
         </NavLink> */}
-        <NavLink to='/wallet' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
+        <NavLink to='/wallet' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
           <IoWalletSharp />
         </NavLink>
-        <NavLink to='/investments' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
+        <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2.5 text-xl'}>
           <FaCoins />
         </NavLink>
       </div>
       <div className='mb-4 flex w-full flex-col items-center justify-center space-y-6'>
-        <NavLink to='/settings' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
+        <NavLink to='/settings' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
           <FiSettings />
         </NavLink>
-        <NavLink to='/profile' className={({ isActive }) => (isActive ? '[&>*]:border-custom-jet ' : '') + 'h-8 w-8 cursor-pointer'}>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded border-2 hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
+        <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-jet ' : '') + 'h-8 w-8 cursor-pointer'}>
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded border-2 xl:hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
         </NavLink>
       </div>
 
