@@ -18,11 +18,17 @@ const NewAssetPage: FC = () => {
     state: 'purchased'
   })
 
-  async function addAsset(e: { preventDefault: () => void }) {
+  const addAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     await setDoc(doc(db, 'stocks', user.uid), { [ticker.toUpperCase()]: asset }, { merge: true })
       .then(res => navigate('/investments/portfolio'))
       .catch(err => alert(err))
+  }
+
+  const qwe = () => {
+    Notification.requestPermission().then(perm => {
+      if (perm === 'granted') new Notification('qwe', { body: 'qwe' })
+    })
   }
 
   return (
@@ -61,6 +67,7 @@ const NewAssetPage: FC = () => {
           </button>
         </div>
       </form>
+      <button onClick={qwe}>Teste</button>
     </div>
   )
 }
