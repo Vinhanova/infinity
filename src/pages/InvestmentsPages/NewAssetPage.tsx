@@ -18,10 +18,10 @@ const NewAssetPage: FC = () => {
     state: 'purchased'
   })
 
-  async function addAsset(e: { preventDefault: () => void }) {
+  const addAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     await setDoc(doc(db, 'stocks', user.uid), { [ticker.toUpperCase()]: asset }, { merge: true })
-      .then(res => navigate('/investments/portfolio'))
+      .then(res => navigate('/investments/list'))
       .catch(err => alert(err))
   }
 
