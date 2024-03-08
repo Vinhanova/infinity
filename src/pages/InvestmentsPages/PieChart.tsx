@@ -39,31 +39,33 @@ const PieChart: FC<Props> = ({ title, labels, dataContent, total }) => {
   if (_.isEmpty(dataContent) || _.every(dataContent, (value: any) => value <= 0 || isNaN(value))) return <></>
   //<h3 className='m-8'>No Data for {title}</h3>
 
-  return (
-    <div className='w-full'>
-      {title && <h3 className='mx-4 border-t-2 py-4 text-2xl xs:m-0'>{title}</h3>}
-      <Pie
-        data={data}
-        options={{
-          plugins: {
-            legend: {
-              display: true,
-              position: 'bottom'
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context: any) {
-                  if (context) {
-                    return `${context.raw.toFixed(0)}€  =  ${((context.raw / total) * 100).toFixed(1)}%`
+  if (window.innerWidth)
+    return (
+      <div className='-mb-4 w-full'>
+        {title && <h3 className='mx-4 pb-4 text-2xl xs:m-0'>{title}</h3>}
+        <Pie
+          className={window.innerWidth < 400 && data.labels.length <= 4 ? '' : 'p-4'}
+          data={data}
+          options={{
+            plugins: {
+              legend: {
+                display: window.innerWidth < 400 ? data.labels.length <= 4 : true,
+                position: 'bottom'
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context: any) {
+                    if (context) {
+                      return `${context.raw.toFixed(0)}€  =  ${((context.raw / total) * 100).toFixed(1)}%`
+                    }
                   }
                 }
               }
             }
-          }
-        }}
-      />
-    </div>
-  )
+          }}
+        />
+      </div>
+    )
 }
 
 export default PieChart

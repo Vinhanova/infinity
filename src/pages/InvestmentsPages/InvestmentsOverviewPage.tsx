@@ -36,9 +36,9 @@ const InvestmentsOverviewPage: FC = () => {
             .
           </h1>
         ) : (
-          <div className='flex items-center justify-center'>
-            <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'>
-              <h3>Cotação USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}</h3>
+          <div className='mt-6 grid gap-y-6 xs:grid-cols-2 sm:m-6 sm:gap-8 lg:m-8 lg:grid-cols-3 xl:grid-cols-4 2xl:m-12'>
+            {/* <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'> */}
+            <div>
               <PieChart
                 title='Todos os ativos'
                 labels={_.keys(purchasedAssetsList)}
@@ -48,15 +48,17 @@ const InvestmentsOverviewPage: FC = () => {
                 })}
                 total={totalEUR}
               />
-              <div className='flex w-full justify-between px-4 xs:px-0'>
-                <div className='text-left'>
+              <div className='mx-4 flex justify-between rounded rounded-t-none border-x-2 border-b-2 border-white/10 py-2'>
+                <div className='ml-2 text-left'>
                   <h3>Total: </h3>
                 </div>
-                <div className='text-right'>
+                <div className='mr-2 text-right'>
                   <h3>{toFixed(totalEUR, 2)} €</h3>
                 </div>
               </div>
-              <PieChart title='Ações vs Cryptomoedas' labels={['Ações', 'Cryptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
+            </div>
+            <PieChart title='Ações vs Cryptomoedas' labels={['Ações', 'Cryptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
+            <div>
               <PieChart
                 title='Ações'
                 labels={_.keys(stocksList)}
@@ -67,15 +69,17 @@ const InvestmentsOverviewPage: FC = () => {
                 total={totalStocks}
               />
               {totalStocks > 0 && (
-                <div className='flex w-full justify-between px-4 xs:px-0'>
-                  <div className='text-left'>
+                <div className='mx-4 flex justify-between rounded rounded-t-none border-x-2 border-b-2 border-white/10 py-2'>
+                  <div className='ml-2 text-left'>
                     <h3>Total Ações: </h3>
                   </div>
-                  <div className='text-right'>
+                  <div className='mr-2 text-right'>
                     <h3>{toFixed(totalStocks, 2)} €</h3>
                   </div>
                 </div>
               )}
+            </div>
+            <div>
               <PieChart
                 title='Cryptomoedas'
                 labels={_.keys(cryptoList)}
@@ -86,25 +90,26 @@ const InvestmentsOverviewPage: FC = () => {
                 total={totalCryptocurrencies}
               />
               {totalCryptocurrencies > 0 && (
-                <div className='flex w-full justify-between px-4 xs:px-0'>
-                  <div className='text-left'>
+                <div className='mx-4 flex justify-between rounded rounded-t-none border-x-2 border-b-2 border-white/10 py-2'>
+                  <div className='ml-2 text-left'>
                     <h3>Total Cryptomoedas: </h3>
                   </div>
-                  <div className='text-right'>
+                  <div className='mr-2 text-right'>
                     <h3>{toFixed(totalCryptocurrencies, 2)} €</h3>
                   </div>
                 </div>
               )}
-              <PieChart
-                title='WatchList'
-                labels={_.keys(watchlistAssetsList)}
-                dataContent={_.map(watchlistAssetsList, (stock: any) => {
-                  //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
-                  return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
-                })}
-                total={totalEUR}
-              />
             </div>
+            <PieChart
+              title='WatchList'
+              labels={_.keys(watchlistAssetsList)}
+              dataContent={_.map(watchlistAssetsList, (stock: any) => {
+                //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
+                return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
+              })}
+              total={totalEUR}
+            />
+            <h3>Cotação USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}</h3>
           </div>
         ))}
     </div>
