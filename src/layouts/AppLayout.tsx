@@ -4,9 +4,9 @@ import { FC } from 'react'
 
 const AppLayout: FC = () => {
   return (
-    <div className='h-screen overflow-hidden'>
+    <div className='min-h-full'>
       <MainNavBar />
-      <div className='ml-12 h-full overflow-x-hidden xl:ml-16'>
+      <div className='ml-12 min-h-full xl:ml-16'>
         <Outlet />
       </div>
     </div>
