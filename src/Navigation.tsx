@@ -27,7 +27,8 @@ const Navigation = () => {
         <Route path='login' element={<LoginPage />} />
 
         <Route element={<PrivateRoute />}>
-          <Route index element={<MainPage />} />
+          {/* <Route index element={<MainPage />} /> */}
+          <Route index element={<Navigate to='investments' replace />} />
         </Route>
 
         {/* <Route element={<PrivateRoute />}>
@@ -42,14 +43,14 @@ const Navigation = () => {
           </Route>
         </Route> */}
 
-        <Route element={<PrivateRoute />}>
+        {/* <Route element={<PrivateRoute />}>
           <Route path='wallet' element={<WalletLayout />}>
             <Route index element={<WalletPage />} />
             <Route path='recent-payments' element={<RecentPaymentsPage />} />
             <Route path='all-payments' element={<AllPaymentsPage />} />
             <Route path='add-payment' element={<AddPaymentPage />} />
           </Route>
-        </Route>
+        </Route> */}
 
         <Route element={<PrivateRoute />}>
           <Route path='investments' element={<InvestmentsLayout />}>

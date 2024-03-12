@@ -22,9 +22,9 @@ const MainNavBar: FC = () => {
         {/* <NavLink to='/meal-planner' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
           <GiMeal />
         </NavLink> */}
-        <NavLink to='/wallet' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
+        {/* <NavLink to='/wallet' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
           <IoWalletSharp />
-        </NavLink>
+        </NavLink> */}
         <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2.5 text-xl'}>
           <FaCoins />
         </NavLink>
