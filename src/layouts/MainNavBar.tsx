@@ -13,9 +13,12 @@ const MainNavBar: FC = () => {
   return (
     <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl xl:w-16'>
       <div className='flex w-full flex-col items-center justify-center space-y-2'>
-        <NavLink to='/' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl'}>
+        <div className={'mb-3 rounded p-1.5 text-4xl'}>
           <IoInfiniteSharp />
-        </NavLink>
+        </div>
+        {/* <NavLink to='/' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl'}>
+          <IoInfiniteSharp />
+        </NavLink> */}
         {/* <NavLink to='/calendar' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
           <BsFillCalendar2WeekFill />
         </NavLink> */}
