@@ -32,7 +32,7 @@ const InvestmentsPage: FC = () => {
               <h1 className='p-2'>Não tem ativos</h1>
             ) : (
               <>
-                <div className='relative overflow-x-auto sm:rounded-lg'>
+                <div className=''>
                   <table className='w-full text-left text-sm lg:text-base'>
                     <thead className='border-b-2 uppercase'>
                       <tr>
@@ -112,7 +112,7 @@ const InvestmentsPage: FC = () => {
                       <tr className='border-t-2 font-semibold uppercase'>
                         <th scope='row' className='px-[3px] py-[7px] lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                           Total
-                          <span className='text-sm'> (USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</span>:
+                          <span className='hidden text-sm lg:inline'> (USD/EUR: {exchangeRateInfoData?.c.toFixed(3)})</span>:
                         </th>
                         <td></td>
                         <td className='hidden sm:table-cell'></td>

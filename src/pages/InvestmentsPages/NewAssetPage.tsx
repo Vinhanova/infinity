@@ -36,7 +36,7 @@ const NewAssetPage: FC = () => {
           </label>
           <input id='cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-auto text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value })} required />
           <label htmlFor='cryptocurrency-radio' className='cursor-auto'>
-            Cryptomoedas
+            Criptomoedas
           </label>
         </div>
         <div>

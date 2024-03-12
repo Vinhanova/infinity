@@ -57,7 +57,7 @@ const InvestmentsOverviewPage: FC = () => {
                 </div>
               </div>
             </div>
-            <PieChart title='Ações vs Cryptomoedas' labels={['Ações', 'Cryptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
+            <PieChart title='Ações vs Criptomoedas' labels={['Ações', 'Criptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />
             <div>
               <PieChart
                 title='Ações'
@@ -81,7 +81,7 @@ const InvestmentsOverviewPage: FC = () => {
             </div>
             <div>
               <PieChart
-                title='Cryptomoedas'
+                title='Criptomoedas'
                 labels={_.keys(cryptoList)}
                 dataContent={_.map(cryptoList, (stock: any) => {
                   //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
@@ -92,7 +92,7 @@ const InvestmentsOverviewPage: FC = () => {
               {totalCryptocurrencies > 0 && (
                 <div className='mx-4 flex justify-between rounded rounded-t-none border-x-2 border-b-2 border-white/10 py-2'>
                   <div className='ml-2 text-left'>
-                    <h3>Total Cryptomoedas: </h3>
+                    <h3>Total Criptomoedas: </h3>
                   </div>
                   <div className='mr-2 text-right'>
                     <h3>{toFixed(totalCryptocurrencies, 2)} €</h3>

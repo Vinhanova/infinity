@@ -6,7 +6,7 @@ import CalendarLayout from './layouts/CalendarLayout'
 import InvestmentsLayout from './layouts/InvestmentsLayout'
 import MainPage from './pages/MainPages/MainPage'
 import WalletPage from './pages/WalletPages/WalletPage'
-import InvestmentsPage from './pages/InvestmentsPages/PortfolioPage'
+import AssetsListPage from './pages/InvestmentsPages/AssetsListPage'
 import MealPlannerPage from './pages/MealPlannerPages/MealPlannerPage'
 import CalendarPage from './pages/CalendarPages/CalendarPage'
 import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
@@ -55,7 +55,7 @@ const Navigation = () => {
           <Route path='investments' element={<InvestmentsLayout />}>
             <Route index element={<Navigate to='dashboard' replace />} />
             <Route path='dashboard' element={<InvestmentsOverviewPage />} />
-            <Route path='list' element={<InvestmentsPage />} />
+            <Route path='list' element={<AssetsListPage />} />
             <Route path='new-asset' element={<NewAssetPage />} />
           </Route>
         </Route>
