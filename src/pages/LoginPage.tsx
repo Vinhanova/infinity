@@ -45,7 +45,7 @@ const LoginPage: FC = () => {
             <GoogleButton onClick={handleGoogleSignIn} className='scale-90 self-center sm:scale-100 sm:self-start' />
           </div>
           <div className='-mt-4 sm:-mt-12 sm:w-7/12'>
-            <img src='public/mockups.png' alt='Infinity App Phone, Tablet and PC Mockups' />
+            <img src='../mockups.png' alt='Infinity App Phone, Tablet and PC Mockups' />
           </div>
         </div>
         <div
