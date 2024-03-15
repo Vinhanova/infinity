@@ -29,9 +29,9 @@ const LoginPage: FC = () => {
   return (
     <>
       <div className='flex min-h-screen flex-col items-center justify-items-center font-mono'>
-        <div className='flex min-h-[60vh] w-full flex-col-reverse justify-center pl-4 sm:flex-row sm:items-center sm:p-0 sm:px-16'>
-          <div className='mt-6 flex h-full flex-col justify-items-center gap-y-6 text-center sm:m-0 sm:w-5/12 sm:pl-24 sm:text-start'>
-            <h1 className='text-xl sm:text-5xl'>
+        <div className='mt-4 flex min-h-[60vh] w-full flex-col-reverse justify-center sm:flex-row sm:items-center sm:px-16'>
+          <div className='flex h-full flex-col justify-items-center gap-y-6 p-4 text-center sm:m-0 sm:w-5/12 sm:p-0 sm:pl-24 sm:text-start'>
+            <h1 className='text-2xl sm:text-5xl'>
               Projeto <IoInfiniteSharp className='mb-1 inline text-3xl sm:mb-2 sm:text-5xl' /> Infinity
             </h1>
             <h3 className='break-words text-sm sm:text-base'>
@@ -42,9 +42,9 @@ const LoginPage: FC = () => {
                 Tiago Vinhanova
               </a>
             </h3>
-            <GoogleButton onClick={handleGoogleSignIn} className='scale-75 self-center sm:scale-100 sm:self-start' />
+            <GoogleButton onClick={handleGoogleSignIn} className='scale-90 self-center sm:scale-100 sm:self-start' />
           </div>
-          <div className='-mt-12 sm:w-7/12'>
+          <div className='-mt-4 sm:-mt-12 sm:w-7/12'>
             <img src='public/mockups.png' alt='Infinity App Phone, Tablet and PC Mockups' />
           </div>
         </div>
