@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Asset } from '../../utils/types'
 import { FC, useState } from 'react'
 import { db } from '../../firebase'
-import { GoPlus } from 'react-icons/go'
+import { FaPlus } from 'react-icons/fa'
 
 const NewAssetPage: FC = () => {
   const navigate = useNavigate()
@@ -56,8 +56,7 @@ const NewAssetPage: FC = () => {
         </div> */}
         <div className='mt-4 flex w-full justify-center text-center'>
           <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
-            <span>Adicionar</span>
-            <GoPlus className='ml-1 mt-1 text-base' />
+            <span>Adicionar</span> <FaPlus className='text-sm sm:ml-1 sm:mt-[5px]' />
           </button>
         </div>
       </form>

@@ -1,7 +1,7 @@
 import { InvestmentsContextProvider } from '../Context/InvestmentsContext'
 import { NavLink, Outlet } from 'react-router-dom'
 import ErrorBoundary from '../ErrorBoundary'
-import { GoPlus } from 'react-icons/go'
+import { FaPlus } from 'react-icons/fa'
 import { FC, Suspense } from 'react'
 import TopBar from './TopBar'
 import { FaRegChartBar } from 'react-icons/fa'
@@ -25,7 +25,7 @@ const InvestmentsLayout: FC = () => {
         end={[
           <NavLink to={'/investments/new-asset'} id='submenu-link' className={({ isActive }) => (isActive ? 'hidden ' : '') + 'flex rounded border-2 border-white p-1.5 sm:py-1.5 sm:px-3'}>
             <span className='hidden sm:block'>Adicionar</span>
-            <GoPlus className='text-base sm:ml-1 sm:mt-[2.4px]' />
+            <FaPlus className='text-sm sm:ml-1 sm:mt-[2.5px]' />
           </NavLink>
         ]}
       />

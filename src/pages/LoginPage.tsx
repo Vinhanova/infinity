@@ -32,7 +32,7 @@ const LoginPage: FC = () => {
     <>
       <div className='flex min-h-screen flex-col items-center justify-items-center font-mono'>
         <div className='mt-4 flex min-h-[60vh] w-full flex-col-reverse justify-center sm:flex-row sm:items-center sm:px-16'>
-          <div className='flex h-full flex-col justify-items-center gap-y-6 p-4 text-center sm:m-0 sm:w-5/12 sm:p-0 sm:pl-24 sm:text-start'>
+          <div className='flex h-full flex-col justify-items-center gap-y-6 p-4 text-center sm:m-0 sm:w-5/12 sm:p-0 sm:text-start lg:pl-4 xl:pl-24'>
             <h1 className='text-2xl sm:text-5xl'>
               Projeto <IoInfiniteSharp className='mb-1 inline text-3xl sm:mb-2 sm:text-5xl' /> Infinity
             </h1>
@@ -51,53 +51,49 @@ const LoginPage: FC = () => {
           </div>
         </div>
         <div
-          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-center gap-y-8 bg-[#1d1e20] p-8
-          sm:mx-12 sm:h-[40vh] sm:min-h-[0vh] sm:grid-cols-3 sm:grid-rows-1 sm:items-center sm:gap-y-8 sm:p-0
-          [&_div]:h-[20vh] [&_div]:space-y-4
-          [&_h4]:sm:text-xl [&_div]:lg:mx-12 [&_div]:xl:mx-20
-          [&_h4]:text-base
-          [&_h5]:whitespace-normal [&_h5]:text-sm [&_h5]:font-light [&_h5]:sm:text-base'
+          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-center gap-y-2 bg-[#1d1e20] p-8
+          sm:h-[40vh] sm:min-h-[0vh] sm:grid-cols-3 sm:grid-rows-1 sm:items-center sm:gap-y-8 sm:p-0 sm:px-16'
         >
-          <div>
-            <FaFolderTree className='sm:text-3xl' />
-            <h4>Tudo na mesma aplicação</h4>
-            <h5>Adicione múltiplos tipos de ativos no mesmo portfólio, como ações e criptomoedas</h5>
+          <div className='h-[20vh] space-y-4 lg:mx-4 xl:mx-20'>
+            <FaFolderTree className='min-w-auto min-h-[30px] sm:text-2xl xl:text-3xl' />
+            <h4 className='text-base sm:text-lg xl:text-xl'>Tudo na mesma aplicação</h4>
+            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Adicione múltiplos tipos de ativos no mesmo Portfólio, como Ações e Criptomoedas</h5>
           </div>
-          <div>
-            <MdAccessTime className='-ml-1 text-xl sm:text-4xl' />
-            <h4>Atualizado em tempo real</h4>
-            <h5>Valor de Ações e Criptomoedas atualizado ao segundo</h5>
+          <div className='h-[20vh] space-y-4 lg:mx-4 xl:mx-20'>
+            <MdAccessTime className='min-w-auto -ml-1 min-h-[30px] text-xl sm:text-3xl xl:text-4xl' />
+            <h4 className='text-base sm:text-lg xl:text-xl'>Atualizado em tempo real</h4>
+            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Valor de Ações e Criptomoedas atualizado ao segundo</h5>
           </div>
-          <div>
-            <FaChartPie className='-ml-0.5 text-xl sm:text-3xl' />
-            <h4>Estatísticas</h4>
-            <h5>Gráficos representativos da distribuição do seu portfólio</h5>
+          <div className='h-[20vh] space-y-4 lg:mx-4 xl:mx-20'>
+            <FaChartPie className='min-w-auto -ml-0.5 min-h-[30px] text-xl sm:text-2xl xl:text-3xl' />
+            <h4 className='text-base sm:text-lg xl:text-xl'>Estatísticas</h4>
+            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Gráficos representativos da distribuição do seu Portfólio</h5>
           </div>
         </div>
         <div className='my-8 flex h-[40vh] w-full justify-center'>
-          <div id='default-carousel' className='relative flex h-full w-7/12 justify-center' data-carousel='slide'>
+          <div id='default-carousel' className='relative flex h-full w-full justify-center sm:w-7/12' data-carousel='slide'>
             {/* <!-- Carousel wrapper --> */}
             <div className='h-10/12 relative w-3/4 overflow-hidden rounded-lg'>
               {/* <!-- Item 1 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='./crypto-vs-stocks-piechart.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 2 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='./new-asset.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 3 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='./crypto-stocks-piechart.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 4 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='./list.png' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 5 --> */}
-              <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
-              </div>
+              {/* <div className='hidden duration-700 ease-in-out' data-carousel-item>
+                <img src='./ex1.png' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
+              </div> */}
             </div>
             {/* <!-- Slider indicators --> */}
             <div className='absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse'>
@@ -105,7 +101,7 @@ const LoginPage: FC = () => {
               <button type='button' className='h-3 w-3 rounded-full' aria-current='false' aria-label='Slide 2' data-carousel-slide-to='1'></button>
               <button type='button' className='h-3 w-3 rounded-full' aria-current='false' aria-label='Slide 3' data-carousel-slide-to='2'></button>
               <button type='button' className='h-3 w-3 rounded-full' aria-current='false' aria-label='Slide 4' data-carousel-slide-to='3'></button>
-              <button type='button' className='h-3 w-3 rounded-full' aria-current='false' aria-label='Slide 5' data-carousel-slide-to='4'></button>
+              {/*               <button type='button' className='h-3 w-3 rounded-full' aria-current='false' aria-label='Slide 5' data-carousel-slide-to='4'></button> */}{' '}
             </div>
             {/* <!-- Slider controls --> */}
             <button type='button' className='group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none' data-carousel-prev>
@@ -126,7 +122,7 @@ const LoginPage: FC = () => {
             </button>
           </div>
         </div>
-        <div className='mx-12 flex h-[10vh] w-full items-center justify-center bg-[#1d1e20]'>
+        <div className='mx-12 flex h-[10vh] w-full items-center justify-center bg-[#1d1e20] text-sm sm:text-base'>
           <h5>
             Desenvolvido por{' '}
             <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='text-custom-tealblue-hl underline underline-offset-4'>
