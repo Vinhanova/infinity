@@ -76,19 +76,19 @@ const LoginPage: FC = () => {
             <div className='h-10/12 relative w-3/4 overflow-hidden rounded-lg'>
               {/* <!-- Item 1 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='./crypto-vs-stocks-piechart.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='../crypto-vs-stocks-piechart.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 2 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='./new-asset.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='../new-asset.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 3 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='./crypto-stocks-piechart.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='../crypto-stocks-piechart.png' className='absolute top-1/2 left-1/2 block w-10/12 -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 4 --> */}
               <div className='hidden duration-700 ease-in-out' data-carousel-item>
-                <img src='./list.png' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
+                <img src='../list.png' className='absolute top-1/2 left-1/2 block w-full -translate-x-1/2 -translate-y-1/2' alt='...' />
               </div>
               {/* <!-- Item 5 --> */}
               {/* <div className='hidden duration-700 ease-in-out' data-carousel-item>
