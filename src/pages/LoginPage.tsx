@@ -5,8 +5,9 @@ import GoogleButton from 'react-google-button'
 import { IoInfiniteSharp } from 'react-icons/io5'
 import { FaChartPie, FaFolderTree } from 'react-icons/fa6'
 import { MdAccessTime } from 'react-icons/md'
-import { FaLinkedin } from 'react-icons/fa'
+import { FaChevronRight, FaLinkedin } from 'react-icons/fa'
 import { Carousel } from 'flowbite-react'
+import { FaChevronLeft } from 'react-icons/fa'
 
 const LoginPage: FC = () => {
   const { googleSignIn, user } = useUserAuth()
@@ -42,6 +43,7 @@ const LoginPage: FC = () => {
               Desenvolvido por{' '}
               <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='text-custom-tealblue-hl underline underline-offset-4'>
                 Tiago Vinhanova
+                <FaLinkedin className='ml-2 inline text-custom-tealblue-hl' />
               </a>
             </h3>
             <GoogleButton onClick={handleGoogleSignIn} className='scale-90 self-center sm:scale-100 sm:self-start' />
@@ -71,7 +73,7 @@ const LoginPage: FC = () => {
           </div>
         </div>
         <div className='my-8 flex h-[40vh] w-full justify-center'>
-          <Carousel className='relative h-full w-full justify-center xs:w-8/12 sm:w-6/12 2xl:w-4/12'>
+          <Carousel pauseOnHover className='relative h-full w-full justify-center xs:w-8/12 sm:w-6/12 2xl:w-4/12' leftControl={<FaChevronLeft className='absolute -left-12 text-2xl text-custom-tealblue-hl' />} rightControl={<FaChevronRight className='absolute -right-12 text-2xl text-custom-tealblue-hl' />}>
             <img src='../crypto-vs-stocks-piechart.png' alt='...' />
             <img src='../new-asset.png' alt='...' />
             <img src='../crypto-stocks-piechart.png' alt='...' />
