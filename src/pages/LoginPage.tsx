@@ -72,8 +72,8 @@ const LoginPage: FC = () => {
             <h5 className='whitespace-normal text-sm font-light xl:text-base'>Gráficos representativos da distribuição do seu Portfólio</h5>
           </div>
         </div>
-        <div className='my-8 flex h-[40vh] w-full justify-center'>
-          <Carousel pauseOnHover className='relative h-full w-full justify-center xs:w-8/12 sm:w-6/12 2xl:w-4/12' leftControl={<FaChevronLeft className='absolute -left-12 text-2xl text-custom-tealblue-hl' />} rightControl={<FaChevronRight className='absolute -right-12 text-2xl text-custom-tealblue-hl' />}>
+        <div className='flex h-[40vh] w-full justify-center p-8'>
+          <Carousel pauseOnHover className='h-full w-full justify-center xs:w-8/12 sm:w-6/12 2xl:w-4/12' leftControl={<FaChevronLeft className='relative -left-10 text-2xl text-custom-tealblue-hl sm:-left-20' />} rightControl={<FaChevronRight className='relative -right-10 text-2xl text-custom-tealblue-hl sm:-right-20' />}>
             <img src='../crypto-vs-stocks-piechart.png' alt='...' />
             <img src='../new-asset.png' alt='...' />
             <img src='../crypto-stocks-piechart.png' alt='...' />
