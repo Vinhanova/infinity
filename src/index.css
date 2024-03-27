@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-custom-jet text-white;
+  @apply bg-custom-jet font-sans tracking-wide text-white;
 }
 
 @layer base {

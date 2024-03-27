@@ -17,7 +17,8 @@ module.exports = {
         custom: {
           tealblue: '#007991',
           'tealblue-hl': '#00aacc', //highlight
-          jet: '#2A2B2E'
+          jet: '#2A2B2E',
+          'dark-jet': '#1d1e20'
         }
       }
     }

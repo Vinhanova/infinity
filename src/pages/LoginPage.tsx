@@ -31,13 +31,13 @@ const LoginPage: FC = () => {
 
   return (
     <>
-      <div className='flex min-h-screen flex-col items-center justify-items-center font-mono'>
+      <div className='flex min-h-screen flex-col items-center justify-items-center'>
         <div className='mt-4 flex w-full flex-col-reverse justify-center sm:flex-row sm:items-center sm:px-8 md:px-16 portrait:min-h-[40vh] landscape:min-h-[65vh]'>
           <div className='flex h-full flex-col justify-items-center gap-y-6 p-4 text-center sm:m-0 sm:w-7/12 sm:p-0 sm:text-start lg:w-5/12 lg:pl-4 xl:pl-12 2xl:pl-24'>
-            <h1 className='text-2xl sm:text-[1.7rem] lg:text-3xl xl:text-4xl 2xl:text-5xl'>
+            <h1 className='font-mono text-2xl sm:text-[1.7rem] lg:text-3xl xl:text-4xl 2xl:text-5xl'>
               Projeto <IoInfiniteSharp className='mb-1 inline text-3xl sm:mb-2 sm:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl' /> Infinity
             </h1>
-            <h3 className='break-words text-sm lg:text-base'>
+            <h3 className='break-words text-sm lg:text-base xl:text-[18px]'>
               Aplicação para gestão de investimentos
               <br />
               Desenvolvido por{' '}
@@ -53,7 +53,7 @@ const LoginPage: FC = () => {
           </div>
         </div>
         <div
-          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-4 overflow-hidden bg-[#1d1e20] p-8 sm:min-h-[40vh] md:px-16
+          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-4 overflow-hidden bg-custom-dark-jet p-8 sm:min-h-[40vh] md:px-16
           lg:h-[40vh] lg:min-h-[0vh] lg:grid-cols-3 lg:grid-rows-1 lg:items-center lg:justify-items-center lg:gap-y-8 lg:p-0 lg:px-16'
         >
           <div className='space-y-4 lg:mx-4 xl:mx-12 2xl:mx-20'>
@@ -80,10 +80,10 @@ const LoginPage: FC = () => {
             <img src='../list.png' alt='List of all Assets with 24h percent change Example' />
           </Carousel>
         </div>
-        <div className='mx-12 flex h-[10vh] w-full items-center justify-center bg-[#1d1e20] text-sm sm:text-base'>
+        <div className='mx-12 flex h-[10vh] w-full items-center justify-center bg-custom-dark-jet text-sm sm:text-base'>
           <h5>
             Desenvolvido por{' '}
-            <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='text-custom-tealblue-hl underline underline-offset-4'>
+            <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='whitespace-nowrap text-custom-tealblue-hl underline underline-offset-4'>
               Tiago Vinhanova
               <FaLinkedin className='ml-2 inline text-custom-tealblue-hl' />
             </a>
