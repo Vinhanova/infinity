@@ -37,7 +37,7 @@ export type AssetDic = {
 export type Asset = {
   name: string
   quantity: number
-  type: string
+  type: 'stock' | 'cryptocurrency'
   state: string
 }
 

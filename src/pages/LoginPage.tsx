@@ -53,23 +53,23 @@ const LoginPage: FC = () => {
           </div>
         </div>
         <div
-          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-4 overflow-hidden bg-custom-dark-jet p-8 sm:min-h-[40vh] md:px-16
-          lg:h-[40vh] lg:min-h-[0vh] lg:grid-cols-3 lg:grid-rows-1 lg:items-center lg:justify-items-center lg:gap-y-8 lg:p-0 lg:px-16'
+          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-8 overflow-hidden bg-custom-dark-jet p-8 sm:min-h-[40vh] md:px-16
+          lg:h-[40vh] lg:min-h-[0vh] lg:grid-cols-3 lg:grid-rows-1 lg:items-center lg:justify-items-center lg:p-0 lg:px-16'
         >
           <div className='space-y-4 lg:mx-4 xl:mx-12 2xl:mx-20'>
             <FaFolderTree className='h-[30px] w-auto sm:text-2xl xl:text-3xl' />
             <h4 className='text-base lg:text-lg xl:text-xl'>Tudo na mesma aplicação</h4>
-            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Adicione múltiplos tipos de ativos no mesmo Portfólio, como Ações e Criptomoedas</h5>
+            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Adicione múltiplas categorias de ativos no mesmo Portfólio, como Ações e Criptomoedas</h5>
           </div>
           <div className='space-y-4 lg:mx-4 xl:mx-12 2xl:mx-20'>
             <MdAccessTime className='-ml-1 h-[30px] w-auto scale-110 text-xl sm:text-3xl xl:text-4xl' />
             <h4 className='text-base lg:text-lg xl:text-xl'>Atualizado em tempo real</h4>
-            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Valor de Ações e Criptomoedas atualizado ao segundo</h5>
+            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Acompanhe o valor de Ações e Criptomoedas atualizado ao segundo</h5>
           </div>
           <div className='space-y-4 lg:mx-4 xl:mx-12 2xl:mx-20'>
             <FaChartPie className='-ml-0.5 h-[30px] w-auto text-xl sm:text-2xl xl:text-3xl' />
             <h4 className='text-base lg:text-lg xl:text-xl'>Estatísticas</h4>
-            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Gráficos representativos da distribuição do seu Portfólio</h5>
+            <h5 className='whitespace-normal text-sm font-light xl:text-base'>Veja visualmente a distribuição do seu Portfólio nas diferentes categorias: Ações vs Criptomoedas</h5>
           </div>
         </div>
         <div className='flex w-full justify-center p-8 portrait:h-[30vh] landscape:h-[40vh]'>
