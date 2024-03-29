@@ -39,7 +39,7 @@ const NewAssetPage: FC = () => {
 
   return (
     <div className='my-8 flex flex-col items-center justify-center text-center sm:m-12'>
-      <form className='flex w-8/12 flex-col gap-4 text-left md:w-6/12 lg:w-4/12 [&_p]:mb-1' onSubmit={addAsset}>
+      <form className='flex w-9/12 flex-col gap-4 text-left md:w-6/12 lg:w-4/12 [&_p]:mb-1' onSubmit={addAsset}>
         <div>
           <p>Tipo:</p>
           <input checked={asset.type === 'stock'} id='stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-auto text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
@@ -68,7 +68,8 @@ const NewAssetPage: FC = () => {
         </div> */}
         <div className='mt-4 flex w-full justify-center text-center'>
           <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
-            <span>Adicionar</span> <FaPlus className='text-sm sm:ml-1 sm:mt-[5px]' />
+            <span>Adicionar</span>
+            <FaPlus className='ml-1 mt-[5px] text-sm' />
           </button>
         </div>
       </form>
