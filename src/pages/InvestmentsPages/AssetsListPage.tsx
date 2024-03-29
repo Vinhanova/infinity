@@ -1,6 +1,10 @@
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { toFixed } from '../../utils/utils'
 import { Link, useLocation } from 'react-router-dom'
+import { RiDeleteBin6Line } from 'react-icons/ri'
+import { SlOptions } from 'react-icons/sl'
+import { MdEdit } from 'react-icons/md'
+import { Dropdown } from 'flowbite-react'
 import { FC } from 'react'
 import _ from 'underscore'
 
@@ -98,6 +102,7 @@ const InvestmentsPage: FC = () => {
                             </a>
                           </div>
                         </th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -121,6 +126,32 @@ const InvestmentsPage: FC = () => {
                             </td>
                             <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : 'A carregar...'}</td>
                             <td className='hidden px-[3px] py-[7px] text-right text-gray-200 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c, 2)} €</td>
+                            <td>
+                              <Dropdown
+                                label=''
+                                renderTrigger={() => (
+                                  <span>
+                                    <SlOptions className='mx-2 cursor-pointer sm:text-lg' />
+                                  </span>
+                                )}
+                                theme={{
+                                  content: 'py-1 focus:outline-none bg-custom-dark-jet rounded-[0.15rem]',
+                                  floating: {
+                                    item: {
+                                      base: 'flex w-full cursor-pointer items-center justify-start px-8 pl-4 py-2 text-sm text-white hover:text-custom-tealblue-hl focus:outline-none'
+                                    },
+                                    style: {
+                                      auto: 'border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white'
+                                    }
+                                  }
+                                }}
+                              >
+                                {/* <Dropdown.Header>Example</Dropdown.Header> */}
+                                <Dropdown.Item icon={MdEdit}>Editar</Dropdown.Item>
+                                <Dropdown.Item icon={RiDeleteBin6Line}>Remover</Dropdown.Item>
+                                {/* <Dropdown.Divider /> */}
+                              </Dropdown>
+                            </td>
                           </tr>
                         )
                       })}
@@ -135,6 +166,7 @@ const InvestmentsPage: FC = () => {
                         <td className='hidden sm:table-cell'></td>
                         <td className='hidden sm:table-cell'></td>
                         <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(totalEUR, 2)} €</td>
+                        <td></td>
                       </tr>
                     </tfoot>
                   </table>
