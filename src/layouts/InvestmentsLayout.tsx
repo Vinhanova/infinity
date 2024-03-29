@@ -23,7 +23,7 @@ const InvestmentsLayout: FC = () => {
           </NavLink>
         ]}
         end={[
-          <NavLink to={'/investments/new-asset'} id='submenu-link' className={({ isActive }) => (isActive ? 'hidden ' : '') + 'flex rounded border-2 border-white p-1.5 sm:py-1.5 sm:px-3'}>
+          <NavLink to={'/investments/new-asset'} id='submenu-link' className={({ isActive }) => (isActive ? 'hidden ' : '') + 'flex rounded-[0.15rem] border-2 border-white p-1.5 sm:py-1.5 sm:px-3'}>
             <span className='hidden sm:block'>Adicionar</span>
             <FaPlus className='text-sm sm:ml-1 sm:mt-[2.5px]' />
           </NavLink>

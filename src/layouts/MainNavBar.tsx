@@ -37,7 +37,7 @@ const MainNavBar: FC = () => {
           <FiSettings />
         </NavLink>
         <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-jet ' : '') + 'h-8 w-8 cursor-pointer'}>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded border-2 xl:hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2 xl:hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
         </NavLink>
       </div>
 
