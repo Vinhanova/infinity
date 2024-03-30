@@ -34,7 +34,7 @@ const InvestmentsPage: FC = () => {
   } else
     return (
       <>
-        <div className='flex flex-col items-center space-x-3'>
+        <div className='flex w-full flex-col items-center space-x-3'>
           <div className='mt-4 mb-2 w-11/12 text-center sm:mb-0 lg:mt-8 xl:mb-6 xl:w-3/4'>
             {listState === 'pending' && <h1 className='mb-8'>A carregar...</h1>}
 
@@ -155,7 +155,9 @@ const InvestmentsPage: FC = () => {
                                 }}
                               >
                                 {/* <Dropdown.Header>Example</Dropdown.Header> */}
-                                <Dropdown.Item icon={MdEdit}>Editar</Dropdown.Item>
+                                <Dropdown.Item icon={MdEdit} onClick={() => alert('edit')}>
+                                  Editar
+                                </Dropdown.Item>
                                 <Dropdown.Item icon={RiDeleteBin6Line} onClick={() => deleteHandler(stock.id)}>
                                   Remover
                                 </Dropdown.Item>
