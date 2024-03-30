@@ -1,16 +1,24 @@
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { toFixed } from '../../utils/utils'
-import { Link, useLocation } from 'react-router-dom'
+import deleteAssetFS from '../../utils/useDeleteAsset'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { SlOptions } from 'react-icons/sl'
 import { MdEdit } from 'react-icons/md'
 import { Dropdown } from 'flowbite-react'
+import { useUserAuth } from '../../Context/AuthContext'
 import { FC } from 'react'
 import _ from 'underscore'
 
 const InvestmentsPage: FC = () => {
   const { purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, userTickersData, exchangeRateInfoData, totalUSD, totalEUR } = useInvestmentsContext()
+  const { user } = useUserAuth()
   const location = useLocation()
+  const navigate = useNavigate()
+
+  function deleteHandler(assetId: string): void {
+    deleteAssetFS('stocks', user.uid, assetId).then(() => navigate(0))
+  }
 
   if (location.state?.info === 'refresh') {
     window.history.replaceState({}, '')
@@ -148,7 +156,9 @@ const InvestmentsPage: FC = () => {
                               >
                                 {/* <Dropdown.Header>Example</Dropdown.Header> */}
                                 <Dropdown.Item icon={MdEdit}>Editar</Dropdown.Item>
-                                <Dropdown.Item icon={RiDeleteBin6Line}>Remover</Dropdown.Item>
+                                <Dropdown.Item icon={RiDeleteBin6Line} onClick={() => deleteHandler(stock.id)}>
+                                  Remover
+                                </Dropdown.Item>
                                 {/* <Dropdown.Divider /> */}
                               </Dropdown>
                             </td>
