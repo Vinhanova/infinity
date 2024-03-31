@@ -35,6 +35,18 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const [stocksList, setStocksList] = useState<any>({})
   const [cryptoList, setCryptoList] = useState<any>({})
 
+  const [editAssetModal, setEditAssetModal] = useState<boolean>(false)
+  const [assetInfo, setAssetInfo] = useState<any>({})
+
+  function openEditAssetModal(assetId: string) {
+    setAssetInfo(userTickersData[assetId])
+    setEditAssetModal(true)
+  }
+
+  function closeEditAssetModal() {
+    setEditAssetModal(false)
+  }
+
   useEffect(() => {
     setTickers({ state: userTickersState, data: userTickersData, error: userTickersError })
   }, [userTickersState])
@@ -105,7 +117,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
     })
   }, [stocksInfoData])
 
-  return <InvestmentsContext.Provider value={{ stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalStocks, totalCryptocurrencies, totalUSD, totalEUR }}>{children}</InvestmentsContext.Provider>
+  return <InvestmentsContext.Provider value={{ stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, stocksInfoData, userTickersData, exchangeRateInfoData, totalStocks, totalCryptocurrencies, totalUSD, totalEUR, editAssetModal, openEditAssetModal, closeEditAssetModal, oldAssetInfo: assetInfo }}>{children}</InvestmentsContext.Provider>
 }
 
 export const useInvestmentsContext = () => {

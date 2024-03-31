@@ -7,6 +7,7 @@ import { FC, Suspense, useState } from 'react'
 import TopBar from './TopBar'
 import { FaRegChartBar } from 'react-icons/fa'
 import { IoListSharp } from 'react-icons/io5'
+import EditAssetModal from '../pages/InvestmentsPages/EditAssetModal'
 
 const InvestmentsLayout: FC = () => {
   const [addAssetModal, setAddAssetModal] = useState(false)
@@ -52,6 +53,7 @@ const InvestmentsLayout: FC = () => {
             <InvestmentsContextProvider>
               <Outlet />
               <AddAssetModal addAssetModal={addAssetModal} setAddAssetModal={setAddAssetModal} />
+              <EditAssetModal setAddAssetModal={setAddAssetModal} />
             </InvestmentsContextProvider>
           </div>
         </Suspense>
