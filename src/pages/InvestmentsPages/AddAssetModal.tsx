@@ -1,6 +1,5 @@
 import { useUserAuth } from '../../Context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
 import { Asset } from '../../utils/types'
 import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
@@ -15,8 +14,6 @@ type Props = {
 
 const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   const { closeEditAssetModal } = useInvestmentsContext()
-
-  const navigate = useNavigate()
   const { user } = useUserAuth()
   const [ticker, setTicker] = useState<string>('')
   const [placeholder, setPlaceholder] = useState<{ symbol: { stock: string; cryptocurrency: string }; name: { stock: string; cryptocurrency: string } }>({
@@ -63,12 +60,12 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
       <form className='flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={addAsset}>
         <div>
           <p>Tipo:</p>
-          <input checked={asset.type === 'stock'} id='stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-auto text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
-          <label htmlFor='stock-radio' className='mr-8 cursor-auto focus:bg-transparent'>
+          <input checked={asset.type === 'stock'} id='add-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
+          <label htmlFor='add-stock-radio' className='mr-8 cursor-pointer focus:bg-transparent'>
             Ações
           </label>
-          <input checked={asset.type === 'cryptocurrency'} id='cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-auto text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
-          <label htmlFor='cryptocurrency-radio' className='cursor-auto'>
+          <input checked={asset.type === 'cryptocurrency'} id='add-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
+          <label htmlFor='add-cryptocurrency-radio' className='cursor-pointer'>
             Criptomoedas
           </label>
         </div>

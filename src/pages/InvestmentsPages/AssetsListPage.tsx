@@ -16,7 +16,9 @@ const InvestmentsPage: FC = () => {
   const navigate = useNavigate()
 
   function deleteHandler(assetId: string): void {
-    deleteAssetFS('stocks', user.uid, assetId).then(() => navigate(0))
+    if (confirm(`Deseja remover ${userTickersData![assetId].name} permanentemente?`)) {
+      deleteAssetFS('stocks', user.uid, assetId).then(() => navigate(0))
+    }
   }
 
   return (

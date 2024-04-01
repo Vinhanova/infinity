@@ -2,7 +2,7 @@ import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'r
 import { useGetAllTickers, useGetTicker } from '../utils/useGetTickers'
 import { useDocFirestore } from '../utils/useGetFirestore'
 import { useYFWebSocket } from '../utils/useYFWebSocket'
-import { Request, AssetDic } from '../utils/types'
+import { Request, AssetDic, Asset } from '../utils/types'
 import { findKey, toFixed } from '../utils/utils'
 import { useUserAuth } from './AuthContext'
 import _ from 'underscore'
@@ -36,10 +36,10 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
   const [cryptoList, setCryptoList] = useState<any>({})
 
   const [editAssetModal, setEditAssetModal] = useState<boolean>(false)
-  const [assetInfo, setAssetInfo] = useState<any>({})
+  const [assetInfo, setAssetInfo] = useState<Asset>()
 
   function openEditAssetModal(assetId: string) {
-    setAssetInfo(userTickersData[assetId])
+    setAssetInfo({ ...userTickersData[assetId], symbol: assetId })
     setEditAssetModal(true)
   }
 

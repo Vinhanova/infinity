@@ -1,11 +1,11 @@
 import { useUserAuth } from '../../Context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
 import { Asset } from '../../utils/types'
 import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { MdClose, MdEdit } from 'react-icons/md'
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import _ from 'underscore'
 
 type Props = {
   setAddAssetModal: Function
@@ -13,32 +13,41 @@ type Props = {
 
 const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
   const { editAssetModal, closeEditAssetModal, oldAssetInfo } = useInvestmentsContext()
-  const navigate = useNavigate()
   const { user } = useUserAuth()
-  const [ticker, setTicker] = useState<string>('')
-  const [placeholder, setPlaceholder] = useState<{ symbol: { stock: string; cryptocurrency: string }; name: { stock: string; cryptocurrency: string } }>({
-    symbol: {
-      stock: 'Exemplo: AAPL',
-      cryptocurrency: 'Exemplo: BTC-USD'
-    },
-    name: {
-      stock: 'Exemplo: Apple Inc.',
-      cryptocurrency: 'Exemplo: Bitcoin USD'
-    }
+  const [editedSymbol, setEditedSymbol] = useState<string>('')
+  const [placeholder, setPlaceholder] = useState<{ symbol: string; name: string }>({
+    symbol: 'Anterior: (A carregar...)',
+    name: 'Anterior: (A carregar...)'
   })
 
-  const [asset, setAsset] = useState<Asset>({
-    name: '',
+  const [editedAsset, setEditedAsset] = useState<Asset>({
+    name: '(A carregar...)',
     quantity: 1,
     type: 'stock',
     state: 'purchased'
   })
 
+  useEffect(() => {
+    if (_.isEmpty(oldAssetInfo)) return
+
+    setEditedSymbol(oldAssetInfo.symbol)
+    setEditedAsset({
+      name: oldAssetInfo.name,
+      quantity: oldAssetInfo.quantity,
+      type: oldAssetInfo.type,
+      state: oldAssetInfo.state
+    })
+    setPlaceholder({
+      symbol: 'Anterior: ' + oldAssetInfo.symbol,
+      name: 'Anterior: ' + oldAssetInfo.name
+    })
+  }, [oldAssetInfo])
+
   const editAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    await setDoc(doc(db, 'stocks', user.uid), { [ticker.toUpperCase()]: asset }, { merge: true })
+    await setDoc(doc(db, 'stocks', user.uid), { [editedSymbol.toUpperCase()]: editedAsset }, { merge: true })
       .then(res => {
-        //window.location.reload()
+        window.location.reload()
       })
       .catch(err => alert(err))
   }
@@ -55,26 +64,26 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
       <form className='flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={editAsset}>
         <div>
           <p>Tipo:</p>
-          <input checked={asset.type === 'stock'} id='stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-auto text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
-          <label htmlFor='stock-radio' className='mr-8 cursor-auto focus:bg-transparent'>
+          <input checked={editedAsset.type === 'stock'} id='edit-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
+          <label htmlFor='edit-stock-radio' className='mr-8 cursor-pointer focus:bg-transparent'>
             Ações
           </label>
-          <input checked={asset.type === 'cryptocurrency'} id='cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-auto text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
-          <label htmlFor='cryptocurrency-radio' className='cursor-auto'>
+          <input checked={editedAsset.type === 'cryptocurrency'} id='edit-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
+          <label htmlFor='edit-cryptocurrency-radio' className='cursor-pointer'>
             Criptomoedas
           </label>
         </div>
         <div>
           <p>Símbolo</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue' placeholder={placeholder.symbol[asset.type]} value={ticker} onChange={e => setTicker(e.target.value)} required />
+          <input className='w-full rounded py-1 px-2 text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value)} required />
         </div>
         <div>
           <p>Nome</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue' placeholder={placeholder.name[asset.type]} value={oldAssetInfo.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />
+          <input className='w-full rounded py-1 px-2 text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue' placeholder={placeholder.name} value={editedAsset.name} onChange={e => setEditedAsset({ ...editedAsset, name: e.target.value })} required />
         </div>
         <div>
           <p>Quantidade</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet focus:ring-2 focus:ring-custom-tealblue' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' min={asset.type === 'stock' ? 1 : 0.000000001} step={asset.type === 'stock' ? 1 : 0.000000001} required />
+          <input className='w-full rounded py-1 px-2 text-custom-jet focus:ring-2 focus:ring-custom-tealblue' value={editedAsset.quantity} type='number' onChange={e => setEditedAsset({ ...editedAsset, quantity: +e.target.value })} inputMode='numeric' min={editedAsset.type === 'stock' ? 1 : 0.000000001} step={editedAsset.type === 'stock' ? 1 : 0.000000001} required />
         </div>
         {/* <div>
           <p>Watchlist</p>
