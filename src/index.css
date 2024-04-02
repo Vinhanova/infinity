@@ -21,7 +21,7 @@ body {
     @apply border-custom-tealblue-hl text-custom-tealblue-hl;
   }
 
-  // overwrites min-h-full on pc
+  /* overwrites min-h-full on pc */
   #app-layout {
     @apply min-h-screen;
   }
