@@ -49,7 +49,7 @@ const InvestmentsLayout: FC = () => {
               </a>
             ]}
           />
-          <div className='relative flex flex-1'>
+          <div className='relative flex min-h-[calc((100vh-58px))]'>
             <InvestmentsContextProvider>
               <Outlet />
               <AddAssetModal addAssetModal={addAssetModal} setAddAssetModal={setAddAssetModal} />
