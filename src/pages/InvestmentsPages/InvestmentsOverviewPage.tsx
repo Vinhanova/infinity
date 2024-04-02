@@ -9,20 +9,14 @@ const InvestmentsOverviewPage: FC = () => {
   const { stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, totalUSD, totalEUR, totalStocks, totalCryptocurrencies, exchangeRateInfoData, userTickersData } = useInvestmentsContext()
 
   return (
-    <div className='my-4 w-full text-center sm:my-8'>
-      {listState === 'pending' && <h1 className='mb-8'>A carregar...</h1>}
+    <div className=' w-full text-center'>
+      {listState === 'pending' && <h1 className='my-8'>A carregar...</h1>}
 
       {listState === 'error' &&
-        ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
+        ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-8 text-red-500'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
           (stocksInfoError === 'No tickers found' && (
-            <div className='mb-8'>
-              <h3>
-                Não foram encontrados ativos, pode adicionar novos ativos{' '}
-                <Link to='/investments/new-asset' className='underline'>
-                  aqui
-                </Link>
-                .
-              </h3>
+            <div className='my-8'>
+              <h3>Não foram encontrados ativos, experimente adicionar um primeiro</h3>
             </div>
           )))}
 
@@ -109,7 +103,7 @@ const InvestmentsOverviewPage: FC = () => {
               })}
               total={totalEUR}
             />
-            <h3>Cotação USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}</h3>
+            <h3 className='my-8'>Cotação USD/EUR: {exchangeRateInfoData?.c.toFixed(3)}</h3>
           </div>
         ))}
     </div>

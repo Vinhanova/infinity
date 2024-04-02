@@ -25,19 +25,13 @@ const InvestmentsPage: FC = () => {
     <>
       <div className='flex w-full flex-col items-center space-x-3'>
         <div className='mt-4 mb-2 w-11/12 text-center sm:mb-0 lg:mt-8 xl:mb-6 xl:w-3/4'>
-          {listState === 'pending' && <h1 className='mb-8'>A carregar...</h1>}
+          {listState === 'pending' && <h1 className='my-4 sm:my-8 lg:my-0'>A carregar...</h1>}
 
           {listState === 'error' &&
-            ((initialTickersInfoError?.response?.status === 429 && <h1 className='mb-8 text-red-500'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
+            ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-4 text-red-500 lg:my-4'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
               (stocksInfoError === 'No tickers found' && (
-                <div className='mb-8'>
-                  <h3>
-                    Não foram encontrados ativos, pode adicionar novos ativos{' '}
-                    <Link to='/investments/new-asset' className='underline'>
-                      aqui
-                    </Link>
-                    .
-                  </h3>
+                <div className='my-4 lg:my-0'>
+                  <h3>Não foram encontrados ativos, experimente adicionar um primeiro</h3>
                 </div>
               )))}
 

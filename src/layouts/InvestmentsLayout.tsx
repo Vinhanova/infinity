@@ -49,7 +49,7 @@ const InvestmentsLayout: FC = () => {
               </a>
             ]}
           />
-          <div className='relative flex h-full'>
+          <div className='relative flex flex-1'>
             <InvestmentsContextProvider>
               <Outlet />
               <AddAssetModal addAssetModal={addAssetModal} setAddAssetModal={setAddAssetModal} />
