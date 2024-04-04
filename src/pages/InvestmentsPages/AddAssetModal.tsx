@@ -1,11 +1,12 @@
+import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { useUserAuth } from '../../Context/AuthContext'
+import { IoIosArrowDropright } from 'react-icons/io'
 import { doc, setDoc } from 'firebase/firestore'
 import { Asset } from '../../utils/types'
 import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { FaPlus } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
-import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 
 type Props = {
   addAssetModal: boolean
@@ -47,62 +48,110 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
     if (addAssetModal) closeEditAssetModal()
   }, [addAssetModal])
 
+  const [initialBorderPosition, setInitialBorderPosition] = useState<{ md: Number; lg: Number }>({ md: 225, lg: 300 }) // Initial position of the border
+  const [borderPosition, setBorderPosition] = useState<any>(initialBorderPosition) // Initial position of the border
+
+  const handleMouseDown = (e: any) => {
+    const startX = e.clientX
+    const startWidth = parseInt(borderPosition, 10) // Gets the number
+
+    const handleMouseMove = (e: any) => {
+      const newWidth = startWidth - e.clientX + startX
+
+      // Minimum
+      if ((window.innerWidth >= 768 && window.innerWidth < 1024 && newWidth < window.innerWidth * 0.3) || (window.innerWidth >= 1024 && newWidth < initialBorderPosition.lg)) return
+
+      // Maximum
+      if (
+        (window.innerWidth >= 1670 && newWidth > window.innerWidth * 0.35) || //
+        (window.innerWidth < 1670 && window.innerWidth >= 1550 && newWidth > 300 + window.innerWidth * 0.1) ||
+        (window.innerWidth < 1550 && window.innerWidth >= 1420 && newWidth > 300 + window.innerWidth * 0.08) ||
+        (window.innerWidth < 1420 && window.innerWidth >= 1400 && newWidth > 300 + window.innerWidth * 0.05) ||
+        (window.innerWidth < 1400 && window.innerWidth >= 1280 && newWidth > 300) ||
+        (window.innerWidth < 1280 && window.innerWidth >= 1070 && newWidth > 300 + window.innerWidth * 0.03) ||
+        (window.innerWidth < 1070 && window.innerWidth >= 1024 && newWidth > 300) ||
+        (window.innerWidth < 1024 && window.innerWidth >= 850 && newWidth > window.innerWidth * 0.3 + window.innerWidth * 0.07) ||
+        (window.innerWidth < 850 && newWidth > window.innerWidth * 0.3)
+      )
+        return
+
+      setBorderPosition(newWidth + 'px')
+    }
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+  }
+
+  useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      setBorderPosition(initialBorderPosition.lg)
+    } else if (window.innerWidth >= 768) {
+      setBorderPosition(window.innerWidth * (3 / 10))
+    } else {
+      setBorderPosition('100%')
+    }
+  }, [window.innerWidth])
+
   return (
-    <div
-      className={
-        addAssetModal
-          ? `absolute z-10 flex min-h-full w-full flex-col items-center bg-custom-jet py-8 text-base
-            md:relative md:z-0 md:w-6/12 md:border-l-2 md:bg-custom-dark-jet
-            md:text-sm
-            lg:w-5/12 lg:text-base
-            xl:w-4/12
-            2xl:w-3/12
-            3xl:w-3/12`
-          : `hidden`
-      }
-    >
+    <div className={addAssetModal ? 'absolute min-h-full min-w-full bg-custom-jet md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
+      <div className='hidden cursor-col-resize border-l-2 pl-1 md:block' style={{ width: '2px' }} onMouseDown={handleMouseDown}></div>
       <div
-        className='absolute top-0 left-0 float-left cursor-pointer p-2'
-        onClick={() => {
-          setAddAssetModal(false)
-        }}
+        className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
+                    md:relative md:z-0 
+                    md:text-sm
+                    lg:text-base
+                  `}
+        style={{ width: borderPosition }}
       >
-        <MdClose className='text-3xl' />
-      </div>
-      <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={addAsset}>
-        <div>
-          <p>Tipo:</p>
-          <input checked={asset.type === 'stock'} id='add-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
-          <label htmlFor='add-stock-radio' className='mr-8 cursor-pointer focus:bg-transparent'>
-            Ações
-          </label>
-          <input checked={asset.type === 'cryptocurrency'} id='add-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
-          <label htmlFor='add-cryptocurrency-radio' className='cursor-pointer'>
-            Criptomoedas
-          </label>
+        <div
+          className='absolute top-0 right-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0'
+          onClick={() => {
+            setAddAssetModal(false)
+          }}
+        >
+          <MdClose className='md:hidden' />
+          <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet md:block' />
         </div>
-        <div>
-          <p>Símbolo</p>
-          <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={ticker} onChange={e => setTicker(e.target.value)} required />
-        </div>
-        <div>
-          <p>Nome</p>
-          <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name[asset.type]} value={asset.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />
-        </div>
-        <div>
-          <p>Quantidade</p>
-          <input className='w-full rounded py-1 px-2 text-sm text-custom-jet focus:ring-2 focus:ring-custom-tealblue lg:text-base' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' min={asset.type === 'stock' ? 1 : 0.000000001} step={asset.type === 'stock' ? 1 : 0.000000001} required />
-        </div>
-        {/* <div>
+        <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={addAsset}>
+          <div>
+            <p>Tipo:</p>
+            <input checked={asset.type === 'stock'} id='add-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
+            <label htmlFor='add-stock-radio' className='mr-8 cursor-pointer focus:bg-transparent'>
+              Ações
+            </label>
+            <input checked={asset.type === 'cryptocurrency'} id='add-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)} required />
+            <label htmlFor='add-cryptocurrency-radio' className='cursor-pointer'>
+              Criptomoedas
+            </label>
+          </div>
+          <div>
+            <p>Símbolo</p>
+            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={ticker} onChange={e => setTicker(e.target.value)} required />
+          </div>
+          <div>
+            <p>Nome</p>
+            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name[asset.type]} value={asset.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />
+          </div>
+          <div>
+            <p>Quantidade</p>
+            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet focus:ring-2 focus:ring-custom-tealblue lg:text-base' value={asset.quantity} type='number' onChange={e => setAsset({ ...asset, quantity: +e.target.value })} inputMode='numeric' min={asset.type === 'stock' ? 1 : 0.000000001} step={asset.type === 'stock' ? 1 : 0.000000001} required />
+          </div>
+          {/* <div>
           <p>Watchlist</p>
-        </div> */}
-        <div className='mt-4 flex w-full justify-center text-center'>
-          <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
-            <span>Adicionar</span>
-            <FaPlus className='ml-1 mt-[5px] text-sm' />
-          </button>
-        </div>
-      </form>
+        </div>  */}
+          <div className='mt-4 flex w-full justify-center text-center'>
+            <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
+              <span>Adicionar</span>
+              <FaPlus className='ml-1 mt-[5px] text-sm' />
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

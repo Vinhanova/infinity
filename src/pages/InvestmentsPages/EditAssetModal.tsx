@@ -1,10 +1,11 @@
+import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { useUserAuth } from '../../Context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
 import { Asset } from '../../utils/types'
+import { IoIosArrowDropright } from 'react-icons/io'
 import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { MdClose, MdEdit } from 'react-icons/md'
-import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import _ from 'underscore'
 
 type Props = {
@@ -70,8 +71,9 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
           : `hidden`
       }
     >
-      <div className='absolute top-0 left-0 float-left cursor-pointer p-2' onClick={closeEditAssetModal}>
-        <MdClose className='text-3xl' />
+      <div className='absolute top-0 right-0 w-fit cursor-pointer p-2 text-3xl md:left-0 md:top-1/2 md:-ml-4 md:p-0' onClick={closeEditAssetModal}>
+        <MdClose className='md:hidden' />
+        <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet md:block' />
       </div>
       <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={editAsset}>
         <div>
