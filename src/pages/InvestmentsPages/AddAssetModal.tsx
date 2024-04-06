@@ -1,4 +1,5 @@
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { useDraggHandler } from '../../utils/DraggHandler'
 import { useUserAuth } from '../../Context/AuthContext'
 import { IoIosArrowDropright } from 'react-icons/io'
 import { doc, setDoc } from 'firebase/firestore'
@@ -15,6 +16,7 @@ type Props = {
 
 const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   const { closeEditAssetModal } = useInvestmentsContext()
+  const { borderPosition, mouseDownHandler } = useDraggHandler()
   const { user } = useUserAuth()
   const [ticker, setTicker] = useState<string>('')
   const [placeholder, setPlaceholder] = useState<{ symbol: { stock: string; cryptocurrency: string }; name: { stock: string; cryptocurrency: string } }>({
@@ -48,58 +50,9 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
     if (addAssetModal) closeEditAssetModal()
   }, [addAssetModal])
 
-  const [initialBorderPosition, setInitialBorderPosition] = useState<{ md: Number; lg: Number }>({ md: 225, lg: 300 }) // Initial position of the border
-  const [borderPosition, setBorderPosition] = useState<any>(initialBorderPosition) // Initial position of the border
-
-  const handleMouseDown = (e: any) => {
-    const startX = e.clientX
-    const startWidth = parseInt(borderPosition, 10) // Gets the number
-
-    const handleMouseMove = (e: any) => {
-      const newWidth = startWidth - e.clientX + startX
-
-      // Minimum
-      if ((window.innerWidth >= 768 && window.innerWidth < 1024 && newWidth < window.innerWidth * 0.3) || (window.innerWidth >= 1024 && newWidth < initialBorderPosition.lg)) return
-
-      // Maximum
-      if (
-        (window.innerWidth >= 1670 && newWidth > window.innerWidth * 0.35) || //
-        (window.innerWidth < 1670 && window.innerWidth >= 1550 && newWidth > 300 + window.innerWidth * 0.1) ||
-        (window.innerWidth < 1550 && window.innerWidth >= 1420 && newWidth > 300 + window.innerWidth * 0.08) ||
-        (window.innerWidth < 1420 && window.innerWidth >= 1400 && newWidth > 300 + window.innerWidth * 0.05) ||
-        (window.innerWidth < 1400 && window.innerWidth >= 1280 && newWidth > 300) ||
-        (window.innerWidth < 1280 && window.innerWidth >= 1070 && newWidth > 300 + window.innerWidth * 0.03) ||
-        (window.innerWidth < 1070 && window.innerWidth >= 1024 && newWidth > 300) ||
-        (window.innerWidth < 1024 && window.innerWidth >= 850 && newWidth > window.innerWidth * 0.3 + window.innerWidth * 0.07) ||
-        (window.innerWidth < 850 && newWidth > window.innerWidth * 0.3)
-      )
-        return
-
-      setBorderPosition(newWidth + 'px')
-    }
-
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', handleMouseUp)
-  }
-
-  useEffect(() => {
-    if (window.innerWidth >= 1024) {
-      setBorderPosition(initialBorderPosition.lg)
-    } else if (window.innerWidth >= 768) {
-      setBorderPosition(window.innerWidth * (3 / 10))
-    } else {
-      setBorderPosition('100%')
-    }
-  }, [window.innerWidth])
-
   return (
     <div className={addAssetModal ? 'absolute min-h-full min-w-full bg-custom-jet md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
-      <div className='hidden cursor-col-resize border-l-2 pl-1 md:block' style={{ width: '2px' }} onMouseDown={handleMouseDown}></div>
+      <div className='hidden cursor-col-resize select-none border-l-2 pl-1 md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
       <div
         className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
                     md:relative md:z-0 
@@ -143,7 +96,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           </div>
           {/* <div>
           <p>Watchlist</p>
-        </div>  */}
+        </div> */}
           <div className='mt-4 flex w-full justify-center text-center'>
             <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
               <span>Adicionar</span>
