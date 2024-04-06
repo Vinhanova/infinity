@@ -1,5 +1,5 @@
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
-import { useDraggHandler } from '../../utils/DraggHandler'
+import { useDraggHandler } from '../../utils/useDraggHandler'
 import { useUserAuth } from '../../Context/AuthContext'
 import { IoIosArrowDropright } from 'react-icons/io'
 import { doc, setDoc } from 'firebase/firestore'

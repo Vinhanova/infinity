@@ -40,15 +40,5 @@ export const useDraggHandler = () => {
     document.addEventListener('mouseup', mouseUpHandler)
   }
 
-  useEffect(() => {
-    if (window.innerWidth >= 1024) {
-      setBorderPosition(initialBorderPosition.lg)
-    } else if (window.innerWidth >= 768) {
-      setBorderPosition(window.innerWidth * (3 / 10))
-    } else {
-      setBorderPosition('100%')
-    }
-  }, [window.innerWidth])
-
   return { mouseDownHandler, borderPosition }
 }
