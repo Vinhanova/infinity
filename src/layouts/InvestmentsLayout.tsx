@@ -8,6 +8,7 @@ import TopBar from './TopBar'
 import { FaRegChartBar } from 'react-icons/fa'
 import { IoListSharp } from 'react-icons/io5'
 import EditAssetModal from '../pages/InvestmentsPages/EditAssetModal'
+import { MdOutlineAddBox } from 'react-icons/md'
 
 const InvestmentsLayout: FC = () => {
   const [addAssetModal, setAddAssetModal] = useState(false)
@@ -18,7 +19,7 @@ const InvestmentsLayout: FC = () => {
         <Suspense fallback={<h1>Loading Suspense...</h1>}>
           <TopBar
             start={[
-              <span className='mr-4 ml-2 py-2 px-0.5 text-xl sm:text-2xl'>Investimentos</span>,
+              <span className='mr-2 ml-2 py-2 px-0.5 text-xl xs:mr-4 sm:text-2xl'>Investimentos</span>,
               <NavLink
                 to={'/investments/dashboard'}
                 onClick={() => {
@@ -43,9 +44,9 @@ const InvestmentsLayout: FC = () => {
               </NavLink>
             ]}
             end={[
-              <a onClick={() => setAddAssetModal(true)} id='submenu-link' className={(addAssetModal ? 'hidden ' : '') + 'flex cursor-pointer rounded-[0.15rem] border-2 border-white p-1.5 sm:py-1.5 sm:px-3'}>
+              <a onClick={() => setAddAssetModal(true)} id='submenu-link' className={(addAssetModal ? 'hidden ' : '') + 'mx-1 flex cursor-pointer rounded-[0.15rem] border-2 border-white p-1 sm:py-1.5 sm:px-3'}>
                 <span className='hidden sm:block'>Adicionar</span>
-                <FaPlus className='text-sm sm:ml-1 sm:mt-[2.5px]' />
+                <FaPlus className='text-xs sm:ml-1 sm:mt-[2.5px]' />
               </a>
             ]}
           />

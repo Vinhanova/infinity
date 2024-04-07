@@ -11,10 +11,14 @@ export const useDraggHandler = () => {
     const handleMouseMove = (e: any) => {
       const newWidth = startWidth - e.clientX + startX
 
-      // Minimum
-      if ((window.innerWidth >= 768 && window.innerWidth < 1024 && newWidth < window.innerWidth * 0.3) || (window.innerWidth >= 1024 && newWidth < initialBorderPosition.lg)) return
+      // Minimum limit
+      if (
+        (window.innerWidth >= 768 && window.innerWidth < 1024 && newWidth < window.innerWidth * 0.3) || //
+        (window.innerWidth >= 1024 && newWidth < initialBorderPosition.lg)
+      )
+        return
 
-      // Maximum
+      // Maximum limit
       if (
         (window.innerWidth >= 1670 && newWidth > window.innerWidth * 0.35) || //
         (window.innerWidth < 1670 && window.innerWidth >= 1550 && newWidth > initialBorderPosition.lg + window.innerWidth * 0.1) ||

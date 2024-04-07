@@ -57,7 +57,6 @@ const Navigation = () => {
             <Route index element={<Navigate to='dashboard' replace />} />
             <Route path='dashboard' element={<InvestmentsOverviewPage />} />
             <Route path='list' element={<AssetsListPage />} />
-            <Route path='new-asset' element={<NewAssetPage />} />
           </Route>
         </Route>
 
@@ -65,9 +64,9 @@ const Navigation = () => {
           <Route path='profile' element={<ProfilePage />} />
         </Route>
 
-        <Route element={<PrivateRoute />}>
+        {/* <Route element={<PrivateRoute />}>
           <Route path='settings' element={<SettingsPage />} />
-        </Route>
+        </Route> */}
 
         <Route path='*' element={<NotFoundPage />} />
       </Route>

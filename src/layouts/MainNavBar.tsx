@@ -33,9 +33,9 @@ const MainNavBar: FC = () => {
         </NavLink>
       </div>
       <div className='mb-4 flex w-full flex-col items-center justify-center space-y-6'>
-        <NavLink to='/settings' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
+        {/* <NavLink to='/settings' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
           <FiSettings />
-        </NavLink>
+        </NavLink> */}
         <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-jet ' : '') + 'h-8 w-8 cursor-pointer'}>
           {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2 xl:hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
         </NavLink>
