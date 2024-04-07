@@ -9,7 +9,7 @@ const InvestmentsOverviewPage: FC = () => {
   const { stocksList, cryptoList, watchlistAssetsList, purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, totalUSD, totalEUR, totalStocks, totalCryptocurrencies, exchangeRateInfoData, userTickersData } = useInvestmentsContext()
 
   return (
-    <div className=' w-full text-center'>
+    <div className='w-full text-center'>
       {listState === 'pending' && <h1 className='my-8'>A carregar...</h1>}
 
       {listState === 'error' &&

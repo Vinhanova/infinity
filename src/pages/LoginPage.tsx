@@ -46,7 +46,7 @@ const LoginPage: FC = () => {
                 <FaLinkedin className='ml-2 inline text-custom-tealblue-hl' />
               </a>
             </h3>
-            <GoogleButton onClick={handleGoogleSignIn} className='scale-90 self-center sm:scale-100 sm:self-start' />
+            <GoogleButton className='!w-[280px] scale-90 self-center !rounded !bg-custom-tealblue hover:!bg-custom-tealblue-hl/75 hover:!shadow-none focus:!appearance-none focus:!bg-custom-tealblue sm:scale-100 sm:self-start' type='dark' label='Fazer login com o Google' onClick={handleGoogleSignIn} />
           </div>
           <div className='-mt-4 sm:-mt-12 sm:w-7/12'>
             <img src='../mockups.png' alt='Infinity App Phone, Tablet and PC Mockups with example data' />
