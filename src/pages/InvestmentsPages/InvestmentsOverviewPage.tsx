@@ -22,13 +22,7 @@ const InvestmentsOverviewPage: FC = () => {
 
       {listState === 'success' &&
         (_.isEmpty(purchasedAssetsList) ? (
-          <h1 className='p-2'>
-            Não foram encontrados ativos, pode adicionar novos ativos{' '}
-            <Link to='/investments/new-asset' className='underline'>
-              aqui
-            </Link>
-            .
-          </h1>
+          <h1 className='p-2'>Não tem ativos, experimente adicionar um primeiro</h1>
         ) : (
           <div className='mt-6 grid gap-y-6 xs:grid-cols-2 sm:m-6 sm:gap-8 lg:m-8 xl:grid-cols-3 2xl:xl:grid-cols-4 2xl:m-12'>
             {/* <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'> */}

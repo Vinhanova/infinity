@@ -37,7 +37,7 @@ const InvestmentsPage: FC = () => {
 
           {listState === 'success' &&
             (_.isEmpty(purchasedAssetsList) ? (
-              <h1 className='p-2'>Não tem ativos</h1>
+              <h1 className='p-2'>Não tem ativos, experimente adicionar um primeiro</h1>
             ) : (
               <>
                 <table className='w-full text-left text-sm lg:text-base'>
