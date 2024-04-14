@@ -48,7 +48,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
 
   const editAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    await setDoc(doc(db, 'stocks', user.uid), { [editedSymbol.toUpperCase()]: editedAsset }, { merge: true })
+    await setDoc(doc(db, 'stocks', user.uid), { [editedSymbol]: editedAsset }, { merge: true })
       .then(res => {
         window.location.reload()
       })
@@ -94,7 +94,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
           </div>
           <div>
             <p>Símbolo</p>
-            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value)} required />
+            <input className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value.toUpperCase())} required />
           </div>
           <div>
             <p>Nome</p>

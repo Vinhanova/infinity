@@ -8,6 +8,8 @@ import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { FaPlus } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
+import { useAxios } from '../../utils/useAxios'
+import _ from 'underscore'
 
 type Props = {
   addAssetModal: boolean
@@ -37,9 +39,15 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
     state: 'purchased'
   })
 
+  const { data: cryptoData, error: cryptoError, isLoading: cryptoIsLoading } = useAxios<any>(`https://finnhub.io/api/v1/crypto/symbol?exchange=coinbase&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
+
+  useEffect(() => {
+    console.log(_.filter(cryptoData, crypto => crypto.displaySymbol.includes(ticker)))
+  }, [cryptoData, ticker])
+
   const addAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    await setDoc(doc(db, 'stocks', user.uid), { [ticker.toUpperCase()]: asset }, { merge: true })
+    await setDoc(doc(db, 'stocks', user.uid), { [ticker]: asset }, { merge: true })
       .then(res => {
         window.location.reload()
       })
@@ -84,7 +92,14 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           </div>
           <div>
             <p>Símbolo</p>
-            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={ticker} onChange={e => setTicker(e.target.value)} required />
+            <input className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={ticker} onChange={e => setTicker(e.target.value.toUpperCase())} required />
+          </div>
+          <div>
+            {_.filter(cryptoData, cryptoFiltered => cryptoFiltered.displaySymbol.includes(ticker.replace('-', '/')))
+              .slice(0, 3)
+              .map(cryptoItem => (
+                <p key={cryptoItem.displaySymbol}>{cryptoItem.displaySymbol.replace('/', '-')}</p>
+              ))}
           </div>
           <div>
             <p>Nome</p>
