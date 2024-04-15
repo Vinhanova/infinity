@@ -1,14 +1,16 @@
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { useDraggHandler } from '../../utils/useDraggHandler'
 import { useUserAuth } from '../../Context/AuthContext'
+import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'
+import { MdOutlineWarningAmber, MdClose } from 'react-icons/md'
 import { IoIosArrowDropright } from 'react-icons/io'
+import { FaCheck } from 'react-icons/fa6'
+import { FaPlus } from 'react-icons/fa'
+import { useAxios } from '../../utils/useAxios'
 import { doc, setDoc } from 'firebase/firestore'
 import { Asset } from '../../utils/types'
-import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
-import { FaPlus } from 'react-icons/fa'
-import { MdClose } from 'react-icons/md'
-import { useAxios } from '../../utils/useAxios'
 import _ from 'underscore'
 
 type Props = {
@@ -20,7 +22,12 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   const { closeEditAssetModal } = useInvestmentsContext()
   const { borderPosition, mouseDownHandler } = useDraggHandler()
   const { user } = useUserAuth()
-  const [ticker, setTicker] = useState<string>('')
+  const [symbol, setSymbol] = useState<string>('')
+  const [initialSearchLimit, setInitialSearchLimit] = useState<number>(3)
+  const [maxSearchLimit, setMaxSearchLimit] = useState<number>(9)
+  const [searchLimit, setSearchLimit] = useState<number>(initialSearchLimit)
+  const [searchList, setSearchList] = useState<any[]>([])
+  const [displayedSearchList, setDisplayedSearchList] = useState<any[3]>([1, 2, 3, 4])
   const [placeholder, setPlaceholder] = useState<{ symbol: { stock: string; cryptocurrency: string }; name: { stock: string; cryptocurrency: string } }>({
     symbol: {
       stock: 'Exemplo: AAPL',
@@ -42,12 +49,28 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   const { data: cryptoData, error: cryptoError, isLoading: cryptoIsLoading } = useAxios<any>(`https://finnhub.io/api/v1/crypto/symbol?exchange=coinbase&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
 
   useEffect(() => {
-    console.log(_.filter(cryptoData, crypto => crypto.displaySymbol.includes(ticker)))
-  }, [cryptoData, ticker])
+    let symbolFound: boolean = false
+
+    setSearchList(
+      _.filter(cryptoData, cryptoFiltered => cryptoFiltered.displaySymbol.includes(symbol.replace('-', '/')))
+        .slice(0, 25)
+        .filter(cryptoItem => {
+          if (symbol === cryptoItem.displaySymbol.replace('/', '-')) {
+            symbolFound = true
+            return
+          } else {
+            return cryptoItem
+          }
+        })
+        .slice(0, searchLimit)
+    )
+
+    setIsSymbolValid(symbolFound)
+  }, [cryptoData, symbol, searchLimit])
 
   const addAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    await setDoc(doc(db, 'stocks', user.uid), { [ticker]: asset }, { merge: true })
+    await setDoc(doc(db, 'stocks', user.uid), { [symbol]: asset }, { merge: true })
       .then(res => {
         window.location.reload()
       })
@@ -57,6 +80,25 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   useEffect(() => {
     if (addAssetModal) closeEditAssetModal()
   }, [addAssetModal])
+
+  // Symbol validation:
+
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [isSymbolValid, setIsSymbolValid] = useState(false)
+
+  const handleSymbolChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSymbol(e.target.value.toUpperCase())
+  }
+
+  useEffect(() => {
+    if (!inputRef.current) return
+
+    if (isSymbolValid) {
+      inputRef.current.setCustomValidity('')
+    } else {
+      inputRef.current.setCustomValidity('Símbolo não existe, selecione um por favor.\nExemplo: BTC-USD')
+    }
+  }, [isSymbolValid])
 
   return (
     <div className={addAssetModal ? 'absolute min-h-full min-w-full bg-custom-jet md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
@@ -92,15 +134,25 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           </div>
           <div>
             <p>Símbolo</p>
-            <input className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={ticker} onChange={e => setTicker(e.target.value.toUpperCase())} required />
+            <div className='flex'>
+              <input ref={inputRef} type='text' className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:opacity-60 invalid:text-red-500 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={symbol} onChange={e => handleSymbolChange(e)} required />
+              {symbol != '' && <div className={'-ml-8 mt-1.5 text-xl ' + (isSymbolValid ? 'text-green-500' : 'text-red-500')}>{isSymbolValid ? <FaCheck /> : <MdOutlineWarningAmber />}</div>}
+            </div>
           </div>
-          <div>
-            {_.filter(cryptoData, cryptoFiltered => cryptoFiltered.displaySymbol.includes(ticker.replace('-', '/')))
-              .slice(0, 3)
-              .map(cryptoItem => (
-                <p key={cryptoItem.displaySymbol}>{cryptoItem.displaySymbol.replace('/', '-')}</p>
+          {asset.type === 'cryptocurrency' && searchList.length > 0 && (
+            <div className='flex flex-col items-center gap-y-2 px-12'>
+              {searchList.map((cryptoItem: any) => (
+                <button type='button' key={cryptoItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center' onClick={() => setSymbol(cryptoItem.displaySymbol.replace('/', '-'))}>
+                  {cryptoItem?.displaySymbol.replace('/', '-')}
+                </button>
               ))}
-          </div>
+              {searchList.length >= searchLimit && (
+                <button type='button' key={1} className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
+                  {searchLimit === initialSearchLimit ? <FiMaximize2 /> : <FiMinimize2 />}
+                </button>
+              )}
+            </div>
+          )}
           <div>
             <p>Nome</p>
             <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name[asset.type]} value={asset.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />

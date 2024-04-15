@@ -6,7 +6,7 @@ import CalendarLayout from './layouts/CalendarLayout'
 import InvestmentsLayout from './layouts/InvestmentsLayout'
 import MainPage from './pages/MainPages/MainPage'
 import WalletPage from './pages/WalletPages/WalletPage'
-import AssetsListPage from './pages/InvestmentsPages/AssetsListPage'
+import ListPage from './pages/InvestmentsPages/ListPage'
 import MealPlannerPage from './pages/MealPlannerPages/MealPlannerPage'
 import CalendarPage from './pages/CalendarPages/CalendarPage'
 import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
@@ -18,7 +18,7 @@ import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
 import NewAssetPage from './pages/InvestmentsPages/NewAssetPage'
-import InvestmentsOverviewPage from './pages/InvestmentsPages/InvestmentsOverviewPage'
+import OverviewPage from './pages/InvestmentsPages/OverviewPage'
 
 const Navigation = () => {
   const router = createBrowserRouter(
@@ -55,8 +55,8 @@ const Navigation = () => {
         <Route element={<PrivateRoute />}>
           <Route path='investments' element={<InvestmentsLayout />}>
             <Route index element={<Navigate to='dashboard' replace />} />
-            <Route path='dashboard' element={<InvestmentsOverviewPage />} />
-            <Route path='list' element={<AssetsListPage />} />
+            <Route path='dashboard' element={<OverviewPage />} />
+            <Route path='list' element={<ListPage />} />
           </Route>
         </Route>
 
