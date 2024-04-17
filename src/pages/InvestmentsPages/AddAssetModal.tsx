@@ -12,6 +12,7 @@ import { doc, setDoc } from 'firebase/firestore'
 import { Asset } from '../../utils/types'
 import { db } from '../../firebase'
 import _ from 'underscore'
+import MainButton from './MainButton'
 
 type Props = {
   addAssetModal: boolean
@@ -225,10 +226,15 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           <p>Watchlist</p>
         </div> */}
           <div className='mt-4 flex w-full justify-center text-center'>
-            <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
-              <span>Adicionar</span>
-              <FaPlus className='ml-1 mt-[5px] text-sm' />
-            </button>
+            <MainButton
+              type='submit'
+              content={
+                <>
+                  <span>Adicionar</span>
+                  <FaPlus className='ml-1 mt-[5px] text-sm' />
+                </>
+              }
+            />
           </div>
         </form>
       </div>
