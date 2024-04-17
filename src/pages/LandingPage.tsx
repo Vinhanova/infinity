@@ -68,7 +68,7 @@ const LandingPage: FC = () => {
         </div>
         <div
           className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-8 overflow-hidden bg-custom-dark-jet p-8 sm:min-h-[40vh] md:px-16
-          lg:h-[40vh] lg:min-h-[0vh] lg:grid-cols-3 lg:grid-rows-1 lg:items-center lg:justify-items-center lg:p-0 lg:px-16'
+          lg:h-[35vh] lg:min-h-[0vh] lg:grid-cols-3 lg:grid-rows-1 lg:items-center lg:justify-items-center lg:p-0 lg:px-16 xl:h-[35vh] 2xl:h-[35vh] 3xl:h-[30vh]'
         >
           <div className='space-y-4 lg:mx-4 xl:mx-12 2xl:mx-20'>
             <FaFolderTree className='h-[30px] w-auto sm:text-2xl xl:text-3xl' />
@@ -94,9 +94,19 @@ const LandingPage: FC = () => {
             <img src='../list.png' alt='List of all Assets with 24h percent change Example' />
           </Carousel>
         </div>
-        <div ref={ref} className='flex w-full flex-col items-center justify-center space-y-6 bg-custom-dark-jet py-8 xs:h-[25vh] xs:py-0'>
-          <h3 className='text-base lg:text-lg xl:text-xl'>Tecnologias utilizadas</h3>
-          <div className='flex w-10/12 flex-col justify-between space-y-8 text-7xl xs:w-11/12 xs:flex-row xs:space-y-0 sm:w-10/12 md:w-9/12 lg:w-7/12 2xl:w-6/12 3xl:w-6/12 [&_h6]:text-base'>
+        <div ref={ref} className='flex w-full flex-col items-center justify-center bg-custom-dark-jet py-8 xs:h-[30vh] xs:py-0'>
+          <h3 className='mt-2 mb-10 text-base xs:mb-0 sm:mt-6 lg:text-lg xl:text-xl'>Tecnologias utilizadas</h3>
+          <div
+            className='flex h-4/6 w-10/12 flex-col justify-between space-y-8 text-7xl
+                      xs:w-11/12 xs:flex-row xs:space-y-0
+                      sm:w-10/12
+                      md:w-9/12
+                      lg:w-7/12
+                      2xl:w-6/12
+                      3xl:w-6/12
+                      [&_h6]:text-sm
+                      [&_h6]:lg:text-base'
+          >
             <div className='flex flex-col items-center justify-center space-y-2'>
               <SiTypescript />
               <h6>TypeScript</h6>
