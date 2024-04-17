@@ -8,7 +8,7 @@ import TopBar from './TopBar'
 import { FaRegChartBar } from 'react-icons/fa'
 import { IoListSharp } from 'react-icons/io5'
 import EditAssetModal from '../pages/InvestmentsPages/EditAssetModal'
-import { MdOutlineAddBox } from 'react-icons/md'
+import MainButton from '../pages/InvestmentsPages/MainButton'
 
 const InvestmentsLayout: FC = () => {
   const [addAssetModal, setAddAssetModal] = useState(false)
@@ -44,10 +44,20 @@ const InvestmentsLayout: FC = () => {
               </NavLink>
             ]}
             end={[
-              <a onClick={() => setAddAssetModal(true)} id='submenu-link' className={(addAssetModal ? 'hidden ' : '') + 'mx-1 flex cursor-pointer rounded-[0.15rem] border-2 border-white p-1 sm:py-1.5 sm:px-3'}>
-                <span className='hidden sm:block'>Adicionar</span>
-                <FaPlus className='text-xs sm:ml-1 sm:mt-[2.5px]' />
-              </a>
+              <>
+                {!addAssetModal && (
+                  <MainButton
+                    className='mx-1 !p-1 sm:!py-1.5 sm:!px-3'
+                    onClick={() => setAddAssetModal(true)}
+                    content={
+                      <>
+                        <span className='hidden sm:block'>Adicionar</span>
+                        <FaPlus className='text-xs sm:ml-1 sm:mt-[2.5px]' />
+                      </>
+                    }
+                  />
+                )}
+              </>
             ]}
           />
           <div className='relative flex flex-1'>

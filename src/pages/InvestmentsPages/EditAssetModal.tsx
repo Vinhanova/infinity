@@ -8,6 +8,7 @@ import { FC, useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { MdClose, MdEdit } from 'react-icons/md'
 import _ from 'underscore'
+import MainButton from './MainButton'
 
 type Props = {
   setAddAssetModal: Function
@@ -108,10 +109,15 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
           <p>Watchlist</p>
         </div> */}
           <div className='mt-4 flex w-full justify-center text-center'>
-            <button type='submit' id='submenu-link' className='flex rounded border-2 py-1.5 px-3'>
-              <span>Editar</span>
-              <MdEdit className='ml-1 mt-[5px] text-sm' />
-            </button>
+            <MainButton
+              type='submit'
+              content={
+                <>
+                  <span>Editar</span>
+                  <MdEdit className='ml-1 mt-[5px] text-sm' />
+                </>
+              }
+            />
           </div>
         </form>
       </div>

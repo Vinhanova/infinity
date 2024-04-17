@@ -9,7 +9,7 @@ import { MdAccessTime } from 'react-icons/md'
 import { Carousel } from 'flowbite-react'
 import { FC, useEffect, useRef } from 'react'
 
-const LoginPage: FC = () => {
+const LandingPage: FC = () => {
   const { googleSignIn, user } = useUserAuth()
   const navigate = useNavigate()
   const ref = useRef<any>()
@@ -26,7 +26,7 @@ const LoginPage: FC = () => {
   useEffect(() => {
     if (user) {
       //console.log('Navigate')
-      navigate('/')
+      navigate('/investments')
     }
   }, [user])
 
@@ -133,4 +133,4 @@ const LoginPage: FC = () => {
   )
 }
 
-export default LoginPage
+export default LandingPage

@@ -12,7 +12,7 @@ import CalendarPage from './pages/CalendarPages/CalendarPage'
 import RecentPaymentsPage from './pages/WalletPages/RecentPaymentsPage'
 import AllPaymentsPage from './pages/WalletPages/AllPaymentsPage'
 import AddPaymentPage from './pages/WalletPages/NewPaymentPage'
-import LoginPage from './pages/LoginPage'
+import LandingPage from './pages/LandingPage'
 import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -24,7 +24,7 @@ const Navigation = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='' element={<AppLayout />}>
-        <Route path='login' element={<LoginPage />} />
+        <Route index element={<LandingPage />} />
 
         <Route element={<PrivateRoute />}>
           {/* <Route index element={<MainPage />} /> */}
