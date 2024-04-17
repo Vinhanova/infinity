@@ -6,7 +6,7 @@ const ProfilePage: FC = () => {
 
   return (
     <>
-      <div className='flex w-full flex-col items-center'>
+      <div className='flex h-full w-full flex-col items-center'>
         {user && (
           <div className='mt-8 flex w-3/4 flex-col items-center space-y-4'>
             <h1 className='text-xl font-bold'>Perfil</h1>

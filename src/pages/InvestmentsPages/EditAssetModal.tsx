@@ -61,8 +61,8 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
   }, [editAssetModal])
 
   return (
-    <div className={editAssetModal ? 'absolute min-h-full min-w-full bg-custom-jet md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
-      <div className='hidden cursor-col-resize select-none border-l-2 pl-1 md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
+    <div className={editAssetModal ? 'custom-gradient fixed min-h-full min-w-full md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
+      <div className='hidden cursor-col-resize select-none border-l-2 border-custom-tealblue-hl pl-1 hover:border-custom-tealblue md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
       <div
         className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
                     md:relative md:z-0 
@@ -78,7 +78,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
           }}
         >
           <MdClose className='md:hidden' />
-          <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet md:block' />
+          <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet hover:text-custom-tealblue-hl md:block' />
         </div>
         <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={editAsset}>
           <div>
@@ -95,7 +95,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
           </div>
           <div>
             <p>Símbolo</p>
-            <input className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value.toUpperCase())} required />
+            <input className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value.toUpperCase())} required />
           </div>
           <div>
             <p>Nome</p>

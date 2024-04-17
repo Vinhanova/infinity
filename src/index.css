@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-br from-custom-jet to-custom-dark-jet font-sans tracking-wide text-white;
+  @apply custom-gradient font-sans tracking-wide text-white;
 }
 
 @layer base {
@@ -20,4 +20,8 @@ body {
   #submenu-link:hover {
     @apply text-custom-tealblue-hl;
   }
+}
+
+.custom-gradient {
+  @apply bg-gradient-to-br from-custom-jet to-custom-dark-jet;
 }

@@ -86,7 +86,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
     )
 
     setIsSymbolValid(symbolFound)
-  }, [cryptoData, symbol, searchLimit])
+  }, [cryptoData, symbol, searchLimit, isCryptocurrency])
 
   const addAsset = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
@@ -115,6 +115,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
 
     if (!isCryptocurrency) {
       inputRef.current.setCustomValidity('')
+      setIsSymbolValid(true)
       return
     }
 
@@ -128,8 +129,8 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   // #endregion
 
   return (
-    <div className={addAssetModal ? 'absolute min-h-full min-w-full bg-custom-jet md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
-      <div className='hidden cursor-col-resize select-none border-l-2 pl-1 md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
+    <div className={addAssetModal ? 'custom-gradient fixed min-h-full min-w-full md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
+      <div className='hidden cursor-col-resize select-none border-l-2 border-custom-tealblue-hl pl-1 hover:border-custom-tealblue md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
       <div
         className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
                     md:relative md:z-0 
@@ -140,7 +141,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
       >
         <div className='absolute top-0 right-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0' onClick={() => setAddAssetModal(false)}>
           <MdClose className='md:hidden' />
-          <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet md:block' />
+          <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet hover:text-custom-tealblue-hl md:block' />
         </div>
         <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={addAsset}>
           <div>
@@ -175,7 +176,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           <div>
             <p>Símbolo</p>
             <div className='flex'>
-              <input ref={inputRef} type='text' className='peer w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:opacity-60 invalid:text-red-500 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={symbol} onChange={e => handleSymbolChange(e)} required />
+              <input ref={inputRef} type='text' className='peer w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 invalid:text-red-500 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={symbol} onChange={e => handleSymbolChange(e)} required />
               {symbol !== '' && (
                 <div className='-ml-8 mt-1.5 text-xl peer-valid:text-green-500 peer-invalid:text-red-500'>
                   {isSymbolValid ? ( //
