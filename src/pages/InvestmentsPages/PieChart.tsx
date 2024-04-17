@@ -13,7 +13,16 @@ type Props = {
 }
 
 const PieChart: FC<Props> = ({ title, labels, dataContent, total }) => {
-  const [colors, setColors] = useState<{ [k: string]: string }>({ 'rgba(255, 99, 132, 0.2)': 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 100, 0.2)': 'rgba(75, 192, 100, 1)', 'rgba(255, 206, 86, 0.2)': 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 0.2)': 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 0.2)': 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 0.2)': 'rgba(255, 159, 64, 1)', 'rgba(200, 250, 0, 0.2)': 'rgba(200, 250, 0, 1)', 'rgba(250, 250, 200, 0.2)': 'rgba(250, 250, 200, 1)' })
+  const [colors, setColors] = useState<{ [k: string]: string }>({
+    'rgba(255, 99, 132, 0.2)': 'rgba(255, 99, 132, 1)',
+    'rgba(75, 192, 100, 0.2)': 'rgba(75, 192, 100, 1)',
+    'rgba(255, 206, 86, 0.2)': 'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 0.2)': 'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 0.2)': 'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 0.2)': 'rgba(255, 159, 64, 1)',
+    'rgba(200, 250, 0, 0.2)': 'rgba(200, 250, 0, 1)',
+    'rgba(250, 250, 200, 0.2)': 'rgba(250, 250, 200, 1)'
+  })
 
   const randomSort = (a: any, b: any) => Math.random() - 0.5
 
@@ -40,7 +49,7 @@ const PieChart: FC<Props> = ({ title, labels, dataContent, total }) => {
   //<h3 className='m-8'>No Data for {title}</h3>
 
   return (
-    <div className='-mb-4 w-full'>
+    <div className='w-full'>
       {title && <h3 className='mx-4 pb-4 text-2xl xs:m-0'>{title}</h3>}
       <Pie
         className={window.innerWidth < 400 && data.labels.length <= 4 ? '' : 'p-4'}

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-custom-jet font-sans tracking-wide text-white;
+  @apply bg-gradient-to-br from-custom-jet to-custom-dark-jet font-sans tracking-wide text-white;
 }
 
 @layer base {
@@ -14,10 +14,10 @@ body {
 
 @media (hover: hover) {
   #main-link:hover {
-    @apply text-custom-jet/60;
+    @apply text-custom-tealblue-hl;
   }
 
   #submenu-link:hover {
-    @apply border-custom-tealblue-hl text-custom-tealblue-hl;
+    @apply text-custom-tealblue-hl;
   }
 }
