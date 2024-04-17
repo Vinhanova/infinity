@@ -1,11 +1,12 @@
 import { FC, ReactNode } from 'react'
 
 type Props = {
-  content: ReactNode
+  children: ReactNode
+  className: string
 }
 
-const Card: FC<Props> = ({ content }) => {
-  return <div className='rounded-lg bg-custom-dark-jet p-4'>{content}</div>
+const Card: FC<Props> = ({ children, className }) => {
+  return <div className={'rounded-lg bg-custom-dark-jet p-4 ' + className}>{children}</div>
 }
 
 export default Card

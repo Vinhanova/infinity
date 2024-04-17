@@ -33,7 +33,7 @@ const LandingPage: FC = () => {
   return (
     <>
       <div className='flex min-h-screen flex-col items-center justify-items-center'>
-        <div className='mt-4 flex w-full flex-col-reverse justify-center sm:flex-row sm:items-center sm:px-8 md:px-16 portrait:min-h-[40vh] landscape:min-h-[65vh]'>
+        <div className='mt-4 flex w-full flex-col-reverse justify-center bg-custom-jet sm:flex-row sm:items-center sm:px-8 md:px-16 portrait:min-h-[40vh] landscape:min-h-[65vh]'>
           <div className='flex h-full flex-col justify-items-center gap-y-4 p-4 text-center sm:m-0 sm:w-7/12 sm:p-0 sm:text-start lg:w-5/12 lg:pl-4 xl:pl-12 2xl:pl-24'>
             <h1 className='font-mono text-2xl sm:text-[1.7rem] lg:text-3xl xl:text-4xl 2xl:text-5xl'>
               Projeto <IoInfiniteSharp className='mb-1 inline text-3xl sm:mb-2 sm:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl' /> Infinity
@@ -67,7 +67,7 @@ const LandingPage: FC = () => {
           </div>
         </div>
         <div
-          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-8 overflow-hidden bg-custom-dark-jet p-8 sm:min-h-[40vh] md:px-16
+          className='grid min-h-[65vh] w-full grid-cols-1 grid-rows-3 items-start justify-items-start gap-y-8 overflow-hidden bg-custom-mid-jet p-8 sm:min-h-[40vh] md:px-16
           lg:h-[35vh] lg:min-h-[0vh] lg:grid-cols-3 lg:grid-rows-1 lg:items-center lg:justify-items-center lg:p-0 lg:px-16 xl:h-[35vh] 2xl:h-[35vh] 3xl:h-[30vh]'
         >
           <div className='space-y-4 lg:mx-4 xl:mx-12 2xl:mx-20'>
@@ -86,7 +86,7 @@ const LandingPage: FC = () => {
             <h5 className='whitespace-normal text-sm font-light xl:text-base'>Veja visualmente a distribuição do seu Portfólio nas diferentes categorias: Ações vs Criptomoedas</h5>
           </div>
         </div>
-        <div className='flex w-full justify-center p-8 portrait:h-[30vh] landscape:h-[40vh]'>
+        <div className='flex w-full justify-center bg-custom-jet p-8 portrait:h-[30vh] landscape:h-[40vh]'>
           <Carousel pauseOnHover className='h-full w-full justify-center xs:w-8/12 md:w-6/12 2xl:w-4/12' leftControl={<FaChevronLeft className='relative -left-10 text-2xl sm:-left-20' />} rightControl={<FaChevronRight className='relative -right-10 text-2xl sm:-right-20' />}>
             <img className='lg:w-10/12' src='../crypto-vs-stocks-piechart.png' alt='All Assets and Crypto vs Stocks PieCharts Example' />
             <img src='../new-asset.png' alt='New Asset Page Example' />
@@ -94,7 +94,7 @@ const LandingPage: FC = () => {
             <img src='../list.png' alt='List of all Assets with 24h percent change Example' />
           </Carousel>
         </div>
-        <div ref={ref} className='flex w-full flex-col items-center justify-center bg-custom-dark-jet py-8 xs:h-[30vh] xs:py-0'>
+        <div ref={ref} className='flex w-full flex-col items-center justify-center bg-custom-mid-jet py-8 xs:h-[30vh] xs:py-0'>
           <h3 className='mt-2 mb-10 text-base xs:mb-0 sm:mt-6 lg:text-lg xl:text-xl'>Tecnologias utilizadas</h3>
           <div
             className='flex h-4/6 w-10/12 flex-col justify-between space-y-8 text-7xl
@@ -129,7 +129,7 @@ const LandingPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className='mx-12 flex h-[10vh] w-full items-center justify-center text-sm sm:text-base'>
+        <div className='mx-12 flex h-[10vh] w-full items-center justify-center bg-custom-jet text-sm sm:text-base'>
           <h5>
             Desenvolvido por{' '}
             <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='whitespace-nowrap text-custom-tealblue-hl underline underline-offset-4'>

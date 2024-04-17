@@ -1,5 +1,6 @@
 import { useUserAuth } from '../Context/AuthContext'
 import { FC } from 'react'
+import MainButton from './InvestmentsPages/MainButton'
 
 const ProfilePage: FC = () => {
   const { logOut, user } = useUserAuth()
@@ -20,9 +21,7 @@ const ProfilePage: FC = () => {
               <h3>{user.email}</h3>
             </div>
             <div className='pt-8'>
-              <button id='submenu-link' className='flex rounded border-2 py-1.5 px-3' onClick={logOut}>
-                Terminar sessão
-              </button>
+              <MainButton onClick={logOut} content={<span>Terminar sessão</span>} />
             </div>
           </div>
         )}
