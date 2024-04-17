@@ -61,7 +61,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
   }, [editAssetModal])
 
   return (
-    <div className={editAssetModal ? 'custom-gradient fixed min-h-full min-w-full md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
+    <div className={editAssetModal ? 'custom-gradient fixed min-h-[calc(100vh-3.5rem)] min-w-full md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
       <div className='hidden cursor-col-resize select-none border-l-2 border-custom-tealblue-hl pl-1 hover:border-custom-tealblue md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
       <div
         className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
