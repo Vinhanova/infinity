@@ -12,17 +12,20 @@ const MainNavBar: FC = () => {
 
   return (
     <>
+      {/* Mobile Menu */}
       <div className='fixed bottom-0 z-10 flex h-12 w-full items-center justify-evenly bg-custom-dark-jet py-1 xs:hidden'>
-        <div className={'rounded p-1.5 text-4xl xs:mb-3'}>
+        <div className={'w-12 rounded p-1.5 text-4xl xs:mb-3'}>
           <IoInfiniteSharp />
         </div>
-        <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'cursor-pointer rounded p-2.5 text-xl'}>
+        <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex w-12 cursor-pointer justify-center rounded p-2.5 text-xl'}>
           <FaCoins />
         </NavLink>
-        <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-tealblue-hl ' : '') + 'h-8 w-8 cursor-pointer'}>
+        <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-tealblue-hl ' : '') + 'mx-2 h-8 w-8 cursor-pointer'}>
           {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2 xl:hover:border-custom-tealblue-hl' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
         </NavLink>
       </div>
+
+      {/* Desktop Menu */}
       <div className='fixed hidden h-full w-12 flex-col justify-between bg-custom-dark-jet p-6 text-2xl xs:flex xl:w-16'>
         <div className='flex w-full flex-col items-center justify-center space-y-2'>
           <div className={'rounded p-1.5 text-4xl xs:mb-3'}>

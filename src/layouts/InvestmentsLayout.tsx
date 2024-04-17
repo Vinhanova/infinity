@@ -26,7 +26,7 @@ const InvestmentsLayout: FC = () => {
                   //setAddAssetModal(false)
                 }}
                 id='submenu-link'
-                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5'}
+                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-2'}
               >
                 <FaRegChartBar className='text-xl' />
                 <span className='hidden font-normal sm:block'>Estatísticas</span>
@@ -37,7 +37,7 @@ const InvestmentsLayout: FC = () => {
                   //setAddAssetModal(false)
                 }}
                 id='submenu-link'
-                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-0.5'}
+                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-2'}
               >
                 <IoListSharp className='text-xl' />
                 <span className='hidden font-normal sm:block'>Vista Geral</span>
