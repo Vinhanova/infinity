@@ -28,7 +28,7 @@ const InvestmentsPage: FC = () => {
           {listState === 'pending' && <h1 className='my-4 sm:my-8 lg:my-0'>A carregar...</h1>}
 
           {listState === 'error' &&
-            ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-4 text-red-500 lg:my-4'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
+            ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-4 text-red-500 lg:my-4'>Aviso: Muitos pedidos em simultâneo (Erro 429 - Limite da API)</h1>) ||
               (stocksInfoError === 'No tickers found' && (
                 <div className='my-4 lg:my-0'>
                   <h3>Não foram encontrados ativos, experimente adicionar um primeiro</h3>
