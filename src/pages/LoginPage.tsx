@@ -115,7 +115,7 @@ const LoginPage: FC = () => {
             </div>
             <div className='flex flex-col items-center justify-center space-y-2'>
               <SiNetlify />
-              <h6>Netlity</h6>
+              <h6>Netlify</h6>
             </div>
           </div>
         </div>
