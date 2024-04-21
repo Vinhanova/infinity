@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
-  className: string
+  className?: string
 }
 
 const Card: FC<Props> = ({ children, className }) => {

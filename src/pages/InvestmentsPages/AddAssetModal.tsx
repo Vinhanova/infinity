@@ -9,15 +9,18 @@ import { FaCheck } from 'react-icons/fa6'
 import { FaPlus } from 'react-icons/fa'
 import { useAxios } from '../../utils/useAxios'
 import { doc, setDoc } from 'firebase/firestore'
-import { Asset } from '../../utils/types'
+import { Asset, StockSearchType } from '../../utils/types'
 import { db } from '../../firebase'
 import _ from 'underscore'
 import MainButton from './MainButton'
+import { Spinner } from 'flowbite-react'
 
 type Props = {
   addAssetModal: boolean
   setAddAssetModal: Function
 }
+
+type CrytoSearchType = {}
 
 const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   const { closeEditAssetModal } = useInvestmentsContext()
@@ -59,9 +62,9 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
 
   // #endregion
 
-  // #region Search Functionality
+  // #region Crypto Search Functionality
 
-  const [searchList, setSearchList] = useState<any[]>([])
+  const [cryptoSearchList, setCryptoSearchList] = useState<any[]>([])
   const [initialSearchLimit, setInitialSearchLimit] = useState<number>(3)
   const [maxSearchLimit, setMaxSearchLimit] = useState<number>(9)
   const [searchLimit, setSearchLimit] = useState<number>(initialSearchLimit)
@@ -69,14 +72,14 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   const { data: cryptoData, error: cryptoError, isLoading: cryptoIsLoading } = useAxios<any>(`https://finnhub.io/api/v1/crypto/symbol?exchange=coinbase&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
 
   useEffect(() => {
-    let symbolFound: boolean = false
+    let cryptoSymbolFound: boolean = false
 
-    setSearchList(
+    setCryptoSearchList(
       _.filter(cryptoData, cryptoFiltered => cryptoFiltered.displaySymbol.includes(symbol.replace('-', '/')))
         .slice(0, 25)
         .filter(cryptoItem => {
           if (symbol === cryptoItem.displaySymbol.replace('/', '-')) {
-            symbolFound = true
+            cryptoSymbolFound = true
             return
           } else {
             return cryptoItem
@@ -85,7 +88,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
         .slice(0, searchLimit)
     )
 
-    setIsSymbolValid(symbolFound)
+    setIsCryptoSymbolValid(cryptoSymbolFound)
   }, [cryptoData, symbol, searchLimit, isCryptocurrency])
 
   const addAsset = async (e: { preventDefault: () => void }) => {
@@ -101,10 +104,44 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
     if (addAssetModal) closeEditAssetModal()
   }, [addAssetModal])
 
-  // Symbol Validation
+  // #endregion
+
+  // #region Stocks Search Functionality
+
+  const [stocksSearchList, setStocksSearchList] = useState<any[]>([])
+  const { data: stocksData, error: stocksError, isLoading: stocksIsLoading } = useAxios<any>(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
+
+  useEffect(() => {
+    let stockSymbolFound: boolean = false
+
+    setStocksSearchList(
+      _.filter(
+        stocksData,
+        stockItem => stockItem.displaySymbol.includes(symbol)
+        // || stockItem.description.includes(symbol.toLocaleUpperCase())
+      )
+        .slice(0, 25)
+        .filter((stockItem: StockSearchType) => {
+          if (symbol === stockItem.displaySymbol) {
+            stockSymbolFound = true
+            return
+          } else {
+            return stockItem
+          }
+        })
+        .slice(0, searchLimit)
+    )
+
+    setIsStockSymbolValid(stockSymbolFound)
+  }, [stocksData, symbol, searchLimit, isStock])
+
+  // #endregion
+
+  // #region Symbol Validation
 
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isSymbolValid, setIsSymbolValid] = useState(false)
+  const [isCryptoSymbolValid, setIsCryptoSymbolValid] = useState(false)
+  const [isStockSymbolValid, setIsStockSymbolValid] = useState(false)
 
   const handleSymbolChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSymbol(e.target.value.toUpperCase())
@@ -113,18 +150,20 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   useEffect(() => {
     if (!inputRef.current) return
 
-    if (!isCryptocurrency) {
-      inputRef.current.setCustomValidity('')
-      setIsSymbolValid(true)
-      return
-    }
-
-    if (isSymbolValid) {
-      inputRef.current.setCustomValidity('')
+    if (isStock) {
+      if (isStockSymbolValid) {
+        inputRef.current.setCustomValidity('')
+      } else {
+        inputRef.current.setCustomValidity('Símbolo não existe, selecione um por favor.\nExemplo: AAPL')
+      }
     } else {
-      inputRef.current.setCustomValidity('Símbolo não existe, selecione um por favor.\nExemplo: BTC-USD')
+      if (isCryptoSymbolValid) {
+        inputRef.current.setCustomValidity('')
+      } else {
+        inputRef.current.setCustomValidity('Símbolo não existe, selecione um por favor.\nExemplo: BTC-USD')
+      }
     }
-  }, [isSymbolValid, isCryptocurrency])
+  }, [isCryptoSymbolValid, isStockSymbolValid, isStock])
 
   // #endregion
 
@@ -179,7 +218,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               <input ref={inputRef} type='text' className='peer w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 invalid:text-red-500 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={symbol} onChange={e => handleSymbolChange(e)} required />
               {symbol !== '' && (
                 <div className='-ml-8 mt-1.5 text-xl peer-valid:text-green-500 peer-invalid:text-red-500'>
-                  {isSymbolValid ? ( //
+                  {(isCryptocurrency && isCryptoSymbolValid) || (isStock && isStockSymbolValid) ? ( //
                     <FaCheck />
                   ) : (
                     <MdOutlineWarningAmber />
@@ -188,23 +227,58 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               )}
             </div>
           </div>
-          {isCryptocurrency && searchList.length > 0 && (
-            <div className='flex flex-col items-center gap-y-2 px-12'>
-              {searchList.map((cryptoItem: any) => (
-                <button type='button' key={cryptoItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center' onClick={() => setSymbol(cryptoItem.displaySymbol.replace('/', '-'))}>
-                  {cryptoItem?.displaySymbol.replace('/', '-')}
-                </button>
-              ))}
-              {searchList.length >= searchLimit && (
-                <button type='button' key={1} className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
-                  {searchLimit === initialSearchLimit ? ( //
-                    <FiMaximize2 />
-                  ) : (
-                    <FiMinimize2 />
+          {isCryptocurrency ? (
+            cryptoIsLoading ? (
+              <div className='flex items-center px-12'>
+                <Spinner aria-label='Alternate spinner button example' size='sm' />
+                <span className='pl-3'>A carregar...</span>
+              </div>
+            ) : (
+              isCryptocurrency &&
+              cryptoSearchList.length > 0 && (
+                <div className='flex flex-col items-center gap-y-2 px-12'>
+                  {cryptoSearchList.map((cryptoItem: any) => (
+                    <button type='button' key={cryptoItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center hover:text-custom-tealblue-hl' onClick={() => setSymbol(cryptoItem.displaySymbol.replace('/', '-'))}>
+                      {cryptoItem?.displaySymbol.replace('/', '-')}
+                    </button>
+                  ))}
+                  {cryptoSearchList.length >= searchLimit && (
+                    <button type='button' className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold hover:text-custom-tealblue-hl' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
+                      {searchLimit === initialSearchLimit ? ( //
+                        <FiMaximize2 />
+                      ) : (
+                        <FiMinimize2 />
+                      )}
+                    </button>
                   )}
-                </button>
-              )}
+                </div>
+              )
+            )
+          ) : stocksIsLoading ? (
+            <div className='flex items-center px-12'>
+              <Spinner aria-label='Alternate spinner button example' size='sm' />
+              <span className='pl-3'>A carregar...</span>
             </div>
+          ) : (
+            stocksSearchList &&
+            stocksSearchList.length > 0 && (
+              <div className='flex flex-col items-center gap-y-2 px-12'>
+                {stocksSearchList.map((stocksItem: any) => (
+                  <button type='button' key={stocksItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center hover:text-custom-tealblue-hl' onClick={() => setSymbol(stocksItem.displaySymbol.replace('/', '-'))}>
+                    {stocksItem?.displaySymbol.replace('/', '-')}
+                  </button>
+                ))}
+                {stocksSearchList.length >= searchLimit && (
+                  <button type='button' className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold hover:text-custom-tealblue-hl' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
+                    {searchLimit === initialSearchLimit ? ( //
+                      <FiMaximize2 />
+                    ) : (
+                      <FiMinimize2 />
+                    )}
+                  </button>
+                )}
+              </div>
+            )
           )}
           <div>
             <p>Nome</p>

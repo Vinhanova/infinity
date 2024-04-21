@@ -13,6 +13,8 @@ export function useAxios<T>(url: string): ApiResponse<T> {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
+    setIsLoading(true)
+
     const fetchData = async () => {
       try {
         const response: AxiosResponse<T> = await axios.get(url)

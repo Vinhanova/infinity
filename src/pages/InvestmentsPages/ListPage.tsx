@@ -130,7 +130,7 @@ const InvestmentsPage: FC = () => {
                                 content: 'py-1 focus:outline-none bg-custom-dark-jet rounded-[0.15rem]',
                                 floating: {
                                   item: {
-                                    base: 'flex w-full cursor-pointer items-center justify-start px-8 pl-4 py-2 text-sm text-white hover:text-custom-tealblue focus:outline-none'
+                                    base: 'flex w-full cursor-pointer items-center justify-start px-8 pl-4 py-2 text-sm text-white hover:text-custom-tealblue-hl focus:outline-none'
                                   },
                                   style: {
                                     auto: 'border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white'
