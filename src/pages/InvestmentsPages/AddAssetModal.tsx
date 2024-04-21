@@ -152,7 +152,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               type='radio'
               name='type'
               value='stock'
-              className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0'
+              className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0'
               onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)}
               required
             />
@@ -165,7 +165,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               type='radio'
               name='type'
               value='cryptocurrency'
-              className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0'
+              className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0'
               onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)}
               required
             />

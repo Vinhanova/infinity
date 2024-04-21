@@ -36,7 +36,7 @@ const LandingPage: FC = () => {
         <div className='mt-4 flex w-full flex-col-reverse justify-center bg-custom-jet sm:flex-row sm:items-center sm:px-8 md:px-16 portrait:min-h-[40vh] landscape:min-h-[65vh]'>
           <div className='flex h-full flex-col justify-items-center gap-y-4 p-4 text-center sm:m-0 sm:w-7/12 sm:p-0 sm:text-start lg:w-5/12 lg:pl-4 xl:pl-12 2xl:pl-24'>
             <h1 className='font-mono text-2xl sm:text-[1.7rem] lg:text-3xl xl:text-4xl 2xl:text-5xl'>
-              Projeto <IoInfiniteSharp className='mb-1 inline text-3xl sm:mb-2 sm:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl' /> Infinity
+              Projeto <IoInfiniteSharp className='mb-1 inline text-3xl text-custom-tealblue-hl sm:mb-2 sm:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl' /> Infinity
             </h1>
             <div>
               <h2 className='break-words text-sm lg:text-base xl:text-[18px]'>
@@ -125,7 +125,7 @@ const LandingPage: FC = () => {
             </div>
             <div className='flex flex-col items-center justify-center space-y-2'>
               <SiNetlify />
-              <h6>Netlity</h6>
+              <h6>Netlify</h6>
             </div>
           </div>
         </div>

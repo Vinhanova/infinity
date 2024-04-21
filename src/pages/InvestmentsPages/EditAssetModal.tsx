@@ -83,12 +83,12 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
         <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={editAsset}>
           <div>
             <p>Tipo:</p>
-            <input checked={editedAsset.type === 'stock'} id='edit-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
+            <input checked={editedAsset.type === 'stock'} id='edit-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
             <label htmlFor='edit-stock-radio' className='mr-8 cursor-pointer focus:bg-transparent'>
               Ações
             </label>
 
-            <input checked={editedAsset.type === 'cryptocurrency'} id='edit-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
+            <input checked={editedAsset.type === 'cryptocurrency'} id='edit-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
             <label htmlFor='edit-cryptocurrency-radio' className='cursor-pointer'>
               Criptomoedas
             </label>

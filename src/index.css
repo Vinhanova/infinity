@@ -14,7 +14,7 @@ body {
 
 @media (hover: hover) {
   #main-link:hover {
-    @apply text-custom-tealblue-hl;
+    @apply *:border-custom-tealblue-hl text-custom-tealblue-hl;
   }
 
   #submenu-link:hover {
