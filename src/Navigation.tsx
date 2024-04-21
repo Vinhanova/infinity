@@ -17,7 +17,6 @@ import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
-import NewAssetPage from './pages/InvestmentsPages/NewAssetPage'
 import OverviewPage from './pages/InvestmentsPages/OverviewPage'
 
 const Navigation = () => {
