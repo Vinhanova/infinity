@@ -5,7 +5,7 @@ export const useFHWebSocket = (userStocks: any) => {
 
   useEffect(() => {
     if (userStocks) {
-      const socket = new WebSocket('wss://ws.finnhub.io?token=cfgimjpr01qlga2uev4gcfgimjpr01qlga2uev50')
+      const socket = new WebSocket(`wss://ws.finnhub.io?token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
 
       // Connection opened -> Subscribe
       socket.addEventListener('open', function (event) {

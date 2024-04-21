@@ -54,3 +54,16 @@ export type yHStock = {
   quoteType: number
   time: number
 }
+
+export type StockSearchType = {
+  description: string
+  displaySymbol: string
+  symbol: string
+  type: string
+  currency: string
+  figi: string
+  isin: string
+  mic: string
+  shareClassFIGI: string
+  symbol2: string
+}

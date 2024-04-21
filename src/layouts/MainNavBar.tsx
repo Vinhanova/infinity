@@ -11,37 +11,52 @@ const MainNavBar: FC = () => {
   const { user } = useUserAuth()
 
   return (
-    <div className='fixed flex h-full w-12 flex-col justify-between bg-custom-tealblue p-6 text-2xl xl:w-16'>
-      <div className='flex w-full flex-col items-center justify-center space-y-2'>
-        <div className={'mb-3 rounded p-1.5 text-4xl'}>
+    <>
+      {/* Mobile Menu */}
+      <div className='fixed bottom-0 z-10 flex h-12 w-full items-center justify-evenly bg-custom-dark-jet py-1 xs:hidden'>
+        <div className={'w-12 rounded p-1.5 text-4xl xs:mb-3'}>
           <IoInfiniteSharp />
         </div>
-        {/* <NavLink to='/' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl'}>
-          <IoInfiniteSharp />
-        </NavLink> */}
-        {/* <NavLink to='/calendar' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
-          <BsFillCalendar2WeekFill />
-        </NavLink> */}
-        {/* <NavLink to='/meal-planner' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
-          <GiMeal />
-        </NavLink> */}
-        {/* <NavLink to='/wallet' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
-          <IoWalletSharp />
-        </NavLink> */}
-        <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2.5 text-xl'}>
+        <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex w-12 cursor-pointer justify-center rounded p-2.5 text-xl'}>
           <FaCoins />
         </NavLink>
-      </div>
-      <div className='mb-4 flex w-full flex-col items-center justify-center space-y-6'>
-        {/* <NavLink to='/settings' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
-          <FiSettings />
-        </NavLink> */}
-        <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-jet ' : '') + 'h-8 w-8 cursor-pointer'}>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2 xl:hover:border-custom-jet/50' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
+        <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-tealblue-hl ' : '') + 'mx-2 h-8 w-8 cursor-pointer'}>
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2 xl:hover:border-custom-tealblue-hl' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
         </NavLink>
       </div>
 
-      {/* <div className='flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  '>
+      {/* Desktop Menu */}
+      <div className='fixed hidden h-full w-12 flex-col justify-between bg-custom-dark-jet p-6 text-2xl xs:flex xl:w-16'>
+        <div className='flex w-full flex-col items-center justify-center space-y-2'>
+          <div className={'rounded p-1.5 text-4xl xs:mb-3'}>
+            <IoInfiniteSharp />
+          </div>
+          {/* <NavLink to='/' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'mb-3 cursor-pointer rounded p-1.5 text-4xl'}>
+          <IoInfiniteSharp />
+        </NavLink> */}
+          {/* <NavLink to='/calendar' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2.5 text-xl hover:text-custom-jet/50'}>
+          <BsFillCalendar2WeekFill />
+        </NavLink> */}
+          {/* <NavLink to='/meal-planner' className={({ isActive }) => (isActive ? 'text-custom-jet' : '') + 'cursor-pointer rounded p-2 hover:text-custom-jet/50'}>
+          <GiMeal />
+        </NavLink> */}
+          {/* <NavLink to='/wallet' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
+          <IoWalletSharp />
+        </NavLink> */}
+          <NavLink to='/investments' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'cursor-pointer rounded p-2.5 text-xl'}>
+            <FaCoins />
+          </NavLink>
+        </div>
+        <div className='mb-4 flex w-full flex-col items-center justify-center space-y-6'>
+          {/* <NavLink to='/settings' id='main-link' className={({ isActive }) => (isActive ? 'text-custom-jet ' : '') + 'cursor-pointer rounded p-2'}>
+          <FiSettings />
+        </NavLink> */}
+          <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-tealblue-hl ' : '') + 'h-8 w-8 cursor-pointer'}>
+            {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2' /> : <BsFillPersonFill className='h-full w-full text-3xl' />}
+          </NavLink>
+        </div>
+
+        {/* <div className='flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  '>
           <a className='hover:outline-none hover:text-indigo-400 text-left  text-white flex justify-between items-center w-full py-5 space-x-14  '>
             <p className='text-sm leading-5  uppercase'>Profile Overview</p>
             <svg id='icon1' className='transform' width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -103,7 +118,8 @@ const MainNavBar: FC = () => {
             </a>
           </div>
         </div> */}
-    </div>
+      </div>
+    </>
   )
 }
 

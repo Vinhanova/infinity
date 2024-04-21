@@ -6,7 +6,7 @@ const AppLayout: FC = () => {
   return (
     <div className='flex min-h-screen flex-col'>
       <MainNavBar />
-      <div className='ml-12 flex min-h-screen flex-col xl:ml-16'>
+      <div className='mb-12 flex min-h-full flex-col xs:mb-0 xs:ml-12 xl:ml-16'>
         <Outlet />
       </div>
     </div>

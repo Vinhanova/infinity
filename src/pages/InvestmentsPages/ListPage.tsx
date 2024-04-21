@@ -1,7 +1,7 @@
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
 import { toFixed } from '../../utils/utils'
 import deleteAssetFS from '../../utils/useDeleteAsset'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { SlOptions } from 'react-icons/sl'
 import { MdEdit } from 'react-icons/md'
@@ -9,6 +9,7 @@ import { Dropdown } from 'flowbite-react'
 import { useUserAuth } from '../../Context/AuthContext'
 import { FC } from 'react'
 import _ from 'underscore'
+import Card from './Card'
 
 const InvestmentsPage: FC = () => {
   const { purchasedAssetsList, listState, initialTickersInfoError, stocksInfoError, userTickersData, exchangeRateInfoData, totalUSD, totalEUR, openEditAssetModal } = useInvestmentsContext()
@@ -28,7 +29,7 @@ const InvestmentsPage: FC = () => {
           {listState === 'pending' && <h1 className='my-4 sm:my-8 lg:my-0'>A carregar...</h1>}
 
           {listState === 'error' &&
-            ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-4 text-red-500 lg:my-4'>Aviso: Muitos pedidos em simultâneo (Erro 429)</h1>) ||
+            ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-4 text-red-500 lg:my-4'>Aviso: Muitos pedidos em simultâneo (Erro 429 - Limite da API)</h1>) ||
               (stocksInfoError === 'No tickers found' && (
                 <div className='my-4 lg:my-0'>
                   <h3>Não foram encontrados ativos, experimente adicionar um primeiro</h3>
@@ -39,7 +40,7 @@ const InvestmentsPage: FC = () => {
             (_.isEmpty(purchasedAssetsList) ? (
               <h1 className='p-2'>Não tem ativos, experimente adicionar um primeiro</h1>
             ) : (
-              <>
+              <Card>
                 <table className='w-full text-left text-sm lg:text-base'>
                   <thead className='border-b-2'>
                     <tr>
@@ -165,7 +166,7 @@ const InvestmentsPage: FC = () => {
                     </tr>
                   </tfoot>
                 </table>
-              </>
+              </Card>
             ))}
         </div>
       </div>
