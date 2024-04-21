@@ -33,7 +33,7 @@ const LandingPage: FC = () => {
   return (
     <>
       <div className='flex min-h-screen flex-col items-center justify-items-center'>
-        <div className='mt-4 flex w-full flex-col-reverse justify-center bg-custom-jet sm:flex-row sm:items-center sm:px-8 md:px-16 portrait:min-h-[40vh] landscape:min-h-[65vh]'>
+        <div className='flex w-full flex-col-reverse justify-center bg-custom-jet pt-4 sm:flex-row sm:items-center sm:px-8 sm:pt-0 md:px-16 portrait:min-h-[40vh] landscape:min-h-[65vh]'>
           <div className='flex h-full flex-col justify-items-center gap-y-4 p-4 text-center sm:m-0 sm:w-7/12 sm:p-0 sm:text-start lg:w-5/12 lg:pl-4 xl:pl-12 2xl:pl-24'>
             <h1 className='font-mono text-2xl sm:text-[1.7rem] lg:text-3xl xl:text-4xl 2xl:text-5xl'>
               Projeto <IoInfiniteSharp className='mb-1 inline text-3xl text-custom-tealblue-hl sm:mb-2 sm:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl' /> Infinity
