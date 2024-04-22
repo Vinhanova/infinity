@@ -21,7 +21,7 @@ const MainNavBar: FC = () => {
           <FaCoins />
         </NavLink>
         <NavLink to='/profile' id='main-link' className={({ isActive }) => (isActive ? '[&>*]:border-custom-tealblue-hl ' : '') + 'mx-2 h-8 w-8 cursor-pointer'}>
-          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2 xl:hover:border-custom-tealblue-hl' /> : <BsFillPersonFill className='h-full w-full text-3xl hover:text-custom-jet/50' />}
+          {user?.photoURL ? <img src={user.photoURL} alt='Profile Photo' className='h-full w-full rounded-[0.15rem] border-2' /> : <BsFillPersonFill className='h-full w-full text-3xl' />}
         </NavLink>
       </div>
 

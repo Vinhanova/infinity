@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply custom-gradient font-sans tracking-wide text-white;
+  @apply custom-gradient bg-custom-jet font-sans tracking-wide text-white;
 }
 
 @layer base {
