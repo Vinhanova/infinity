@@ -66,7 +66,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
 
   const [cryptoSearchList, setCryptoSearchList] = useState<any[]>([])
   const [initialSearchLimit, setInitialSearchLimit] = useState<number>(3)
-  const [maxSearchLimit, setMaxSearchLimit] = useState<number>(9)
+  const [maxSearchLimit, setMaxSearchLimit] = useState<number>(7)
   const [searchLimit, setSearchLimit] = useState<number>(initialSearchLimit)
 
   const { data: cryptoData, error: cryptoError, isLoading: cryptoIsLoading } = useAxios<any>(`https://finnhub.io/api/v1/crypto/symbol?exchange=coinbase&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
@@ -168,7 +168,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   // #endregion
 
   return (
-    <div className={addAssetModal ? 'custom-gradient absolute min-h-screen min-w-full md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
+    <div className={addAssetModal ? 'custom-gradient fixed min-h-full min-w-full md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
       <div className='hidden cursor-col-resize select-none border-l-2 border-custom-tealblue-hl pl-1 hover:border-custom-tealblue md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
       <div
         className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
@@ -300,7 +300,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           {/* <div>
           <p>Watchlist</p>
         </div> */}
-          <div className='mb-12 flex w-full justify-center text-center sm:mt-4'>
+          <div className='mb-24 flex w-full justify-center text-center sm:mt-4'>
             <MainButton
               type='submit'
               content={
