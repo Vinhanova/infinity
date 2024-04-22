@@ -168,7 +168,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
   // #endregion
 
   return (
-    <div className={addAssetModal ? 'custom-gradient fixed min-h-full min-w-full overflow-y-auto xs:min-h-[calc(100vh-3.5rem)] xs:overflow-hidden md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
+    <div className={addAssetModal ? 'custom-gradient fixed min-h-full min-w-full overflow-y-auto xs:min-h-[calc(100vh-3.5rem)] xs:overflow-y-visible md:static md:flex md:min-w-min md:bg-custom-dark-jet' : 'hidden'}>
       <div className='hidden cursor-col-resize select-none border-l-2 border-custom-tealblue-hl pl-1 hover:border-custom-tealblue md:block' style={{ width: '2px' }} onMouseDown={mouseDownHandler}></div>
       <div
         className={`absolute z-10 flex min-h-full w-full flex-col items-center py-8 text-base
