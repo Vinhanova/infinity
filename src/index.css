@@ -20,6 +20,14 @@ body {
   #submenu-link:hover {
     @apply text-custom-tealblue-hl;
   }
+
+  #main-button:hover {
+    @apply text-custom-tealblue-hl;
+  }
+
+  #symbol-button:hover {
+    @apply text-custom-tealblue-hl;
+  }
 }
 
 .custom-gradient {

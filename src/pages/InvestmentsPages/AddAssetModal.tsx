@@ -238,12 +238,12 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               cryptoSearchList.length > 0 && (
                 <div className='flex flex-col items-center gap-y-2 px-12'>
                   {cryptoSearchList.map((cryptoItem: any) => (
-                    <button type='button' key={cryptoItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center hover:text-custom-tealblue-hl' onClick={() => setSymbol(cryptoItem.displaySymbol.replace('/', '-'))}>
+                    <button id='symbol-button' type='button' key={cryptoItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center' onClick={() => setSymbol(cryptoItem.displaySymbol.replace('/', '-'))}>
                       {cryptoItem?.displaySymbol.replace('/', '-')}
                     </button>
                   ))}
                   {cryptoSearchList.length >= searchLimit && (
-                    <button type='button' className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold hover:text-custom-tealblue-hl' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
+                    <button id='symbol-button' type='button' className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
                       {searchLimit === initialSearchLimit ? ( //
                         <FiMaximize2 />
                       ) : (
@@ -264,12 +264,12 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
             stocksSearchList.length > 0 && (
               <div className='flex flex-col items-center gap-y-2 px-12'>
                 {stocksSearchList.map((stocksItem: any) => (
-                  <button type='button' key={stocksItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center hover:text-custom-tealblue-hl' onClick={() => setSymbol(stocksItem.displaySymbol.replace('/', '-'))}>
+                  <button id='symbol-button' type='button' key={stocksItem?.displaySymbol} className='!m-0 w-full cursor-pointer rounded bg-custom-jet px-2 py-1 text-center' onClick={() => setSymbol(stocksItem.displaySymbol.replace('/', '-'))}>
                     {stocksItem?.displaySymbol.replace('/', '-')}
                   </button>
                 ))}
                 {stocksSearchList.length >= searchLimit && (
-                  <button type='button' className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold hover:text-custom-tealblue-hl' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
+                  <button id='symbol-button' type='button' className='flex w-min cursor-pointer justify-center px-3 py-1 font-semibold' onClick={() => setSearchLimit(searchLimit => (searchLimit === initialSearchLimit ? maxSearchLimit : initialSearchLimit))}>
                     {searchLimit === initialSearchLimit ? ( //
                       <FiMaximize2 />
                     ) : (

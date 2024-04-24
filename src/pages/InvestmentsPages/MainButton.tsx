@@ -9,7 +9,7 @@ type Props = {
 
 const MainButton: FC<Props> = ({ content, type, className, onClick }) => (
   <button //
-    id='submenu-link'
+    id='main-button'
     type={type || 'button'}
     className={'flex rounded-[0.15rem] border-2 border-custom-tealblue-hl py-1.5 px-3 ' + className}
     onClick={onClick}
