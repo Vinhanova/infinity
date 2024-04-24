@@ -179,10 +179,10 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
         style={{ width: borderPosition }}
       >
         <div className='absolute top-0 right-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0' onClick={() => setAddAssetModal(false)}>
-          <MdClose className='md:hidden' />
+          <MdClose className='fixed -ml-8 md:hidden' />
           <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet hover:text-custom-tealblue-hl md:block' />
         </div>
-        <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={addAsset}>
+        <form className='mt-2 flex flex-col gap-4 text-left xs:mt-6 [&_p]:mb-1' onSubmit={addAsset}>
           <div>
             <p>Tipo:</p>
             <input //

@@ -19,7 +19,7 @@ const InvestmentsLayout: FC = () => {
         <Suspense fallback={<h1>Loading Suspense...</h1>}>
           <TopBar
             start={[
-              <span className='mr-2 ml-2 py-2 px-0.5 text-xl xs:mr-4 sm:text-2xl'>Investimentos</span>,
+              <span className='mr-2 py-2 px-0.5 text-xl xs:ml-2 xs:mr-4 sm:text-2xl'>Investimentos</span>,
               <NavLink
                 to={'/investments/dashboard'}
                 onClick={() => {
@@ -47,7 +47,7 @@ const InvestmentsLayout: FC = () => {
               <>
                 {!addAssetModal && (
                   <MainButton
-                    className='mx-1 !p-1 sm:!py-1.5 sm:!px-3'
+                    className='ml-1 !p-1 sm:!py-1.5 sm:!px-3'
                     onClick={() => setAddAssetModal(true)}
                     content={
                       <>

@@ -25,7 +25,7 @@ const InvestmentsOverviewPage: FC = () => {
         (_.isEmpty(purchasedAssetsList) ? (
           <h1 className='p-2'>Não tem ativos, experimente adicionar um primeiro</h1>
         ) : (
-          <div className='m-4 grid gap-y-4 xs:grid-cols-2 xs:gap-4 sm:m-6 sm:gap-6 lg:m-8 lg:gap-8 xl:grid-cols-3 2xl:xl:grid-cols-4 2xl:m-12'>
+          <div className='m-2.5 grid gap-y-4 xs:m-4 xs:grid-cols-2 xs:gap-4 sm:m-6 sm:gap-6 lg:m-8 lg:gap-8 xl:grid-cols-3 2xl:xl:grid-cols-4 2xl:m-12'>
             {/* <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'> */}
             {totalStocks && totalCryptocurrencies ? (
               <Card>

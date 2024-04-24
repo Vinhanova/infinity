@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply custom-gradient bg-custom-jet font-sans tracking-wide text-white;
+  @apply custom-bg font-sans tracking-wide text-white;
 }
 
 @layer base {
@@ -24,4 +24,8 @@ body {
 
 .custom-gradient {
   @apply bg-gradient-to-br from-custom-jet to-custom-dark-jet;
+}
+
+.custom-bg {
+  @apply bg-custom-jet xs:bg-gradient-to-br xs:from-custom-jet xs:to-custom-dark-jet;
 }

@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Card: FC<Props> = ({ children, className }) => {
-  return <div className={'rounded-lg bg-custom-dark-jet p-4 ' + className}>{children}</div>
+  return <div className={'rounded-lg bg-custom-dark-jet p-2.5 xs:p-4 ' + className}>{children}</div>
 }
 
 export default Card

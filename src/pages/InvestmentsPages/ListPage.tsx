@@ -25,7 +25,7 @@ const InvestmentsPage: FC = () => {
   return (
     <>
       <div className='flex w-full flex-col items-center space-x-3'>
-        <div className='mt-4 mb-2 w-11/12 text-center sm:mb-0 lg:mt-8 xl:mb-6 xl:w-3/4'>
+        <div className='mt-2.5 mb-2.5 w-full px-2.5 text-center xs:w-11/12 xs:p-0 sm:mt-6 sm:mb-0 lg:mt-8 xl:mb-6 xl:w-3/4'>
           {listState === 'pending' && <h1 className='my-4 sm:my-8 lg:my-0'>A carregar...</h1>}
 
           {listState === 'error' &&

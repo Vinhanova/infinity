@@ -52,12 +52,11 @@ const PieChart: FC<Props> = ({ title, labels, dataContent, total }) => {
     <div className='w-full'>
       {title && <h3 className='mx-4 pb-4 text-2xl xs:m-0'>{title}</h3>}
       <Pie
-        className={window.innerWidth < 400 && data.labels.length <= 4 ? '' : 'p-4'}
         data={data}
         options={{
           plugins: {
             legend: {
-              display: window.innerWidth < 400 ? data.labels.length <= 4 : true,
+              display: true,
               position: 'bottom'
             },
             tooltip: {

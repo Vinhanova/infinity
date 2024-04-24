@@ -13,7 +13,7 @@ const MainNavBar: FC = () => {
   return (
     <>
       {/* Mobile Menu */}
-      <div className='fixed bottom-0 z-10 flex h-12 w-full items-center justify-evenly bg-custom-dark-jet py-1 xs:hidden'>
+      <div className='fixed bottom-0 z-10 flex h-12 w-full items-center justify-evenly border-t-2 border-custom-tealblue-hl bg-custom-dark-jet py-1 xs:hidden'>
         <div className={'w-12 rounded p-1.5 text-4xl xs:mb-3'}>
           <IoInfiniteSharp />
         </div>

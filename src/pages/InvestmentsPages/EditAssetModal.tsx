@@ -80,7 +80,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
           <MdClose className='md:hidden' />
           <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet hover:text-custom-tealblue-hl md:block' />
         </div>
-        <form className='mt-6 flex flex-col gap-4 text-left [&_p]:mb-1' onSubmit={editAsset}>
+        <form className='mt-2 flex flex-col gap-4 text-left xs:mt-6 [&_p]:mb-1' onSubmit={editAsset}>
           <div>
             <p>Tipo:</p>
             <input checked={editedAsset.type === 'stock'} id='edit-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
