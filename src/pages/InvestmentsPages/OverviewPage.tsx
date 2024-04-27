@@ -1,6 +1,6 @@
 import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { ImSpinner2 } from 'react-icons/im'
 import { toFixed } from '../../utils/utils'
-import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
 import { FC } from 'react'
 import _ from 'underscore'
@@ -11,7 +11,11 @@ const InvestmentsOverviewPage: FC = () => {
 
   return (
     <div className='w-full text-center'>
-      {listState === 'pending' && <h1 className='my-8'>A carregar...</h1>}
+      {listState === 'pending' && (
+        <div className='my-4 mt-6 flex justify-center text-2xl sm:my-8 sm:mt-[3.5rem] lg:my-0 lg:mt-24'>
+          <ImSpinner2 className='animate-spin' />
+        </div>
+      )}
 
       {listState === 'error' &&
         ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-12 text-red-500'>Aviso: Muitos pedidos em simultâneo (Erro 429 - Limite da API)</h1>) ||

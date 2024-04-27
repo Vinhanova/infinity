@@ -4,6 +4,7 @@ import deleteAssetFS from '../../utils/useDeleteAsset'
 import { useNavigate } from 'react-router-dom'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { SlOptions } from 'react-icons/sl'
+import { ImSpinner2 } from 'react-icons/im'
 import { MdEdit } from 'react-icons/md'
 import { Dropdown } from 'flowbite-react'
 import { useUserAuth } from '../../Context/AuthContext'
@@ -26,7 +27,11 @@ const InvestmentsPage: FC = () => {
     <>
       <div className='flex w-full flex-col items-center space-x-3'>
         <div className='mt-2.5 mb-2.5 w-full px-2.5 text-center xs:w-11/12 xs:p-0 sm:mt-6 sm:mb-0 lg:mt-8 xl:mb-6 xl:w-3/4'>
-          {listState === 'pending' && <h1 className='my-4 sm:my-8 lg:my-0'>A carregar...</h1>}
+          {listState === 'pending' && (
+            <div className='my-4 flex justify-center text-2xl sm:my-8 lg:my-0 lg:mt-16'>
+              <ImSpinner2 className='animate-spin' />
+            </div>
+          )}
 
           {listState === 'error' &&
             ((initialTickersInfoError?.response?.status === 429 && <h1 className='my-4 text-red-500 lg:my-4'>Aviso: Muitos pedidos em simultâneo (Erro 429 - Limite da API)</h1>) ||
@@ -116,7 +121,7 @@ const InvestmentsPage: FC = () => {
                           <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                             <span className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>{stock.change ? (stock.change > 0 ? '+' : '') + `${stock.change?.toFixed(2)} (${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%)` : `${(stock.changePercent > 0 ? '+' : '') + stock.changePercent?.toFixed(2)}%`}</span>
                           </td>
-                          <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : 'A carregar...'}</td>
+                          <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : '... *'}</td>
                           <td className='hidden px-[3px] py-[7px] text-right text-gray-200 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{toFixed(stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c, 2)} €</td>
                           <td>
                             <Dropdown
@@ -166,6 +171,7 @@ const InvestmentsPage: FC = () => {
                     </tr>
                   </tfoot>
                 </table>
+                <p className='text-right text-xs italic text-gray-400'>*Quando for realizada uma nova transação o preço será atualizado</p>
               </Card>
             ))}
         </div>

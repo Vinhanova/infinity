@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { ImSpinner2 } from 'react-icons/im'
 import { auth } from './firebase'
 import { FC } from 'react'
 
@@ -8,10 +9,8 @@ const PrivateRoute: FC = () => {
 
   if (loading)
     return (
-      <div className='flex flex-col items-center'>
-        <div className='mt-4 text-center lg:mt-8'>
-          <h1>A carregar...</h1>
-        </div>
+      <div className='mt-20 flex justify-center text-2xl sm:mt-28 lg:mt-[9.5rem]'>
+        <ImSpinner2 className='animate-spin' />
       </div>
     )
 
