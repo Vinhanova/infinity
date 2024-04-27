@@ -66,7 +66,7 @@ export const InvestmentsContextProvider: FC<Props> = ({ children }) => {
     setTotalUSD(_.reduce(purchasedAssetsList, (total: number, asset: any) => total + asset.price * userTickersData[asset.id].quantity, 0))
   }, [purchasedAssetsList])
 
-  useEffect(() => setTotalEUR(toFixed(totalUSD * exchangeRateInfoData?.c, 2)), [totalUSD, exchangeRateInfoData])
+  useEffect(() => setTotalEUR(toFixed(totalUSD * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)), [totalUSD, exchangeRateInfoData])
 
   useEffect(() => {
     setTotalStocks(toFixed(_.reduce(stocksList, (total: number, asset: any) => total + asset.price * userTickersData[asset.id].quantity, 0) * exchangeRateInfoData?.c, 2))
