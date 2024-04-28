@@ -106,6 +106,7 @@ const InvestmentsPage: FC = () => {
                     {_.map(purchasedAssetsList, (stock: any) => {
                       if (userTickersData[stock.id].quantity === 0) return
                       return (
+                        /* Name */
                         <tr key={stock.id} className='border-t border-white/20 text-sm hover:bg-white/10 lg:text-base'>
                           <th scope='row' className='whitespace-nowrap px-[3px] py-[7px] font-medium lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                             {window.innerWidth < 1024 ? (
@@ -117,7 +118,13 @@ const InvestmentsPage: FC = () => {
                               </>
                             )}
                           </th>
-                          <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-300 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>{stock.price.toFixed(stock.price < 1 ? 3 : 2)} $</td>
+                          {/* Price */}
+                          <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-300 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                            {stock.changePercent !== null //
+                              ? `${stock.price.toFixed(stock.price < 1 ? 3 : 2)} $`
+                              : 'Erro API *'}
+                          </td>
+                          {/* 24h */}
                           <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                             <span className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
                               {stock.changePercent !== null //
@@ -133,16 +140,22 @@ const InvestmentsPage: FC = () => {
                                         ? '+'
                                         : '') + (stock.price - stock.price / (stock.changePercent / 100 + 1))?.toFixed(2)
                                     } (${stock.changePercent?.toFixed(2)}%)`
-                                : 'Erro API *'}
+                                : '... *'}
                             </span>
                           </td>
-                          <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>{stock.change ? `${(stock.change * userTickersData![stock.id].quantity * exchangeRateInfoData?.c).toFixed(2)} €` : '... *'}</td>
+                          {/* Portfolio 24h */}
+                          <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                            {stock.changePercent !== null //
+                              ? stock.change //
+                                ? `${(stock.change * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
+                                : `${((stock.changePercent / 100) * stock.price * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
+                              : '... *'}
+                          </td>
+                          {/* Portfolio */}
                           <td className='hidden px-[3px] py-[7px] text-right text-gray-200 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                            {
-                              //
-                              toFixed(stock.price * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)
-                            }{' '}
-                            €
+                            {stock.changePercent !== null //
+                              ? `${toFixed(stock.price * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)} €`
+                              : '... *'}
                           </td>
                           <td>
                             <Dropdown
@@ -192,7 +205,7 @@ const InvestmentsPage: FC = () => {
                     </tr>
                   </tfoot>
                 </table>
-                <p className='text-right text-xs italic text-gray-400'>*Quando for realizada uma nova transação o preço será atualizado</p>
+                <p className='text-right text-xs italic text-gray-400'>*Quando for realizada uma nova transação o preço será atualizado (mercado pode estar fechado)</p>
               </Card>
             ))}
         </div>
