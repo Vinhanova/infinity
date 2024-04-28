@@ -148,7 +148,7 @@ const InvestmentsPage: FC = () => {
                             {stock.changePercent !== null //
                               ? stock.change //
                                 ? `${(stock.change * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
-                                : `${((stock.changePercent / 100) * stock.price * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
+                                : `${((stock.price - stock.price / (stock.changePercent / 100 + 1)) * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
                               : '... *'}
                           </td>
                           {/* Portfolio */}
