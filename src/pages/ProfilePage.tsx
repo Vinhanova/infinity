@@ -1,4 +1,4 @@
-import { useUserAuth } from '../Context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 import { FC } from 'react'
 import MainButton from './InvestmentsPages/MainButton'
 

@@ -1,10 +1,10 @@
-import { InvestmentsContextProvider } from '../Context/InvestmentsContext'
+import { InvestmentsContextProvider } from '../context/InvestmentsContext'
 import AddAssetModal from '../pages/InvestmentsPages/AddAssetModal'
 import { NavLink, Outlet } from 'react-router-dom'
 import ErrorBoundary from '../ErrorBoundary'
 import { FaPlus } from 'react-icons/fa'
 import { FC, Suspense, useState } from 'react'
-import TopBar from './TopBar'
+import TopBar from '../components/TopBar'
 import { FaRegChartBar } from 'react-icons/fa'
 import { IoListSharp } from 'react-icons/io5'
 import EditAssetModal from '../pages/InvestmentsPages/EditAssetModal'
@@ -19,14 +19,14 @@ const InvestmentsLayout: FC = () => {
         <Suspense fallback={<h1>Loading Suspense...</h1>}>
           <TopBar
             start={[
-              <span className='mr-2 py-2 px-0.5 text-xl xs:ml-2 xs:mr-4 sm:text-2xl'>Investimentos</span>,
+              <span className='mr-2 px-0.5 py-2 text-xl xs:ml-2 xs:mr-4 sm:text-2xl'>Investimentos</span>,
               <NavLink
                 to={'/investments/dashboard'}
                 onClick={() => {
                   //setAddAssetModal(false)
                 }}
                 id='submenu-link'
-                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-2'}
+                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 px-2 py-2'}
               >
                 <FaRegChartBar className='text-xl' />
                 <span className='hidden font-normal sm:block'>Estatísticas</span>
@@ -37,7 +37,7 @@ const InvestmentsLayout: FC = () => {
                   //setAddAssetModal(false)
                 }}
                 id='submenu-link'
-                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 py-2 px-2'}
+                className={({ isActive }) => (isActive ? 'text-custom-tealblue-hl ' : '') + 'flex items-center gap-1 px-2 py-2'}
               >
                 <IoListSharp className='text-xl' />
                 <span className='hidden font-normal sm:block'>Vista Geral</span>
@@ -47,7 +47,7 @@ const InvestmentsLayout: FC = () => {
               <>
                 {!addAssetModal && (
                   <MainButton
-                    className='ml-1 !p-1 sm:!py-1.5 sm:!px-3'
+                    className='ml-1 !p-1 sm:!px-3 sm:!py-1.5'
                     onClick={() => setAddAssetModal(true)}
                     content={
                       <>

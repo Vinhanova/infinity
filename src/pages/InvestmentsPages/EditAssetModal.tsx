@@ -1,6 +1,6 @@
-import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { useInvestmentsContext } from '../../context/InvestmentsContext'
 import { useDraggHandler } from '../../utils/useDraggHandler'
-import { useUserAuth } from '../../Context/AuthContext'
+import { useUserAuth } from '../../context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
 import { Asset } from '../../utils/types'
 import { IoIosArrowDropright } from 'react-icons/io'
@@ -72,7 +72,7 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
         style={{ width: borderPosition }}
       >
         <div
-          className='absolute top-0 right-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0'
+          className='absolute right-0 top-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0'
           onClick={() => {
             closeEditAssetModal()
           }}
@@ -83,27 +83,27 @@ const EditAssetModal: FC<Props> = ({ setAddAssetModal }) => {
         <form className='mt-2 flex flex-col gap-4 text-left xs:mt-6 [&_p]:mb-1' onSubmit={editAsset}>
           <div>
             <p>Tipo:</p>
-            <input checked={editedAsset.type === 'stock'} id='edit-stock-radio' type='radio' name='type' value='stock' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
+            <input checked={editedAsset.type === 'stock'} id='edit-stock-radio' type='radio' name='type' value='stock' className='mb-0.5 mr-1.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
             <label htmlFor='edit-stock-radio' className='mr-8 cursor-pointer focus:bg-transparent'>
               Ações
             </label>
 
-            <input checked={editedAsset.type === 'cryptocurrency'} id='edit-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
+            <input checked={editedAsset.type === 'cryptocurrency'} id='edit-cryptocurrency-radio' type='radio' name='type' value='cryptocurrency' className='mb-0.5 mr-1.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0' onChange={e => setEditedAsset({ ...editedAsset, type: e.target.value } as typeof editedAsset)} required />
             <label htmlFor='edit-cryptocurrency-radio' className='cursor-pointer'>
               Criptomoedas
             </label>
           </div>
           <div>
             <p>Símbolo</p>
-            <input className='w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value.toUpperCase())} required />
+            <input className='w-full rounded px-2 py-1 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol} value={editedSymbol} onChange={e => setEditedSymbol(e.target.value.toUpperCase())} required />
           </div>
           <div>
             <p>Nome</p>
-            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name} value={editedAsset.name} onChange={e => setEditedAsset({ ...editedAsset, name: e.target.value })} required />
+            <input className='w-full rounded px-2 py-1 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name} value={editedAsset.name} onChange={e => setEditedAsset({ ...editedAsset, name: e.target.value })} required />
           </div>
           <div>
             <p>Quantidade</p>
-            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet focus:ring-2 focus:ring-custom-tealblue lg:text-base' value={editedAsset.quantity} type='number' onChange={e => setEditedAsset({ ...editedAsset, quantity: +e.target.value })} inputMode='numeric' min={editedAsset.type === 'stock' ? 1 : 0.000000001} step={editedAsset.type === 'stock' ? 1 : 0.000000001} required />
+            <input className='w-full rounded px-2 py-1 text-sm text-custom-jet focus:ring-2 focus:ring-custom-tealblue lg:text-base' value={editedAsset.quantity} type='number' onChange={e => setEditedAsset({ ...editedAsset, quantity: +e.target.value })} inputMode='numeric' min={editedAsset.type === 'stock' ? 1 : 0.000000001} step={editedAsset.type === 'stock' ? 1 : 0.000000001} required />
           </div>
           {/* <div>
           <p>Watchlist</p>

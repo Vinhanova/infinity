@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
-import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { useInvestmentsContext } from '../../context/InvestmentsContext'
 import { useDraggHandler } from '../../utils/useDraggHandler'
-import { useUserAuth } from '../../Context/AuthContext'
+import { useUserAuth } from '../../context/AuthContext'
 import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'
 import { MdOutlineWarningAmber, MdClose } from 'react-icons/md'
 import { IoIosArrowDropright } from 'react-icons/io'
@@ -178,7 +178,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
                   `}
         style={{ width: borderPosition }}
       >
-        <div className='absolute top-0 right-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0' onClick={() => setAddAssetModal(false)}>
+        <div className='absolute right-0 top-0 z-30 w-fit cursor-pointer p-2 text-3xl md:-left-1 md:top-1/2 md:-ml-4 md:p-0' onClick={() => setAddAssetModal(false)}>
           <MdClose className='fixed -ml-8 md:hidden' />
           <IoIosArrowDropright className='hidden rounded-full bg-custom-dark-jet hover:text-custom-tealblue-hl md:block' />
         </div>
@@ -191,7 +191,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               type='radio'
               name='type'
               value='stock'
-              className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0'
+              className='mb-0.5 mr-1.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0'
               onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)}
               required
             />
@@ -204,7 +204,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
               type='radio'
               name='type'
               value='cryptocurrency'
-              className='mr-1.5 mb-0.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0'
+              className='mb-0.5 mr-1.5 scale-110 cursor-pointer text-custom-tealblue-hl/80 focus:ring-0 focus:ring-offset-0'
               onChange={e => setAsset({ ...asset, type: e.target.value } as typeof asset)}
               required
             />
@@ -215,7 +215,7 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           <div>
             <p>Símbolo</p>
             <div className='flex'>
-              <input ref={inputRef} type='text' className='peer w-full rounded py-1 px-2 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 invalid:text-red-500 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={symbol} onChange={e => handleSymbolChange(e)} required />
+              <input ref={inputRef} type='text' className='peer w-full rounded px-2 py-1 text-sm uppercase text-custom-jet placeholder:normal-case placeholder:opacity-60 invalid:text-red-500 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.symbol[asset.type]} value={symbol} onChange={e => handleSymbolChange(e)} required />
               {symbol !== '' && (
                 <div className='-ml-8 mt-1.5 text-xl peer-valid:text-green-500 peer-invalid:text-red-500'>
                   {(isCryptocurrency && isCryptoSymbolValid) || (isStock && isStockSymbolValid) ? ( //
@@ -282,12 +282,12 @@ const AddAssetModal: FC<Props> = ({ addAssetModal, setAddAssetModal }) => {
           )}
           <div>
             <p>Nome</p>
-            <input className='w-full rounded py-1 px-2 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name[asset.type]} value={asset.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />
+            <input className='w-full rounded px-2 py-1 text-sm text-custom-jet placeholder:opacity-60 focus:ring-2 focus:ring-custom-tealblue lg:text-base' placeholder={placeholder.name[asset.type]} value={asset.name} onChange={e => setAsset({ ...asset, name: e.target.value })} required />
           </div>
           <div>
             <p>Quantidade</p>
             <input //
-              className='w-full rounded py-1 px-2 text-sm text-custom-jet focus:ring-2 focus:ring-custom-tealblue lg:text-base'
+              className='w-full rounded px-2 py-1 text-sm text-custom-jet focus:ring-2 focus:ring-custom-tealblue lg:text-base'
               value={asset.quantity}
               type='number'
               onChange={e => setAsset({ ...asset, quantity: +e.target.value })}

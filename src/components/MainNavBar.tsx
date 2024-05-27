@@ -1,6 +1,6 @@
 import { BsFillCalendar2WeekFill, BsFillPersonFill } from 'react-icons/bs'
 import { IoInfiniteSharp, IoWalletSharp } from 'react-icons/io5'
-import { useUserAuth } from '../Context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 import { FiSettings } from 'react-icons/fi'
 import { FaCoins } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'

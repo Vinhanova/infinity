@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import MainNavBar from './MainNavBar'
+import MainNavBar from '../components/MainNavBar'
 import { FC } from 'react'
 
 const AppLayout: FC = () => {

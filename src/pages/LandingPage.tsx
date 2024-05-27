@@ -2,7 +2,7 @@ import { FaChevronRight, FaLinkedin, FaChevronLeft, FaReact } from 'react-icons/
 import { SiTypescript, SiTailwindcss, SiNetlify } from 'react-icons/si'
 import { IoInfiniteSharp, IoLogoFirebase } from 'react-icons/io5'
 import { FaChartPie, FaFolderTree } from 'react-icons/fa6'
-import { useUserAuth } from '../Context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import GoogleButton from 'react-google-button'
 import { MdAccessTime } from 'react-icons/md'
@@ -95,7 +95,7 @@ const LandingPage: FC = () => {
           </Carousel>
         </div>
         <div ref={ref} className='flex w-full flex-col items-center justify-center bg-custom-mid-jet py-8 xs:h-[30vh] xs:py-0'>
-          <h3 className='mt-2 mb-10 text-base xs:mb-0 sm:mt-6 lg:text-lg xl:text-xl'>Tecnologias utilizadas</h3>
+          <h3 className='mb-10 mt-2 text-base xs:mb-0 sm:mt-6 lg:text-lg xl:text-xl'>Tecnologias utilizadas</h3>
           <div
             className='flex h-4/6 w-10/12 flex-col justify-between space-y-8 text-7xl
                       xs:w-11/12 xs:flex-row xs:space-y-0

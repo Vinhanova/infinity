@@ -1,18 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+import { screens } from 'tailwindcss/defaultTheme'
 
-module.exports = {
+export default {
   mode: 'jit',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/flowbite/**/*.js', 'node_modules/flowbite-react/lib/esm/**/*.js'],
-  theme: {
-    extend: {}
-  },
   plugins: [require('flowbite/plugin'), require('@tailwindcss/forms')],
   theme: {
     screens: {
       xs: '450px',
       '3xl': '1625px',
-      ...defaultTheme.screens
+      ...screens
     },
     extend: {
       colors: {

@@ -1,5 +1,5 @@
-import { useWalletContext } from '../../Context/WalletContext'
-import { useUserAuth } from '../../Context/AuthContext'
+import { useWalletContext } from '../../context/WalletContext'
+import { useUserAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { doc, setDoc } from 'firebase/firestore'
 import { Payment } from '../../utils/types'
@@ -52,24 +52,24 @@ const AddPaymentPage: FC = () => {
       <form className='flex w-8/12 flex-col gap-2 text-left md:w-6/12 lg:w-4/12 [&_p]:mb-1' onSubmit={addPayment}>
         <div>
           <p>Title</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet  outline-custom-tealblue' value={payment.title} onChange={e => setPayment({ ...payment, title: e.target.value })} required />
+          <input className='w-full rounded px-2 py-1 text-custom-jet  outline-custom-tealblue' value={payment.title} onChange={e => setPayment({ ...payment, title: e.target.value })} required />
         </div>
         <div>
           <p>Price</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={payment.price} type='number' onChange={e => setPayment({ ...payment, price: +e.target.value })} inputMode='numeric' min={0.01} step={0.01} required />
+          <input className='w-full rounded px-2 py-1 text-custom-jet outline-custom-tealblue' value={payment.price} type='number' onChange={e => setPayment({ ...payment, price: +e.target.value })} inputMode='numeric' min={0.01} step={0.01} required />
         </div>
         <div>
           <p>Category</p>
-          <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' value={payment.category} onChange={e => setPayment({ ...payment, category: e.target.value })} required />
+          <input className='w-full rounded px-2 py-1 text-custom-jet outline-custom-tealblue' value={payment.category} onChange={e => setPayment({ ...payment, category: e.target.value })} required />
         </div>
         <div className='flex justify-between space-x-5'>
           <div className='w-full'>
             <p>Date</p>
-            <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' type='date' value={moment.unix(payment.date!.seconds).format('YYYY-MM-DD')} onChange={e => setNewDate(e.target.value)} required />
+            <input className='w-full rounded px-2 py-1 text-custom-jet outline-custom-tealblue' type='date' value={moment.unix(payment.date!.seconds).format('YYYY-MM-DD')} onChange={e => setNewDate(e.target.value)} required />
           </div>
           <div className='w-full'>
             <p>Time</p>
-            <input className='w-full rounded py-1 px-2 text-custom-jet outline-custom-tealblue' type='time' value={moment.unix(payment.date!.seconds).format('hh:mm')} onChange={e => setNewTime(e.target.value)} required />
+            <input className='w-full rounded px-2 py-1 text-custom-jet outline-custom-tealblue' type='time' value={moment.unix(payment.date!.seconds).format('hh:mm')} onChange={e => setNewTime(e.target.value)} required />
           </div>
           <br />
         </div>

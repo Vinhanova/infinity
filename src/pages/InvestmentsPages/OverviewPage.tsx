@@ -1,4 +1,4 @@
-import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { useInvestmentsContext } from '../../context/InvestmentsContext'
 import { ImSpinner2 } from 'react-icons/im'
 import { toFixed } from '../../utils/utils'
 import PieChart from './PieChart'

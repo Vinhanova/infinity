@@ -1,4 +1,4 @@
-import { useInvestmentsContext } from '../../Context/InvestmentsContext'
+import { useInvestmentsContext } from '../../context/InvestmentsContext'
 import { toFixed } from '../../utils/utils'
 import deleteAssetFS from '../../utils/useDeleteAsset'
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import { SlOptions } from 'react-icons/sl'
 import { ImSpinner2 } from 'react-icons/im'
 import { MdEdit } from 'react-icons/md'
 import { Dropdown } from 'flowbite-react'
-import { useUserAuth } from '../../Context/AuthContext'
+import { useUserAuth } from '../../context/AuthContext'
 import { FC } from 'react'
 import _ from 'underscore'
 import Card from './Card'
@@ -26,7 +26,7 @@ const InvestmentsPage: FC = () => {
   return (
     <>
       <div className='flex w-full flex-col items-center space-x-3'>
-        <div className='mt-2.5 mb-2.5 w-full px-2.5 text-center xs:w-11/12 xs:p-0 sm:mt-6 sm:mb-0 lg:mt-8 xl:mb-6 xl:w-3/4'>
+        <div className='mb-2.5 mt-2.5 w-full px-2.5 text-center xs:w-11/12 xs:p-0 sm:mb-0 sm:mt-6 lg:mt-8 xl:mb-6 xl:w-3/4'>
           {listState === 'pending' && (
             <div className='my-4 flex justify-center text-2xl sm:my-8 lg:my-0 lg:mt-16'>
               <ImSpinner2 className='animate-spin' />
