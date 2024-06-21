@@ -16,12 +16,10 @@ export const AuthContextProvider: FC<Props> = ({ children }) => {
     await signInAnonymously(auth)
       .then(() => {
         // Signed in..
-        console.log('log in')
       })
       .catch(error => {
         const errorCode = error.code
         const errorMessage = error.message
-        console.log(error)
         // ...
       })
   }

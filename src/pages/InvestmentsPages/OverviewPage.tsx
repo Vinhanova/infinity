@@ -29,97 +29,99 @@ const InvestmentsOverviewPage: FC = () => {
         (_.isEmpty(purchasedAssetsList) ? (
           <h1 className='p-2'>Não tem ativos, experimente adicionar um primeiro</h1>
         ) : (
-          <div className='m-2.5 grid gap-y-4 xs:m-4 xs:grid-cols-2 xs:gap-4 sm:m-6 sm:gap-6 lg:m-8 lg:gap-8 xl:grid-cols-3 2xl:xl:grid-cols-4 2xl:m-12'>
-            {/* <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'> */}
-            {totalStocks && totalCryptocurrencies ? (
-              <Card>
-                <PieChart
-                  title='Todos os ativos'
-                  labels={_.keys(purchasedAssetsList)}
-                  dataContent={_.map(purchasedAssetsList, (stock: any) => {
-                    //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
-                    return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
-                  })}
-                  total={totalEUR}
-                />
-                <div className='mx-4 flex justify-between py-2'>
-                  <div className='text-left'>
-                    <h3>Total: </h3>
-                  </div>
-                  <div className='text-right'>
-                    <h3>{toFixed(totalEUR, 2)} €</h3>
-                  </div>
-                </div>
-              </Card>
-            ) : (
-              <></>
-            )}
-            {totalStocks && totalCryptocurrencies ? (
-              <Card>
-                <PieChart title='Ações vs Criptomoedas' labels={['Ações', 'Criptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />{' '}
-              </Card>
-            ) : (
-              <></>
-            )}
-            {totalStocks > 0 && (
-              <Card>
-                <PieChart
-                  title='Ações'
-                  labels={_.keys(stocksList)}
-                  dataContent={_.map(stocksList, (stock: any) => {
-                    //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
-                    return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
-                  })}
-                  total={totalStocks}
-                />
-                <div className='mx-4 flex justify-between py-2'>
-                  <div className='text-left'>
-                    <h3>Total Ações: </h3>
-                  </div>
-                  <div className='text-right'>
-                    <h3>{toFixed(totalStocks, 2)} €</h3>
-                  </div>
-                </div>
-              </Card>
-            )}
-            {totalCryptocurrencies > 0 && (
-              <Card>
-                <PieChart
-                  title='Criptomoedas'
-                  labels={_.keys(cryptoList)}
-                  dataContent={_.map(cryptoList, (stock: any) => {
-                    //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
-                    return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
-                  })}
-                  total={totalCryptocurrencies}
-                />
-
-                <div className='mx-4 flex justify-between py-2'>
-                  <div className='text-left'>
-                    <h3>Total Criptomoedas: </h3>
-                  </div>
-                  <div className='text-right'>
-                    <h3>{toFixed(totalCryptocurrencies, 2)} €</h3>
-                  </div>
-                </div>
-              </Card>
-            )}
-            {/* <OverviewCard
-              content={
-                <>
+          <div className='m-2.5 flex flex-col items-center gap-y-4 xs:m-4 xs:gap-4 sm:m-6 sm:items-start sm:gap-6 lg:m-8 lg:gap-8 2xl:m-12'>
+            <div className='grid gap-y-4 xs:grid-cols-2 xs:gap-4 sm:gap-6 lg:gap-8 xl:grid-cols-3 2xl:xl:grid-cols-4'>
+              {/* <div className='flex h-full w-full flex-col items-center justify-center gap-8 xs:w-10/12 sm:w-8/12 md:w-6/12 xl:w-4/12'> */}
+              {totalStocks && totalCryptocurrencies ? (
+                <Card>
                   <PieChart
-                    title='WatchList'
-                    labels={_.keys(watchlistAssetsList)}
-                    dataContent={_.map(watchlistAssetsList, (stock: any) => {
+                    title='Todos os ativos'
+                    labels={_.keys(purchasedAssetsList)}
+                    dataContent={_.map(purchasedAssetsList, (stock: any) => {
                       //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
                       return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
                     })}
                     total={totalEUR}
                   />
+                  <div className='mx-4 flex justify-between py-2'>
+                    <div className='text-left'>
+                      <h3>Total: </h3>
+                    </div>
+                    <div className='text-right'>
+                      <h3>{toFixed(totalEUR, 2)} €</h3>
+                    </div>
+                  </div>
+                </Card>
+              ) : (
+                <></>
+              )}
+              {totalStocks && totalCryptocurrencies ? (
+                <Card>
+                  <PieChart title='Ações vs Criptomoedas' labels={['Ações', 'Criptomoedas']} dataContent={[totalStocks, totalCryptocurrencies]} total={totalEUR} />{' '}
+                </Card>
+              ) : (
+                <></>
+              )}
+              {totalStocks > 0 && (
+                <Card>
+                  <PieChart
+                    title='Ações'
+                    labels={_.keys(stocksList)}
+                    dataContent={_.map(stocksList, (stock: any) => {
+                      //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
+                      return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
+                    })}
+                    total={totalStocks}
+                  />
+                  <div className='mx-4 flex justify-between py-2'>
+                    <div className='text-left'>
+                      <h3>Total Ações: </h3>
+                    </div>
+                    <div className='text-right'>
+                      <h3>{toFixed(totalStocks, 2)} €</h3>
+                    </div>
+                  </div>
+                </Card>
+              )}
+              {totalCryptocurrencies > 0 && (
+                <Card>
+                  <PieChart
+                    title='Criptomoedas'
+                    labels={_.keys(cryptoList)}
+                    dataContent={_.map(cryptoList, (stock: any) => {
+                      //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
+                      return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
+                    })}
+                    total={totalCryptocurrencies}
+                  />
+
+                  <div className='mx-4 flex justify-between py-2'>
+                    <div className='text-left'>
+                      <h3>Total Criptomoedas: </h3>
+                    </div>
+                    <div className='text-right'>
+                      <h3>{toFixed(totalCryptocurrencies, 2)} €</h3>
+                    </div>
+                  </div>
+                </Card>
+              )}
+              {/* <OverviewCard
+              content={
+                <>
+                <PieChart
+                title='WatchList'
+                labels={_.keys(watchlistAssetsList)}
+                dataContent={_.map(watchlistAssetsList, (stock: any) => {
+                  //if (hasPercentage) return (((stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c) / totalEUR) * 100).toFixed(1)
+                    return stock.price * userTickersData![stock.id].quantity * exchangeRateInfoData?.c
+                })}
+                total={totalEUR}
+                />
                 </>
               }
             /> */}
-            <Card>
+            </div>
+            <Card className='w-fit'>
               <div className='mx-4 flex h-full items-center justify-center py-2'>
                 <h3 className='my-2'>Cotação USD/EUR: {exchangeRateInfoData?.c ? exchangeRateInfoData?.c.toFixed(3) : '(Erro API)'}</h3>
               </div>
