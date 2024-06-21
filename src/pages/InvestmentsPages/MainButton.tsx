@@ -11,7 +11,7 @@ const MainButton: FC<Props> = ({ content, type, className, onClick }) => (
   <button //
     id='main-button'
     type={type || 'button'}
-    className={'flex rounded-[0.15rem] border-2 border-custom-tealblue-hl py-1.5 px-3 ' + className}
+    className={'flex justify-center rounded-[0.15rem] border-2 border-custom-tealblue-hl px-3 py-1.5 ' + className}
     onClick={onClick}
   >
     {content}

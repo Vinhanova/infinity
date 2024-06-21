@@ -205,7 +205,7 @@ const InvestmentsPage: FC = () => {
                     </tr>
                   </tfoot>
                 </table>
-                <p className='text-right text-xs italic text-gray-400'>*Quando for realizada uma nova transação o preço será atualizado (mercado pode estar fechado)</p>
+                <p className='text-right text-xs italic text-gray-400'>*Quando for realizada uma nova transação o preço será atualizado (API com limite)</p>
               </Card>
             ))}
         </div>

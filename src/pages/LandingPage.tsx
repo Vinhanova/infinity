@@ -8,12 +8,14 @@ import GoogleButton from 'react-google-button'
 import { MdAccessTime } from 'react-icons/md'
 import { Carousel } from 'flowbite-react'
 import { FC, useEffect, useRef } from 'react'
+import MainButton from './InvestmentsPages/MainButton'
 
 const LandingPage: FC = () => {
-  const { googleSignIn, user } = useUserAuth()
+  const { anonSignIn, googleSignIn, user } = useUserAuth()
   const navigate = useNavigate()
   const ref = useRef<any>()
   //console.log('USER >>', user)
+
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn()
@@ -43,14 +45,13 @@ const LandingPage: FC = () => {
                 Aplicação para gestão de investimentos
                 <br />
                 Desenvolvido por{' '}
-                <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='whitespace-nowrap text-custom-tealblue-hl underline underline-offset-4'>
+                <a href='https://www.tiagovinhanova.com' target='_blank' className='whitespace-nowrap text-custom-tealblue-hl hover:underline hover:underline-offset-4'>
                   Tiago Vinhanova
-                  <FaLinkedin className='ml-2 inline text-custom-tealblue-hl' />
                 </a>
               </h2>
             </div>
             <h4
-              className='cursor-pointer text-xs italic underline underline-offset-4 lg:text-sm'
+              className='w-fit cursor-pointer text-xs italic hover:underline hover:underline-offset-4 lg:text-sm'
               onClick={() =>
                 window.scrollTo({
                   top: ref.current.offsetTop,
@@ -60,7 +61,8 @@ const LandingPage: FC = () => {
             >
               Tecnologias utilizadas
             </h4>
-            <GoogleButton className='mt-2 !w-[280px] scale-90 self-center !rounded !bg-custom-tealblue hover:!bg-custom-tealblue-hl/75 hover:!shadow-none focus:!appearance-none focus:!bg-custom-tealblue xs:mt-4 sm:scale-100 sm:self-start md:mt-6 lg:mt-8' type='dark' label='Fazer login com o Google' onClick={handleGoogleSignIn} />
+            <MainButton className='mt-2 w-32 xs:mt-4 md:mt-6 lg:mt-8' onClick={() => anonSignIn()} content={'Demo Login'} />
+            <GoogleButton className='!w-[280px] scale-90 self-center !rounded !bg-custom-tealblue hover:!bg-custom-tealblue-hl/75 hover:!shadow-none focus:!appearance-none focus:!bg-custom-tealblue sm:scale-100 sm:self-start' type='dark' label='Fazer login com o Google' onClick={handleGoogleSignIn} />
           </div>
           <div className='-mt-4 sm:-mt-12 sm:w-7/12'>
             <img src='../mockups.png' alt='Infinity App Phone, Tablet and PC Mockups with example data' />
@@ -132,9 +134,8 @@ const LandingPage: FC = () => {
         <div className='mx-12 flex h-[10vh] w-full items-center justify-center bg-custom-jet text-sm sm:text-base'>
           <h5>
             Desenvolvido por{' '}
-            <a href='https://www.linkedin.com/in/tiagovinhanova/' target='_blank' rel='noreferrer noopener' className='whitespace-nowrap text-custom-tealblue-hl underline underline-offset-4'>
+            <a href='https://www.tiagovinhanova.com' target='_blank' rel='noreferrer noopener' className='whitespace-nowrap text-custom-tealblue-hl hover:underline hover:underline-offset-4'>
               Tiago Vinhanova
-              <FaLinkedin className='ml-2 inline text-custom-tealblue-hl' />
             </a>
           </h5>
         </div>

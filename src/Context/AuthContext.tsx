@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signOut, onAuthStateChanged, signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, signOut, onAuthStateChanged, signInWithPopup, signInAnonymously } from 'firebase/auth'
 import { useContext, createContext, useEffect, useState, FC, ReactNode } from 'react'
 import { Auth } from '../utils/types'
 import { auth } from '../firebase'
@@ -11,6 +11,20 @@ const AuthContext = createContext<Auth>({})
 
 export const AuthContextProvider: FC<Props> = ({ children }) => {
   const [user, setUser] = useState({})
+
+  const anonSignIn = async () => {
+    await signInAnonymously(auth)
+      .then(() => {
+        // Signed in..
+        console.log('log in')
+      })
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(error)
+        // ...
+      })
+  }
 
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider()
@@ -32,7 +46,7 @@ export const AuthContextProvider: FC<Props> = ({ children }) => {
     }
   }, [])
 
-  return <AuthContext.Provider value={{ googleSignIn, logOut, user }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ anonSignIn, googleSignIn, logOut, user }}>{children}</AuthContext.Provider>
 }
 
 export const useUserAuth = () => {

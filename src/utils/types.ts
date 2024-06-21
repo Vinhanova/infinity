@@ -25,6 +25,7 @@ export type Request = {
 }
 
 export type Auth = {
+  anonSignIn?: any
   googleSignIn?: any
   logOut?: any
   user?: any
