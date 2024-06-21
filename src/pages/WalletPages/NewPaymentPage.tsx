@@ -1,5 +1,5 @@
-import { useWalletContext } from '../../context/WalletContext'
-import { useUserAuth } from '../../context/AuthContext'
+import { useWalletContext } from '../../Context/WalletContext'
+import { useUserAuth } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { doc, setDoc } from 'firebase/firestore'
 import { Payment } from '../../utils/types'

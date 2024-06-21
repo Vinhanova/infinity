@@ -1,6 +1,6 @@
 import { useQueryFirestore } from '../../utils/useGetFirestore'
 import PaymentsList from '../../features/PaymentsList'
-import { useUserAuth } from '../../context/AuthContext'
+import { useUserAuth } from '../../Context/AuthContext'
 import { FC } from 'react'
 import _ from 'underscore'
 import moment from 'moment'

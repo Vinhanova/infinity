@@ -1,4 +1,4 @@
-import { WalletContextProvider } from '../context/WalletContext'
+import { WalletContextProvider } from '../Context/WalletContext'
 import { NavLink, Outlet } from 'react-router-dom'
 import ErrorBoundary from '../ErrorBoundary'
 import { GoPlus } from 'react-icons/go'

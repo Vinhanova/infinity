@@ -1,4 +1,4 @@
-import { AuthContextProvider } from './context/AuthContext'
+import { AuthContextProvider } from './Context/AuthContext'
 import { FC } from 'react'
 import Navigation from './Navigation'
 

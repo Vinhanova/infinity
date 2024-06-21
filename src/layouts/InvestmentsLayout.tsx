@@ -1,4 +1,4 @@
-import { InvestmentsContextProvider } from '../context/InvestmentsContext'
+import { InvestmentsContextProvider } from '../Context/InvestmentsContext'
 import AddAssetModal from '../pages/InvestmentsPages/AddAssetModal'
 import { NavLink, Outlet } from 'react-router-dom'
 import ErrorBoundary from '../ErrorBoundary'
