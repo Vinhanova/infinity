@@ -93,94 +93,93 @@ const InvestmentsPage: FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {purchasedAssetsList
+                    {purchasedAssetsList._.map(purchasedAssetsList, (asset: any) => {
+                      if (userTickersData[asset.id].quantity === 0) return
+                    })
                       .sort((a: any, b: any) => b.price * userTickersData![b.id].quantity - a.price * userTickersData![a.id].quantity)
-                      ._.map(purchasedAssetsList, (asset: any) => {
-                        if (userTickersData[asset.id].quantity === 0) return
-                        return (
-                          /* Name */
-                          <tr key={asset.id} className='border-t border-white/20 text-sm hover:bg-white/10 lg:text-base'>
-                            <th scope='row' className='whitespace-nowrap px-[3px] py-[7px] font-medium lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                              {window.innerWidth < 1024 ? (
-                                asset.id.split('-')[0]
-                              ) : (
-                                <>
-                                  {userTickersData![asset.id].name}
-                                  <span className='ml-2 font-extralight opacity-40'>{asset.id.split('-')[0]}</span>
-                                </>
+                      .map((asset: any) => (
+                        /* Name */
+                        <tr key={asset.id} className='border-t border-white/20 text-sm hover:bg-white/10 lg:text-base'>
+                          <th scope='row' className='whitespace-nowrap px-[3px] py-[7px] font-medium lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                            {window.innerWidth < 1024 ? (
+                              asset.id.split('-')[0]
+                            ) : (
+                              <>
+                                {userTickersData![asset.id].name}
+                                <span className='ml-2 font-extralight opacity-40'>{asset.id.split('-')[0]}</span>
+                              </>
+                            )}
+                          </th>
+                          {/* Price */}
+                          <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-300 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                            {asset.changePercent !== null ? ( //
+                              <>
+                                <p>{`${asset.price.toFixed(asset.price < 1 ? 3 : 2)} $`}</p>
+                                <p className={asset.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
+                                  {asset.change //
+                                    ? (asset.change > 0 ? '+' : '') +
+                                      `${asset.change?.toFixed(2)} (${
+                                        (asset.changePercent > 0 //
+                                          ? '+'
+                                          : '') + asset.changePercent?.toFixed(2)
+                                      }%)`
+                                    : `${
+                                        (asset.changePercent > 0 //
+                                          ? '+'
+                                          : '') + (asset.price - asset.price / (asset.changePercent / 100 + 1))?.toFixed(2)
+                                      } (${asset.changePercent?.toFixed(2)}%)`}
+                                </p>
+                              </>
+                            ) : (
+                              'Erro API *'
+                            )}
+                          </td>
+                          {/* Portfolio 24h */}
+                          <td className={`hidden px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${asset.changePercent === null ? `` : asset.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                            {asset.changePercent !== null //
+                              ? asset.change //
+                                ? `${(asset.change * userTickersData![asset.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
+                                : `${((asset.price - asset.price / (asset.changePercent / 100 + 1)) * userTickersData![asset.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
+                              : '... *'}
+                          </td>
+                          {/* Portfolio */}
+                          <td className='px-[3px] py-[7px] text-right text-gray-200 sm:bg-white/5 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                            {asset.changePercent !== null //
+                              ? `${toFixed(asset.price * userTickersData![asset.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)} €`
+                              : '... *'}
+                          </td>
+                          <td>
+                            <Dropdown
+                              label=''
+                              renderTrigger={() => (
+                                <span>
+                                  <SlOptions className='mx-2 cursor-pointer sm:text-lg' />
+                                </span>
                               )}
-                            </th>
-                            {/* Price */}
-                            <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-300 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                              {asset.changePercent !== null ? ( //
-                                <>
-                                  <p>{`${asset.price.toFixed(asset.price < 1 ? 3 : 2)} $`}</p>
-                                  <p className={asset.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
-                                    {asset.change //
-                                      ? (asset.change > 0 ? '+' : '') +
-                                        `${asset.change?.toFixed(2)} (${
-                                          (asset.changePercent > 0 //
-                                            ? '+'
-                                            : '') + asset.changePercent?.toFixed(2)
-                                        }%)`
-                                      : `${
-                                          (asset.changePercent > 0 //
-                                            ? '+'
-                                            : '') + (asset.price - asset.price / (asset.changePercent / 100 + 1))?.toFixed(2)
-                                        } (${asset.changePercent?.toFixed(2)}%)`}
-                                  </p>
-                                </>
-                              ) : (
-                                'Erro API *'
-                              )}
-                            </td>
-                            {/* Portfolio 24h */}
-                            <td className={`hidden px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${asset.changePercent === null ? `` : asset.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                              {asset.changePercent !== null //
-                                ? asset.change //
-                                  ? `${(asset.change * userTickersData![asset.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
-                                  : `${((asset.price - asset.price / (asset.changePercent / 100 + 1)) * userTickersData![asset.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
-                                : '... *'}
-                            </td>
-                            {/* Portfolio */}
-                            <td className='px-[3px] py-[7px] text-right text-gray-200 sm:bg-white/5 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                              {asset.changePercent !== null //
-                                ? `${toFixed(asset.price * userTickersData![asset.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)} €`
-                                : '... *'}
-                            </td>
-                            <td>
-                              <Dropdown
-                                label=''
-                                renderTrigger={() => (
-                                  <span>
-                                    <SlOptions className='mx-2 cursor-pointer sm:text-lg' />
-                                  </span>
-                                )}
-                                theme={{
-                                  content: 'py-1 focus:outline-none bg-custom-dark-jet rounded-[0.15rem]',
-                                  floating: {
-                                    item: {
-                                      base: 'flex w-full cursor-pointer items-center justify-start px-8 pl-4 py-2 text-sm text-white hover:text-custom-tealblue-hl focus:outline-none'
-                                    },
-                                    style: {
-                                      auto: 'border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white'
-                                    }
+                              theme={{
+                                content: 'py-1 focus:outline-none bg-custom-dark-jet rounded-[0.15rem]',
+                                floating: {
+                                  item: {
+                                    base: 'flex w-full cursor-pointer items-center justify-start px-8 pl-4 py-2 text-sm text-white hover:text-custom-tealblue-hl focus:outline-none'
+                                  },
+                                  style: {
+                                    auto: 'border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white'
                                   }
-                                }}
-                              >
-                                {/* <Dropdown.Header>Example</Dropdown.Header> */}
-                                <Dropdown.Item icon={MdEdit} onClick={() => openEditAssetModal(asset.id)}>
-                                  Editar
-                                </Dropdown.Item>
-                                <Dropdown.Item icon={RiDeleteBin6Line} onClick={() => deleteHandler(asset.id)}>
-                                  Remover
-                                </Dropdown.Item>
-                                {/* <Dropdown.Divider /> */}
-                              </Dropdown>
-                            </td>
-                          </tr>
-                        )
-                      })}
+                                }
+                              }}
+                            >
+                              {/* <Dropdown.Header>Example</Dropdown.Header> */}
+                              <Dropdown.Item icon={MdEdit} onClick={() => openEditAssetModal(asset.id)}>
+                                Editar
+                              </Dropdown.Item>
+                              <Dropdown.Item icon={RiDeleteBin6Line} onClick={() => deleteHandler(asset.id)}>
+                                Remover
+                              </Dropdown.Item>
+                              {/* <Dropdown.Divider /> */}
+                            </Dropdown>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                   <tfoot>
                     <tr className='border-t-2 font-semibold'>
