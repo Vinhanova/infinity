@@ -113,7 +113,7 @@ const InvestmentsPage: FC = () => {
                             {stock.changePercent !== null ? ( //
                               <>
                                 <p>{`${stock.price.toFixed(stock.price < 1 ? 3 : 2)} $`}</p>
-                                <p>
+                                <p className={stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
                                   {stock.change //
                                     ? (stock.change > 0 ? '+' : '') +
                                       `${stock.change?.toFixed(2)} (${
@@ -133,7 +133,7 @@ const InvestmentsPage: FC = () => {
                             )}
                           </td>
                           {/* Portfolio 24h */}
-                          <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                          <td className={`hidden px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>
                             {stock.changePercent !== null //
                               ? stock.change //
                                 ? `${(stock.change * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932)).toFixed(2)} €`
@@ -141,7 +141,7 @@ const InvestmentsPage: FC = () => {
                               : '... *'}
                           </td>
                           {/* Portfolio */}
-                          <td className='hidden px-[3px] py-[7px] text-right text-gray-200 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                          <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-200 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                             {stock.changePercent !== null //
                               ? `${toFixed(stock.price * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)} €`
                               : '... *'}
