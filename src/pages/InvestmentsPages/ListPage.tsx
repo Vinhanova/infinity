@@ -69,7 +69,7 @@ const InvestmentsPage: FC = () => {
                           </a>
                         </div>
                       </th>
-                      <th scope='col' className='hidden bg-white/5 px-3 py-2 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
+                      <th scope='col' className='hidden px-3 py-2 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
                         <div className='flex items-center justify-end'>
                           Portfólio 24h %
                           <a href='#'>
@@ -79,7 +79,7 @@ const InvestmentsPage: FC = () => {
                           </a>
                         </div>
                       </th>
-                      <th scope='col' className='hidden px-3 py-2 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
+                      <th scope='col' className='bg-white/5 px-3 py-2 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
                         <div className='flex items-center justify-end'>
                           Portfólio
                           <a href='#'>
