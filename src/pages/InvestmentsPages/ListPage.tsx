@@ -79,7 +79,7 @@ const InvestmentsPage: FC = () => {
                           </a>
                         </div>
                       </th>
-                      <th scope='col' className='bg-white/5 px-3 py-2 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
+                      <th scope='col' className='px-3 py-2 sm:table-cell sm:bg-white/5 lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
                         <div className='flex items-center justify-end'>
                           Portfólio
                           <a href='#'>
@@ -141,7 +141,7 @@ const InvestmentsPage: FC = () => {
                               : '... *'}
                           </td>
                           {/* Portfolio */}
-                          <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-200 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
+                          <td className='px-[3px] py-[7px] text-right text-gray-200 sm:bg-white/5 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
                             {stock.changePercent !== null //
                               ? `${toFixed(stock.price * userTickersData![stock.id].quantity * (exchangeRateInfoData?.c ? exchangeRateInfoData.c : 0.932), 2)} €`
                               : '... *'}
