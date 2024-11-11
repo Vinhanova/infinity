@@ -94,7 +94,7 @@ const InvestmentsPage: FC = () => {
                   </thead>
                   <tbody>
                     {purchasedAssetsList
-                      .sort((a: any, b: any) => b.price - a.price)
+                      .sort((a: any, b: any) => b.price * userTickersData![b.id].quantity - a.price * userTickersData![a.id].quantity)
                       ._.map(purchasedAssetsList, (asset: any) => {
                         if (userTickersData[asset.id].quantity === 0) return
                         return (
