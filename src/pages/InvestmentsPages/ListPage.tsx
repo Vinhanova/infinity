@@ -69,16 +69,6 @@ const InvestmentsPage: FC = () => {
                           </a>
                         </div>
                       </th>
-                      <th scope='col' className='px-3 py-2 lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
-                        <div className='flex items-center justify-end'>
-                          24h %
-                          <a href='#'>
-                            <svg xmlns='http://www.w3.org/2000/svg' className='ml-1 h-3 w-3' aria-hidden='true' fill='currentColor' viewBox='0 0 320 512'>
-                              <path d='M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z' />
-                            </svg>
-                          </a>
-                        </div>
-                      </th>
                       <th scope='col' className='hidden bg-white/5 px-3 py-2 sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-3'>
                         <div className='flex items-center justify-end'>
                           Portfólio 24h %
@@ -120,28 +110,27 @@ const InvestmentsPage: FC = () => {
                           </th>
                           {/* Price */}
                           <td className='bg-white/5 px-[3px] py-[7px] text-right text-gray-300 lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                            {stock.changePercent !== null //
-                              ? `${stock.price.toFixed(stock.price < 1 ? 3 : 2)} $`
-                              : 'Erro API *'}
-                          </td>
-                          {/* 24h */}
-                          <td className='px-[3px] py-[7px] text-right lg:px-2 lg:py-3 xl:px-6 xl:py-4'>
-                            <span className={stock.changePercent === null ? '' : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}>
-                              {stock.changePercent !== null //
-                                ? stock.change //
-                                  ? (stock.change > 0 ? '+' : '') +
-                                    `${stock.change?.toFixed(2)} (${
-                                      (stock.changePercent > 0 //
-                                        ? '+'
-                                        : '') + stock.changePercent?.toFixed(2)
-                                    }%)`
-                                  : `${
-                                      (stock.changePercent > 0 //
-                                        ? '+'
-                                        : '') + (stock.price - stock.price / (stock.changePercent / 100 + 1))?.toFixed(2)
-                                    } (${stock.changePercent?.toFixed(2)}%)`
-                                : '... *'}
-                            </span>
+                            {stock.changePercent !== null ? ( //
+                              <>
+                                <p>{`${stock.price.toFixed(stock.price < 1 ? 3 : 2)} $`}</p>
+                                <p>
+                                  {stock.change //
+                                    ? (stock.change > 0 ? '+' : '') +
+                                      `${stock.change?.toFixed(2)} (${
+                                        (stock.changePercent > 0 //
+                                          ? '+'
+                                          : '') + stock.changePercent?.toFixed(2)
+                                      }%)`
+                                    : `${
+                                        (stock.changePercent > 0 //
+                                          ? '+'
+                                          : '') + (stock.price - stock.price / (stock.changePercent / 100 + 1))?.toFixed(2)
+                                      } (${stock.changePercent?.toFixed(2)}%)`}
+                                </p>
+                              </>
+                            ) : (
+                              'Erro API *'
+                            )}
                           </td>
                           {/* Portfolio 24h */}
                           <td className={`hidden bg-white/5 px-[3px] py-[7px] text-right sm:table-cell lg:px-2 lg:py-3 xl:px-6 xl:py-4 ${stock.changePercent === null ? `` : stock.changePercent > 0 ? 'text-green-500' : 'text-red-500'}`}>
